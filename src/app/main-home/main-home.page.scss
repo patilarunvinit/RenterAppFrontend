@@ -61,6 +61,7 @@
     top:10%;
     left: 10%;
     padding-top:6.6% ;
+    
 }
 .option{
     position: relative;
@@ -69,17 +70,19 @@
     height: 20%;
     margin-left:10%;
     margin-right: 10%;
-    margin-top:13%;
+    margin-top:6.6%;
+    margin-bottom: 6.6%;
     border-radius: 20%;
     background-color: #3D9BD6;
-    // border: 2px solid red;
 
 }
 .fordiffcolor{
     background-color: #BC8080;
 }
 .optionpics{
+    position: relative;
     width: 80%;
-    height: 100%;
-    border: 2px solid black;
+    height: 80%;
+    left: 10%;
+    top:10%;
 }
