@@ -26,6 +26,7 @@ export class MainHomePage implements OnInit {
   remain:string="assets/img/remain.png"
   add_renter:string="assets/img/add_renter.png"
   add_home:string="assets/img/add_home.png"
+  card_pic:string="assets/img/card_img1.jpeg"
 
   
 }
