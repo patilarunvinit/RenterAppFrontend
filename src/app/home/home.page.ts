@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
 
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
@@ -17,7 +18,8 @@ export class HomePage {
 
   constructor(private platform: Platform,
               private keyboard: Keyboard,
-              private router: Router
+              private router: Router,
+              private serviceClass: TokenserviceService,
             ) {
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
@@ -33,9 +35,31 @@ export class HomePage {
   }
 
 
-  redirectToMianHome() {
-    this.router.navigate(['/main-home']);
+  loginObj: any = {
+    "email": "v@gmail.com",
+    "password": "v@12345678"
+  };
+  
+  onLogin() {
+    // console.log(this.loginObj);
+    // this.serviceClass.login(this.loginObj).subscribe((res:any)=>{
+    //   console.log('Response:', res);
+    //   if(res.jwt) {
+    //     alert("Login Success")
+    //     localStorage.setItem('hotelUser',JSON.stringify(res.data));
+    //     this.router.navigateByUrl('/main-home');
+    //   }
+    //   else {
+    //     alert('Check User Credentials')
+    //   }
+    // },
+    // error=> {
+    //   // console.log(error.error.detail)
+    //   alert(error.error.detail)
+
+    // })
   }
+
 
 
   

@@ -36,6 +36,33 @@
 }
 
 
+// .inputbox1{
+//     position: relative;
+//     width: 80%;
+//     height: 68px;
+//     border: 3px solid white;
+//     border-radius: 30px;
+//     background-color: black;
+//     margin-left:10% ;
+//     margin-top:36% ;
+//     color: white;
+//     padding-left:30px ;
+// }
+// .inputbox12{
+//     position: relative;
+//     width: 80%;
+//     height: 68px;
+//     border: 3px solid white;
+//     border-radius: 30px;
+//     // background-color: black;
+//     margin-left:10% ;
+//     margin-top:36% ;
+//     font-size: 20px;
+//     // text-align: center;
+//     // color: white;
+//     // padding-left:30px ;
+    
+// }
 .inputbox1{
     position: relative;
     width: 80%;
@@ -45,8 +72,12 @@
     background-color: black;
     margin-left:10% ;
     margin-top:36% ;
+    padding-left:0% ;
+}
+.inputinside{
     color: white;
-    padding-left:30px ;
+    margin-left: 10%;
+    width: 80%;
 }
 .inputbox2{
     position: relative;
@@ -57,8 +88,6 @@
     background-color: black;
     margin-left:10% ;
     margin-top:8% ;
-    color: white;
-    padding-left:30px ;
 }
 
 ::placeholder{

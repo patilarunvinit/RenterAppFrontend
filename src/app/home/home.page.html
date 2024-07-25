@@ -8,12 +8,20 @@
             <img alt="centerlogo" [src]=centerlogo class="Clogo">
           </div>
         <form class="example-form">
- 
-          <input matInput placeholder="Username" class="inputbox1">
-          <input matInput placeholder="Password" class="inputbox2" type="password"><br>
+          <div class="inputbox1">
+            <ion-input matInput class="inputinside" label="Email" label-placement="floating" fill="solid" placeholder="Enter email here."></ion-input>
+
+          </div>
+          <div class="inputbox2">
+            <ion-input matInput class="inputinside" type="password" label="password" label-placement="floating" fill="solid" placeholder="Enter your password"></ion-input>
+
+          </div>
+
+          <!-- <input matInput placeholder="Username" class="inputbox1"> -->
+          <!-- <input matInput placeholder="Password" class="inputbox2" type="password"><br> -->
           <a href="https://www.google.com/" class="forgotlink">forgot password?</a>
 
-          <button type="button" (click)="redirectToMianHome()" class="button1">Login</button>
+          <button type="button" (click)="onLogin()" class="button1">Login</button>
         </form>
 
       </div>
