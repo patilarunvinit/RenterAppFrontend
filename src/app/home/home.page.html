@@ -7,24 +7,23 @@
           <div class="cercle1">
             <img alt="centerlogo" [src]=centerlogo class="Clogo">
           </div>
-        <form class="example-form">
-          <div class="inputbox1">
-            <ion-input matInput class="inputinside" label="Email" label-placement="floating" fill="solid" placeholder="Enter email here."></ion-input>
 
+
+        <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
+          <div class="inputbox1">
+            <ion-input name="email" type="email" [(ngModel)]="formData.email" required placeholder="Username" class="ion_input" > </ion-input>
           </div>
           <div class="inputbox2">
-            <ion-input matInput class="inputinside" type="password" label="password" label-placement="floating" fill="solid" placeholder="Enter your password"></ion-input>
-
+            <ion-input name="password" type="password" [(ngModel)]="formData.password" required placeholder="Password" class="ion_input" type="password"></ion-input><br>
           </div>
-
-          <!-- <input matInput placeholder="Username" class="inputbox1"> -->
-          <!-- <input matInput placeholder="Password" class="inputbox2" type="password"><br> -->
           <a href="https://www.google.com/" class="forgotlink">forgot password?</a>
 
-          <button type="button" (click)="onLogin()" class="button1">Login</button>
-        </form>
+          <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Login</button>
+          </form>
+
 
       </div>
+
      </div>
 
      <!-- ionic generate page MainHome -->

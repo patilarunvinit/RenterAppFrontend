@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,  ReactiveFormsModule  } from '@angular/forms';
 import { HomePage } from './home.page';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { MatButtonModule } from '@angular/material/button';
 
-
+import { MatLabel } from '@angular/material/form-field';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
@@ -24,13 +25,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HomePageRoutingModule,
     MatInputModule,
     MatFormFieldModule,
+    MatLabel,
+    MatButtonModule,
+    ReactiveFormsModule,
     
     
   ],
   declarations: [HomePage],
   providers: [
-    Keyboard, // Add Keyboard to providers array
-    // Other providers if any
+    Keyboard, 
   ],
 })
 export class HomePageModule {}
