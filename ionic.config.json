@@ -1,7 +1,10 @@
 {
   "name": "rentapp",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
+
+  
 }
