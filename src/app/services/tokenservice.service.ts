@@ -7,11 +7,19 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='https://19b4-103-148-62-157.ngrok-free.app/'
+  apiroot:any='https://0696-103-148-62-157.ngrok-free.app/'
   constructor(private http: HttpClient) { }
 
   login(obj: any) {
+    // debugger
     console.log(obj);
     return this.http.post(this.apiroot + 'login', obj);
+  }
+
+
+
+  Ownerdata() {
+    debugger
+    return this.http.get(this.apiroot + 'user',);
   }
 }

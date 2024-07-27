@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
 
 
 
@@ -11,15 +12,38 @@ import { Component, OnInit } from '@angular/core';
 export class MainHomePage implements OnInit {
 
 
-  constructor() {}
+  constructor(
+    private serviceClass: TokenserviceService,
+  ) {}
   
 
 
   ngOnInit() {
+    this.ownerD();
+  }
+
+
+  mobile_no:any;
+  name:any;
+  owner_dp:any
+  dp:any;
+  url:any="https://0696-103-148-62-157.ngrok-free.app"
+  ownerD(){
+    
+    this.serviceClass.Ownerdata().subscribe((res:any)=>{
+      this.mobile_no = res.mobile_no
+      this.name = res.name
+      this.owner_dp = res.owner_photo
+      this.dp=this.url + this.owner_dp
+      // alert(this.dp)
+      // console.log(res)
+      debugger
+    })  
+
   }
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
-  dp:string="assets/img/test1.jpg"
+  // dp:string="assets/img/test1.jpg"
   all_flats:string="assets/img/all_flats.png"
   manage:string="assets/img/manage.png"
   rent:string="assets/img/rent.png"

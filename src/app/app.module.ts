@@ -4,6 +4,9 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {TokenInterceptor}  from "./services/fortokan.interceptor"
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
+    {provide:HTTP_INTERCEPTORS , useClass: TokenInterceptor, multi: true}
+    
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -83,7 +83,8 @@ export class HomePage {
       console.log('Response:', res);
       if(res.jwt) {
         alert("Login Success")
-        localStorage.setItem('hotelUser',JSON.stringify(res.data));
+        alert(res.jwt)
+        localStorage.setItem('hotelUser',JSON.stringify(res.jwt));
         this.router.navigateByUrl('/main-home');
       }
       else {
