@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'add-address',
+    redirectTo: 'add-renter',
     pathMatch: 'full'
   },
   {
@@ -19,6 +19,11 @@ const routes: Routes = [
     path: 'add-address',
     loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
   },
+  {
+    path: 'add-renter',
+    loadChildren: () => import('./addrenter/addrenter.module').then( m => m.AddrenterPageModule)
+  },
+  
   
 ];
 
