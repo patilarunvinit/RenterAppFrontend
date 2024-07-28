@@ -8,12 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'add-address',
     pathMatch: 'full'
   },
   {
     path: 'main-home',
     loadChildren: () => import('./main-home/main-home.module').then( m => m.MainHomePageModule)
+  },
+  {
+    path: 'add-address',
+    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
   },
   
 ];

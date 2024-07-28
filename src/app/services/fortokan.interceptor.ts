@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     debugger
-    if (req.url.includes('https://0696-103-148-62-157.ngrok-free.app/login')) {
+    if (req.url.includes('http://localhost:8000/login')) {
       return next.handle(req); // Skip interception for login requests
     }
     else{

@@ -26,8 +26,9 @@ export class MainHomePage implements OnInit {
   mobile_no:any;
   name:any;
   owner_dp:any
+  b_date:any;
   dp:any;
-  url:any="https://0696-103-148-62-157.ngrok-free.app"
+  url:any="http://localhost:8000"
   ownerD(){
     
     this.serviceClass.Ownerdata().subscribe((res:any)=>{
@@ -35,6 +36,7 @@ export class MainHomePage implements OnInit {
       this.name = res.name
       this.owner_dp = res.owner_photo
       this.dp=this.url + this.owner_dp
+      this.b_date = res.b_date
       // alert(this.dp)
       // console.log(res)
       debugger

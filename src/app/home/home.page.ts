@@ -37,37 +37,7 @@ export class HomePage {
   }
 
 
-
-  loginObj: any = {
-    "email": "v@gmail.com",
-    "password": "v@12345678"
-  };
   
-  // formData = {email:any,password:any,
-  //   email: '',
-  //   password: ''
-  // };
-  onLogin(data:any) {
-    alert("work")
-       console.log('Form Data:', data);
-    // console.log(this.loginObj);
-    // this.serviceClass.login(this.loginObj).subscribe((res:any)=>{
-    //   console.log('Response:', res);
-    //   if(res.jwt) {
-    //     alert("Login Success")
-    //     localStorage.setItem('hotelUser',JSON.stringify(res.data));
-    //     this.router.navigateByUrl('/main-home');
-    //   }
-    //   else {
-    //     alert('Check User Credentials')
-    //   }
-    // },
-    // error=> {
-    //   // console.log(error.error.detail)
-    //   alert(error.error.detail)
-
-    // })
-  }
   formData = {
     email: '',
     password: ''

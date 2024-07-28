@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='https://0696-103-148-62-157.ngrok-free.app/'
+  apiroot:any='http://localhost:8000/'
   constructor(private http: HttpClient) { }
 
   login(obj: any) {
