@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'add-renter',
+    redirectTo: 'managerent',
     pathMatch: 'full'
   },
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'add-renter',
     loadChildren: () => import('./addrenter/addrenter.module').then( m => m.AddrenterPageModule)
+  },
+  {
+    path: 'managerent',
+    loadChildren: () => import('./managerent/managerent.module').then( m => m.ManagerentPageModule)
   },
   
   
