@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'managerent',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

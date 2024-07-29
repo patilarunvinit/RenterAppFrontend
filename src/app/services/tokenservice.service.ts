@@ -11,7 +11,6 @@ export class TokenserviceService {
   constructor(private http: HttpClient) { }
 
   login(obj: any) {
-    // debugger
     console.log(obj);
     return this.http.post(this.apiroot + 'login', obj);
   }
@@ -19,7 +18,12 @@ export class TokenserviceService {
 
 
   Ownerdata() {
-    debugger
     return this.http.get(this.apiroot + 'user',);
+  }
+  ref_tokan:any;
+  refreshTokan() {
+    this.ref_tokan= localStorage.getItem('ref_tokan');
+    alert(this.ref_tokan)
+    // return this.http.get(this.apiroot + 'refresh', this.ref_tokan);
   }
 }

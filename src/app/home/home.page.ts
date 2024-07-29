@@ -50,11 +50,13 @@ export class HomePage {
       console.log(this.formData);
       
       this.serviceClass.login(this.formData).subscribe((res:any)=>{
-      console.log('Response:', res);
-      if(res.jwt) {
+      console.log('Response:', res.access);
+      if(res.access) {
         alert("Login Success")
-        alert(res.jwt)
-        localStorage.setItem('hotelUser',JSON.stringify(res.jwt));
+        // alert(res.access)
+        localStorage.setItem('hotelUser',JSON.stringify(res.access));
+        localStorage.setItem('ref_tokan',JSON.stringify(res.refresh));
+
         this.router.navigateByUrl('/main-home');
       }
       else {

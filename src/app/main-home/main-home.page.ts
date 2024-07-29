@@ -39,7 +39,6 @@ export class MainHomePage implements OnInit {
       this.b_date = res.b_date
       // alert(this.dp)
       // console.log(res)
-      debugger
     })  
 
   }

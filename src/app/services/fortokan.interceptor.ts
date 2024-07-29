@@ -13,17 +13,18 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    debugger
+   
     if (req.url.includes('http://localhost:8000/login')) {
       return next.handle(req); // Skip interception for login requests
     }
     else{
       let datalocal:any = localStorage.getItem("hotelUser")
     let localTokan = JSON.parse(datalocal);
-    console.log(localTokan)
+    // console.log(localTokan)
+    
     const request = req.clone({
-      headers: req.headers.set('Authorization', 'bearer' + localTokan)});
-
+      headers: req.headers.set('Authorization', `Bearer ${localTokan}`)});
+    // alert(datalocal)
     return next.handle(request);
     }
     // let datalocal:any = localStorage.getItem("hotelUser")
