@@ -1,0 +1,45 @@
+<div class="upperdiv" >
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+    <div class="menu">
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
+    </div>
+    <div class="namediv">
+      <p class="nameh1">
+        <strong>Your Flats</strong>
+      </p>
+      <ion-icon name="funnel" class="filtericon"></ion-icon>
+
+    </div>
+    <div class="listmiandiv">
+      <ion-grid class="tablegrid">
+        <ion-row >
+          <ion-col size="4"><strong>Address</strong></ion-col>
+          <ion-col size="2"><strong>Flat no</strong></ion-col>
+          <ion-col size="2"><strong>Rent</strong></ion-col>
+          <ion-col size="3"><strong>Available</strong></ion-col>
+          <ion-col ><strong></strong></ion-col>
+        </ion-row>
+
+        <ion-row >
+          <ion-col size="4">554 Harvest Quail Hollow, Colorado Springs, CO 40426</ion-col>
+          <ion-col size="2">2/205</ion-col>
+          <ion-col size="2">₹3000</ion-col>
+          <ion-col size="3">Yes</ion-col>
+          <ion-col ><strong>></strong></ion-col>
+
+        </ion-row>
+
+        <ion-row >
+          <ion-col size="4">1837 Middle Byway, Las Vegas, NV 54427</ion-col>
+          <ion-col size="2">A1</ion-col>
+          <ion-col size="2">$1000</ion-col>
+          <ion-col size="3">Yes</ion-col>
+          <ion-col ><strong>></strong></ion-col>
+
+        </ion-row>
+      </ion-grid>
+      
+    </div>
+  </div>
+</div>

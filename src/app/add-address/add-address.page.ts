@@ -57,7 +57,7 @@ export class AddAddressPage implements OnInit {
     // this.showPopup()
     this.serviceClass.addAdrress(this.formData).subscribe((res:any)=>{
       console.log('Response:', res);
-      if(res.jwt) {
+      if(res) {
         this.showPopup()
       }
       else {

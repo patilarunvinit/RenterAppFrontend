@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'managerent',
     loadChildren: () => import('./managerent/managerent.module').then( m => m.ManagerentPageModule)
   },
+  {
+    path: 'listadrress',
+    loadChildren: () => import('./listadrress/listadrress.module').then( m => m.ListadrressPageModule)
+  },
   
   
 ];
