@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
 
+import { Router } from '@angular/router';
 
 
 
@@ -14,6 +15,7 @@ export class MainHomePage implements OnInit {
 
   constructor(
     private serviceClass: TokenserviceService,
+    private router: Router,
   ) {}
   
 
@@ -42,6 +44,13 @@ export class MainHomePage implements OnInit {
     })  
 
   }
+
+
+  menubuttons(menu:any){
+      this.router.navigateByUrl('/' + menu);
+
+  }
+
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
   // dp:string="assets/img/test1.jpg"

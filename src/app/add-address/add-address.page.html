@@ -3,7 +3,7 @@
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
   <div class="lowerdiv"  [style.height]="divHeight">
     <div class="menu">
-      <ion-icon name="arrow-back-outline" class="backbutton"></ion-icon>
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
     </div>
     <div class="namediv">
       <p class="nameh1">

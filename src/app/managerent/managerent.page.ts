@@ -120,6 +120,11 @@ export class ManagerentPage implements OnInit {
 
 
 
+  backbutton(){
+    this.router.navigateByUrl('/main-home');
+  }
+
+
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
 
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
@@ -20,6 +21,8 @@ export class AddAddressPage implements OnInit {
     private platform: Platform,
     private keyboard: Keyboard,
     private router: Router,
+    private serviceClass: TokenserviceService,
+
   ) { 
 
     this.platform.keyboardDidShow.subscribe(ev => {
@@ -40,6 +43,7 @@ export class AddAddressPage implements OnInit {
 
 
   formData = {
+    owner_id:1,
     Area: '',
     Building_name: '',
     Floor: '',
@@ -50,36 +54,41 @@ export class AddAddressPage implements OnInit {
 
   submitForm() {
     console.log(this.formData)
-    this.showPopup()
-    // if (this.formData.email && this.formData.password) {
-    //   console.log(this.formData);
-      
-    //   this.serviceClass.login(this.formData).subscribe((res:any)=>{
-    //   console.log('Response:', res);
-    //   if(res.jwt) {
-    //     alert("Login Success")
-    //     alert(res.jwt)
-    //     localStorage.setItem('hotelUser',JSON.stringify(res.jwt));
-    //     this.router.navigateByUrl('/main-home');
-    //   }
-    //   else {
-    //     alert('Check User Credentials')
-    //   }
-    // },
-    // error=> {
-    //   // console.log(error.error.detail)
-    //   alert(error.error.detail)
+    // this.showPopup()
+    this.serviceClass.addAdrress(this.formData).subscribe((res:any)=>{
+      console.log('Response:', res);
+      if(res.jwt) {
+        this.showPopup()
+      }
+      else {
+        alert('Error To Send Data')
+      }
+    },
+    error=> {
+      // console.log(error.error.detail)
+      alert(error.error.detail)
 
-    // })
+    })
 
 
-    //   this.formData = {
-    //     email: '',
-    //     password: ''
-    //     // Initialize other fields as needed
-    //   };
-    // }
+    this.formData = {
+      owner_id:1,
+      Area: '',
+      Building_name: '',
+      Floor: '',
+      Flat_no: '',
+      Rent: '',
+      // Add more fields as needed
+    };
+    
   }
+
+
+  backbutton(){
+    this.router.navigateByUrl('/main-home');
+  }
+
+
 
   popdiplay:any="none";
   blur:any;

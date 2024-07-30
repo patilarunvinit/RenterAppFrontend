@@ -21,7 +21,7 @@
     <div class="option">
       <img alt="Profile pic" [src]=all_flats class="optionpics" >
     </div>
-    <div class="option fordiffcolor">
+    <div class="option fordiffcolor" (click)="menubuttons('managerent')">
       <img alt="Profile pic" [src]=manage class="optionpics" >
 
     </div>
@@ -34,11 +34,11 @@
 
     </div>
     <div class="option">
-      <img alt="Profile pic" [src]=add_renter class="optionpics" >
+      <img alt="Profile pic" [src]=add_renter class="optionpics" (click)="menubuttons('add-renter')" >
 
     </div>
     <div class="option fordiffcolor">
-      <img alt="Profile pic" [src]=add_home class="optionpics" >
+      <img alt="Profile pic" [src]=add_home class="optionpics" (click)="menubuttons('add-address')">
 
     </div>
   </div>

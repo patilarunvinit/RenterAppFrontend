@@ -20,6 +20,13 @@ export class TokenserviceService {
   Ownerdata() {
     return this.http.get(this.apiroot + 'user',);
   }
+  
+  
+  addAdrress(addr:any) {
+    return this.http.post(this.apiroot + 'addAddress',addr);
+  }
+  
+
   ref_tokan:any;
   refreshTokan() {
     this.ref_tokan= localStorage.getItem('ref_tokan');

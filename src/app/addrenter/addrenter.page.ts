@@ -80,6 +80,14 @@ export class AddrenterPage implements OnInit {
     // }
   }
 
+  backbutton(){
+    this.router.navigateByUrl('/main-home');
+  }
+
+
+
+
+
   popdiplay:any="none";
   blur:any;
   showPopup() {
