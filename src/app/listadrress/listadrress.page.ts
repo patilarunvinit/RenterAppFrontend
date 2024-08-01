@@ -33,6 +33,7 @@ export class ListadrressPage implements OnInit {
       this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
 
     });
+    this.getalldataaddr()
   }
 
   ngOnInit() {
@@ -42,6 +43,18 @@ export class ListadrressPage implements OnInit {
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
+
+  addressdata:any;
+  getalldataaddr(){
+    
+    this.serviceClass.getadrress().subscribe((res:any)=>{
+      
+      this.addressdata=res
+      console.log(res)
+    })  
+
+  }
+
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 

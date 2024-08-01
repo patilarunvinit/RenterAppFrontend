@@ -26,6 +26,14 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addAddress',addr);
   }
   
+  getadrress() {
+    return this.http.get(this.apiroot + 'getaddress');
+  }
+
+  addRenter(renter:any) {
+    console.log(renter)
+    return this.http.post(this.apiroot + 'addrenter',renter);
+  }
 
   ref_tokan:any;
   refreshTokan() {

@@ -6,6 +6,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
 
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
+import { ElementRef, ViewChild } from '@angular/core';
+
 @Component({
   selector: 'app-addrenter',
   templateUrl: './addrenter.page.html',
@@ -19,6 +22,8 @@ export class AddrenterPage implements OnInit {
     private platform: Platform,
     private keyboard: Keyboard,
     private router: Router,
+    private serviceClass: TokenserviceService,
+
   ) { 
 
     this.platform.keyboardDidShow.subscribe(ev => {
@@ -34,51 +39,69 @@ export class AddrenterPage implements OnInit {
     });
   }
 
+  token:any;
   ngOnInit() {
+    
+
   }
 
+
+  @ViewChild('fileInput') fileInput: ElementRef | undefined;
+
+  file!:File;
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    this.formData.id_img = this.file; 
+  }
 
   formData = {
     owner_id:1,
     renter_name: '',
     renter_mobile_no: '',
     id_type: '',
-    id_img: '',
-    // Add more fields as needed
+    id_img: null as File | null
   };
 
   submitForm() {
-    console.log(this.formData)
-    this.showPopup()
-    // if (this.formData.email && this.formData.password) {
-    //   console.log(this.formData);
+    const formData = new FormData();
+    formData.append('owner_id',"1");
+    formData.append('renter_name', this.formData.renter_name);
+    formData.append('renter_mobile_no', this.formData.renter_mobile_no);
+    formData.append('id_type', this.formData.id_type)
+    if (this.file !== null) { 
+      formData.append('id_img', this.file);
+    }
+ 
+
+    // console.log(this.formData.id_img)
+    this.serviceClass.addRenter(formData).subscribe((res:any)=>{
+      console.log('Response:', res);
+      if(res) {
+        this.showPopup()
+        
+      }
+      else {
+        alert('Error To Send Data')
+      }
       
-    //   this.serviceClass.login(this.formData).subscribe((res:any)=>{
-    //   console.log('Response:', res);
-    //   if(res.jwt) {
-    //     alert("Login Success")
-    //     alert(res.jwt)
-    //     localStorage.setItem('hotelUser',JSON.stringify(res.jwt));
-    //     this.router.navigateByUrl('/main-home');
-    //   }
-    //   else {
-    //     alert('Check User Credentials')
-    //   }
-    // },
-    // error=> {
-    //   // console.log(error.error.detail)
-    //   alert(error.error.detail)
-
-    // })
+    },
+    error=> {
+      alert(error.error.detail)
+    })
+    this.formData = {
+      owner_id:1,
+      renter_name: '',
+      renter_mobile_no: '',
+      id_type: '',
+      id_img: null as File | null
+    };
 
 
-    //   this.formData = {
-    //     email: '',
-    //     password: ''
-    //     // Initialize other fields as needed
-    //   };
-    // }
   }
+
+
+
+
 
   backbutton(){
     this.router.navigateByUrl('/main-home');

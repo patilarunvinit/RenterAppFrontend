@@ -45,9 +45,12 @@ export class MainHomePage implements OnInit {
 
   }
 
-
+  token:any;
   menubuttons(menu:any){
       this.router.navigateByUrl('/' + menu);
+      this.token= localStorage.getItem('hotelUser');
+    console.log(this.token)
+    
 
   }
 

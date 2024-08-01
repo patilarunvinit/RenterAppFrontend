@@ -29,7 +29,7 @@
       </div>
 
       <div class="inputbox2">
-        <ion-input type="file" class="ion_input" name="id_img" [(ngModel)]="formData.id_img"></ion-input>
+        <ion-input (change)="onFileSelected($event)" type="file" class="ion_input" name="id_img" ></ion-input>
       </div>
 
       

@@ -20,22 +20,20 @@
           <ion-col size="3"><strong>Available</strong></ion-col>
           <ion-col ><strong></strong></ion-col>
         </ion-row>
-
-        <ion-row >
-          <ion-col size="4">554 Harvest Quail Hollow, Colorado Springs, CO 40426</ion-col>
-          <ion-col size="2">2/205</ion-col>
-          <ion-col size="2">₹3000</ion-col>
-          <ion-col size="3">Yes</ion-col>
+        <ion-row *ngFor="let item of addressdata;let i = index">
+          <ion-col size="4">{{addressdata[i]["Area"]}} <strong>building- </strong> {{addressdata[i]["Building_name"]}}</ion-col>
+          <ion-col size="2">{{addressdata[i]["Floor"]}}/{{addressdata[i]["Flat_no"]}}</ion-col>
+          <ion-col size="2">{{addressdata[i]["Rent"]}}</ion-col>
+          <ion-col size="3">
+            <div *ngIf="addressdata[i]['is_on_rent']== true; else elseBlock">
+              YES
+            </div>
+            <ng-template #elseBlock>
+              NO
+            </ng-template>
+          </ion-col>
           <ion-col ><strong>></strong></ion-col>
 
-        </ion-row>
-
-        <ion-row >
-          <ion-col size="4">1837 Middle Byway, Las Vegas, NV 54427</ion-col>
-          <ion-col size="2">A1</ion-col>
-          <ion-col size="2">$1000</ion-col>
-          <ion-col size="3">Yes</ion-col>
-          <ion-col ><strong>></strong></ion-col>
 
         </ion-row>
       </ion-grid>
