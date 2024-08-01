@@ -7,7 +7,7 @@
     </div>
     <div class="namediv">
       <p class="nameh1">
-        <strong>Manage Rents</strong>
+        <strong>Manage Lease</strong>
       </p>
 
     </div>
@@ -26,39 +26,39 @@
 
 
     <div class="fromdiv" [style.display]="adddispaly" >
-       <p class="formtext">Add Rent</p>
+       <p class="formtext">Add Lease</p>
        <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Id Type" name="renter_name" [(ngModel)]="addfromdata.renter_name">
-          <ion-select-option value="pancard">vinit patil</ion-select-option>
-          <ion-select-option value="adharcard">ramesh patil</ion-select-option>
-          <ion-select-option value="voterid">lakhan tare</ion-select-option>
+        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id">
+          <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
+            {{renter.renter_name}}
+          </ion-select-option>
+         
         </ion-select>
       </div>
 
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Id Type" name="address" [(ngModel)]="addfromdata.address">
-          <ion-select-option value="pancard">
-            at-kasheli koliwada
-            building-raka ali
-            floor/flat-2/250
+        <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="addfromdata.address_id">
+          <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
+            {{addressdata[i]["Area"]}}
+            building-{{addressdata[i]["Building_name"]}}
+            floor/flat-{{addressdata[i]["Floor"]}}/{{addressdata[i]["Flat_no"]}}
           </ion-select-option>
-          <ion-select-option value="adharcard">
-            at-kasheli koliwada
-            building-raka ali
-            floor/flat-2/250
-          </ion-select-option>
-          <ion-select-option value="voterid">
-            at-kasheli koliwada
-            building-raka ali
-            floor/flat-2/250
-          </ion-select-option>
+         
         </ion-select>
       </div>
 
       <div class="inputbox2">
         <ion-input name="start_date" [(ngModel)]="addfromdata.start_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="rent" [(ngModel)]="addfromdata.rent" type="number"  required placeholder="Rent" class="ion_input" ></ion-input><br>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="deposit" [(ngModel)]="addfromdata.deposit" type="number"  required placeholder="deposit" class="ion_input" ></ion-input><br>
       </div>
 
      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Login</button>

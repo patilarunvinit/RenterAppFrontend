@@ -5,7 +5,7 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
-
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -37,20 +37,40 @@ export class AddAddressPage implements OnInit {
 
     });
   }
-
+  userId:any;
   ngOnInit() {
+
+    this.initializeUserData();
   }
 
+  initializeUserData() {
+    const accessToken = localStorage.getItem('hotelUser');
+    if (accessToken) {
+      try {
+        const decodedToken = jwtDecode<any>(accessToken);
+        this.userId = decodedToken.user_id;
+        console.log(`User ID: ${this.userId}`);
+        this.initializeFormData(); // Initialize formData only after userId is set
+      } catch (e) {
+        console.error('Invalid token', e);
+      }
+    } else {
+      console.error('No access token found');
+    }
+  }
 
-  formData = {
-    owner_id:1,
-    Area: '',
-    Building_name: '',
-    Floor: '',
-    Flat_no: '',
-    Rent: '',
-    // Add more fields as needed
-  };
+  formData:any;
+  initializeFormData() {
+    this.formData = {
+      owner_id: this.userId,
+      Area: '',
+      Building_name: '',
+      Floor: '',
+      Flat_no: '',
+      Rent: '',
+      // Add more fields as needed
+    };
+  }
 
   submitForm() {
     console.log(this.formData)
@@ -70,16 +90,7 @@ export class AddAddressPage implements OnInit {
 
     })
 
-
-    this.formData = {
-      owner_id:1,
-      Area: '',
-      Building_name: '',
-      Floor: '',
-      Flat_no: '',
-      Rent: '',
-      // Add more fields as needed
-    };
+    this.initializeFormData();
     
   }
 

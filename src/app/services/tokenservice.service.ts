@@ -35,10 +35,27 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addrenter',renter);
   }
 
-  ref_tokan:any;
-  refreshTokan() {
-    this.ref_tokan= localStorage.getItem('ref_tokan');
-    alert(this.ref_tokan)
-    // return this.http.get(this.apiroot + 'refresh', this.ref_tokan);
+ 
+  getadrressforlease() {
+    return this.http.get(this.apiroot + 'addressforlease');
   }
+
+  getreanterforlease() {
+    return this.http.get(this.apiroot + 'renterforlease');
+  }
+
+  addlease(lease:any) {
+    console.log(lease)
+    return this.http.post(this.apiroot + 'somedata',lease);
+  }
+
+
+
+
+  // ref_tokan:any;
+  // refreshTokan() {
+  //   this.ref_tokan= localStorage.getItem('ref_tokan');
+  //   alert(this.ref_tokan)
+  //   // return this.http.get(this.apiroot + 'refresh', this.ref_tokan);
+  // }
 }

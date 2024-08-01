@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
 import { ElementRef, ViewChild } from '@angular/core';
 
+import { jwtDecode } from 'jwt-decode';
+
+
 @Component({
   selector: 'app-addrenter',
   templateUrl: './addrenter.page.html',
@@ -39,11 +42,40 @@ export class AddrenterPage implements OnInit {
     });
   }
 
-  token:any;
+  
+  userId:any;
   ngOnInit() {
-    
 
+    this.initializeUserData();
   }
+
+  initializeUserData() {
+    const accessToken = localStorage.getItem('hotelUser');
+    if (accessToken) {
+      try {
+        const decodedToken = jwtDecode<any>(accessToken);
+        this.userId = decodedToken.user_id;
+        console.log(`User ID: ${this.userId}`);
+        this.initializeFormData(); // Initialize formData only after userId is set
+      } catch (e) {
+        console.error('Invalid token', e);
+      }
+    } else {
+      console.error('No access token found');
+    }
+  }
+
+  formData:any;
+  initializeFormData() {
+    this.formData = {
+      owner_id: this.userId,
+      renter_name: '',
+      renter_mobile_no: '',
+      id_type: '',
+      id_img: null as File | null
+    };
+  }
+
 
 
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
@@ -54,14 +86,7 @@ export class AddrenterPage implements OnInit {
     this.formData.id_img = this.file; 
   }
 
-  formData = {
-    owner_id:1,
-    renter_name: '',
-    renter_mobile_no: '',
-    id_type: '',
-    id_img: null as File | null
-  };
-
+ 
   submitForm() {
     const formData = new FormData();
     formData.append('owner_id',"1");
@@ -88,13 +113,8 @@ export class AddrenterPage implements OnInit {
     error=> {
       alert(error.error.detail)
     })
-    this.formData = {
-      owner_id:1,
-      renter_name: '',
-      renter_mobile_no: '',
-      id_type: '',
-      id_img: null as File | null
-    };
+    
+    this.initializeFormData();
 
 
   }
