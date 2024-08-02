@@ -30,7 +30,7 @@
        <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id">
+        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id" >
           <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
             {{renter.renter_name}}
           </ion-select-option>

@@ -46,7 +46,7 @@ export class TokenserviceService {
 
   addlease(lease:any) {
     console.log(lease)
-    return this.http.post(this.apiroot + 'somedata',lease);
+    return this.http.post(this.apiroot + 'addlease',lease);
   }
 
 

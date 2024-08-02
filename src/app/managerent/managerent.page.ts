@@ -36,10 +36,17 @@ export class ManagerentPage implements OnInit {
       this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
 
     });
+     
 
+  }
 
+  ngOnInit() {
+    this.dataforinputs()
+  }
 
+  
 
+   dataforinputs(){
 
     this.serviceClass.getadrressforlease().subscribe((res:any)=>{
       
@@ -53,10 +60,8 @@ export class ManagerentPage implements OnInit {
       console.log(res)
     })  
 
-  }
+   }
 
-  ngOnInit() {
-  }
 
 
   addfromdata = {
@@ -75,6 +80,7 @@ export class ManagerentPage implements OnInit {
       console.log('Response:', res);
       if(res) {
         this.showPopup()
+        this.dataforinputs();
       }
       else {
         alert('Error To Send Data')
@@ -86,7 +92,7 @@ export class ManagerentPage implements OnInit {
 
     })
 
-
+    
     this.addfromdata = {
       renter_id:'',
       address_id: '',
@@ -96,6 +102,7 @@ export class ManagerentPage implements OnInit {
   
       // Add more fields as needed
     };
+
   }
 
   removefromdata = {

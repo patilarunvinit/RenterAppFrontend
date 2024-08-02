@@ -44,6 +44,10 @@ export class ListadrressPage implements OnInit {
     this.router.navigateByUrl('/main-home');
   }
 
+  singlepagebutton(address_id:any){
+    this.router.navigateByUrl('/sigleaddress?adrress_id=' + address_id);
+  }
+
   addressdata:any;
   getalldataaddr(){
     

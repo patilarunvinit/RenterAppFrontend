@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'listadrress',
     loadChildren: () => import('./listadrress/listadrress.module').then( m => m.ListadrressPageModule)
   },
+  {
+    path: 'sigleaddress',
+    loadChildren: () => import('./sigleaddress/sigleaddress.module').then( m => m.SigleaddressPageModule)
+  },
   
   
 ];
