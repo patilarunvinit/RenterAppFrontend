@@ -26,7 +26,9 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addAddress',addr);
   }
   
+  
   getadrress() {
+    debugger
     return this.http.get(this.apiroot + 'getaddress');
   }
 

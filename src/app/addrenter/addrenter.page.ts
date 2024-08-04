@@ -86,7 +86,7 @@ export class AddrenterPage implements OnInit {
     this.formData.id_img = this.file; 
   }
 
- 
+ //Form For Add renter 
   submitForm() {
     const formData = new FormData();
     formData.append('owner_id',"1");
@@ -98,21 +98,21 @@ export class AddrenterPage implements OnInit {
     }
  
 
-    // console.log(this.formData.id_img)
-    this.serviceClass.addRenter(formData).subscribe((res:any)=>{
-      console.log('Response:', res);
-      if(res) {
-        this.showPopup()
+    console.log(this.formData.id_img)
+    // this.serviceClass.addRenter(formData).subscribe((res:any)=>{
+    //   console.log('Response:', res);
+    //   if(res) {
+    //     this.showPopup()
         
-      }
-      else {
-        alert('Error To Send Data')
-      }
+    //   }
+    //   else {
+    //     alert('Error To Send Data')
+    //   }
       
-    },
-    error=> {
-      alert(error.error.detail)
-    })
+    // },
+    // error=> {
+    //   alert(error.error.detail)
+    // })
     
     this.initializeFormData();
 
@@ -122,7 +122,7 @@ export class AddrenterPage implements OnInit {
 
 
 
-
+//For back button
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
@@ -130,7 +130,7 @@ export class AddrenterPage implements OnInit {
 
 
 
-
+//For success Form Submite 
   popdiplay:any="none";
   blur:any;
   showPopup() {

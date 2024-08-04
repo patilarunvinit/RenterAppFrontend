@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-   
+   debugger
     if (req.url.includes('http://localhost:8000/login')) {
       return next.handle(req); // Skip interception for login requests
     }
