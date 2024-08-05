@@ -51,6 +51,13 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addlease',lease);
   }
 
+  getaddresssingle(id:any) {
+    return this.http.get(this.apiroot + 'getsingleaddress?address_id=' + id);
+  }
+
+  getrentersingle(id:any) {
+    return this.http.get(this.apiroot + 'Getrenterifonlease?address_id=' + id);
+  }
 
 
 

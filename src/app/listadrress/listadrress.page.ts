@@ -52,7 +52,6 @@ export class ListadrressPage implements OnInit {
   getalldataaddr(){
     
     this.serviceClass.getadrress().subscribe((res:any)=>{
-      
       this.addressdata=res
       console.log(res)
     })  
