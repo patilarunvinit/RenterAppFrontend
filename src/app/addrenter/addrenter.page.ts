@@ -99,20 +99,20 @@ export class AddrenterPage implements OnInit {
  
 
     console.log(this.formData.id_img)
-    // this.serviceClass.addRenter(formData).subscribe((res:any)=>{
-    //   console.log('Response:', res);
-    //   if(res) {
-    //     this.showPopup()
+    this.serviceClass.addRenter(formData).subscribe((res:any)=>{
+      console.log('Response:', res);
+      if(res) {
+        this.showPopup()
         
-    //   }
-    //   else {
-    //     alert('Error To Send Data')
-    //   }
+      }
+      else {
+        alert('Error To Send Data')
+      }
       
-    // },
-    // error=> {
-    //   alert(error.error.detail)
-    // })
+    },
+    error=> {
+      alert(error.error.detail)
+    })
     
     this.initializeFormData();
 

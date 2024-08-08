@@ -1,5 +1,5 @@
 
-<div class="upperdiv" >
+<div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
   <img alt="back photo" [src]=backphoto class="backimage" >
   <div class="menu">
     <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
@@ -14,15 +14,15 @@
       Owner Name :- vinit patil
     </p>
     <p class="addressinfo">
-      Address :- {{address[0].Area}}
+      Address :- {{area}}
     </p>
     <p class="addressinfo">
-      Flat No :- {{address[0].Floor}}/{{address[0].Flat_no}}
+      Flat No :- {{flat_no}}
     </p>
     <p class="addressinfo">
-      Rent :- {{address[0].Rent}}
+      Rent :- {{Rent}}
     </p>
-    <p class="addressinfo" *ngIf="address[0].is_on_rent; else elseBlock">
+    <p class="addressinfo" *ngIf="is_on_rent; else elseBlock">
       Available: Yes
     </p>
     <ng-template #elseBlock>
@@ -32,15 +32,15 @@
     </ng-template>
   <div class="line"></div>
   </div>
-  <div class="renterdiv" *ngIf="address[0].is_on_rent; else elsediv">
+  <div class="renterdiv" *ngIf="is_on_rent; else elsediv">
     <P class="addressinfo">
-      Renter :- {{renter.renter_name}}
+      Renter :- {{renter_name}}
     </P>
     <P class="addressinfo">
-      Mobile No :- {{renter.renter_mobile_no}}
+      Mobile No :- {{renter_mobile_no}}
     </P>
-    <P class="addressinfo">
-      Id Proof :- {{renter.id_type}}
+    <P class="addressinfo" (click)="showPopup()" >
+      Id Proof :- <span style="color: blue;">{{id_type}}</span>
     </P>
     <P class="addressinfo">
       Start Date :- 1 mar 2024
@@ -53,18 +53,12 @@
       </p>
     </div>
   </ng-template>
-  <!-- <div class="renterdiv">
-    <P class="addressinfo">
-      Renter :- nilesh ramesh mhatre
-    </P>
-    <P class="addressinfo">
-      Mobile No :- 9967542791
-    </P>
-    <P class="addressinfo">
-      Id Proof :- pan
-    </P>
-    <P class="addressinfo">
-      Start Date :- 1 mar 2024
-    </P>
-  </div> -->
+
+
+</div>
+<div class="popupdiv" [style.display]="popdiplay">
+  <div class="closebutton">
+    <ion-icon name="close" class="closeicon" (click)="closepopup()"></ion-icon>
+  </div>
+  <img [src]=id_img alt="id card" class="popupimg">
 </div>

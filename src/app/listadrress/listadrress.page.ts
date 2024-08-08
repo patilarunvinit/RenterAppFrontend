@@ -33,25 +33,39 @@ export class ListadrressPage implements OnInit {
       this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
 
     });
-    this.getalldataaddr()
+    // this.getalldataaddr()
   }
 
   ngOnInit() {
+    this.getalldataaddr()
   }
 
 
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
+  
+  selectedValue:any="all";
+  onSelectionChange(event: any) {
+    this.selectedValue = event.detail.value;
+    console.log('Selected value:', this.selectedValue);
+    this.getalldataaddr()
+  }
+
+
 
   singlepagebutton(address_id:any){
+    // localStorage.setItem('address_id',JSON.stringify(address_id));
+    // this.router.navigateByUrl('/sigleaddress');
+
     this.router.navigateByUrl('/sigleaddress?adrress_id=' + address_id);
+    // this.router.navigate(['/sigleaddress'], { queryParams: { address_id } });
   }
 
   addressdata:any;
   getalldataaddr(){
     
-    this.serviceClass.getadrress().subscribe((res:any)=>{
+    this.serviceClass.getadrress(this.selectedValue).subscribe((res:any)=>{
       this.addressdata=res
       console.log(res)
     })  

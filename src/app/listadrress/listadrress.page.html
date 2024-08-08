@@ -8,24 +8,26 @@
       <p class="nameh1">
         <strong>Your Flats</strong>
       </p>
-      <ion-icon name="funnel" class="filtericon"></ion-icon>
-
-    </div>
-
-    
-    <div class="filtermenudiv">
-      <div class="menuin">
-        <p>Available</p>
-      </div>
-      <div class="menuin">
-        Not Available
-      </div> 
+      <ion-item class="select-container">
+      <!-- <ion-icon name="funnel" ></ion-icon> -->
+      <ion-select placeholder="Select Available" name="filter" (ionChange)="onSelectionChange($event)">
+        <ion-select-option value="all" >
+          All Address
+        </ion-select-option>
+        <ion-select-option value=0 >
+          Available
+        </ion-select-option>
+        <ion-select-option value=1 >
+          Not Available
+        </ion-select-option>
+      </ion-select>
+      </ion-item>
     </div>
     
     
     <div class="listmiandiv">
       <ion-grid class="tablegrid">
-        <ion-row >
+        <ion-row class="tablehead">
           <ion-col size="4"><strong>Address</strong></ion-col>
           <ion-col size="2"><strong>Flat no</strong></ion-col>
           <ion-col size="2"><strong>Rent</strong></ion-col>

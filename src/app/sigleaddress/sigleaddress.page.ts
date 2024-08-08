@@ -17,33 +17,19 @@ export class SigleaddressPage implements OnInit {
     private route: ActivatedRoute,
     private serviceClass: TokenserviceService,
 
-  ) { 
-    this.route.queryParams.subscribe(params => {
-      this.addressId = params['adrress_id'];
-      console.log(this.addressId); // Should log '1'
-      if (this.addressId) {
-        this.getadrees();
-        this.getrenter();
-      } else {
-        console.error('Address ID is not defined.');
-      }
-    });
-  }
+  ) {this.route.queryParams.subscribe(params => {
+    this.addressId = params['adrress_id'];
+    console.log(this.addressId); 
+    if (this.addressId) {
+      this.getadrees(this.addressId);
+      this.getrenter(this.addressId);
+    } else {
+      console.error('Address ID is not defined.');
+    }
+  });}
 
   addressId:any;
-  ngOnInit() {
-    // this.route.queryParams.subscribe(params => {
-    //   this.addressId = params['adrress_id'];
-    //   console.log(this.addressId); // Should log '1'
-    //   if (this.addressId) {
-    //     this.getadrees();
-    //     this.getrenter();
-    //   } else {
-    //     console.error('Address ID is not defined.');
-    //   }
-    // });
-    
-  }
+  ngOnInit() { }
 
 
   backbutton(){
@@ -51,11 +37,18 @@ export class SigleaddressPage implements OnInit {
   }
 
 
-  address:any;
-  getadrees(){
-    this.serviceClass.getaddresssingle(this.addressId).subscribe((res:any)=>{
-      this.address=res
-      console.log(this.address)
+  area:any;
+  flat_no:any;
+  Rent:any;
+  is_on_rent:any;
+  getadrees(id:any){
+    this.serviceClass.getaddresssingle(id).subscribe((res:any)=>{
+      // this.address=res
+      this.area = res[0].Area
+      this.flat_no = res[0].Floor + "/" + res[0].Flat_no
+      this.Rent = res[0].Rent
+      this.is_on_rent = res[0].is_on_rent
+      
     }, 
     error=> {
       // console.log(error.error.detail)
@@ -65,13 +58,21 @@ export class SigleaddressPage implements OnInit {
 
   }
 
-  renter:any;
+  renter_name:any;
+  renter_mobile_no:any;
+  id_type:any;
+  id_img:any;
   on_renter_error:any;
-  getrenter(){
+  getrenter(id:any){
     
-    this.serviceClass.getrentersingle(this.addressId).subscribe((res:any)=>{
-      this.renter=res
-      console.log(this.renter)
+    this.serviceClass.getrentersingle(id).subscribe((res:any)=>{
+      this.renter_name = res.renter_name
+      this.renter_mobile_no = res.renter_mobile_no
+      this.id_type = res.id_type
+      let img = res.id_img
+      this.id_img = "http://localhost:8000" + img
+      // alert(this.id_img)
+      console.log(res)
     },
     error=> {
       this.on_renter_error=error.error.detail
@@ -82,6 +83,20 @@ export class SigleaddressPage implements OnInit {
 
   }
 
+
+
+
+  popdiplay:any="none";
+  blur:any;
+  showPopup() {
+    this.popdiplay = 'block';
+    this.blur = true
+  }
+
+  closepopup(){
+    this.popdiplay = 'none';
+    this.blur = false
+  }
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 

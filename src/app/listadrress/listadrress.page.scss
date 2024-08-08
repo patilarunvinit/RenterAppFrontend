@@ -63,28 +63,22 @@
     height: 80%;
     // border: 2px solid red;
     top:9%;
-    overflow: auto;
+    overflow-y: auto;
     
 }
 ion-col{
     text-align: center;
     border-bottom: 2px solid black;
 }
-
-
-.filtermenudiv{
-    position: absolute;
-    width: 100%;
-    height: 15%;
-    z-index: 999;
-    background-color: #00263d;
+.tablehead{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #3D9BD6; 
 }
-.menuin{
-    border-radius: 15px;
-    width: 100%;
-    height: 40%;
-    margin-bottom: 2.5%;
-    margin-top: 2.5%;
-    background-color: aqua;
-    border: 2px solid black;
-}
+.select-container {
+    width: 40%;
+    float: right;
+    margin-top: 4%;
+    padding-right: 4%;
+  }
