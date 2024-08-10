@@ -59,6 +59,13 @@ export class TokenserviceService {
     return this.http.get(this.apiroot + 'Getrenterifonlease?address_id=' + id);
   }
 
+  getrent(date:any) {
+    return this.http.get(this.apiroot + 'getlease?date='+ date);
+  }
+
+  getfilerdate() {
+    return this.http.get(this.apiroot + 'getmonths');
+  }
 
 
   // ref_tokan:any;

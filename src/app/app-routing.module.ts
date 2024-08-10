@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'sigleaddress',
     loadChildren: () => import('./sigleaddress/sigleaddress.module').then( m => m.SigleaddressPageModule)
   },
+  {
+    path: 'rent',
+    loadChildren: () => import('./rent/rent.module').then( m => m.RentPageModule)
+  },
   
   
 ];

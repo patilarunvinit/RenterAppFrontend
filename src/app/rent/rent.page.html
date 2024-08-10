@@ -1,0 +1,67 @@
+<div class="upperdiv" >
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+    <div class="menu">
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
+    </div>
+    <div class="namediv">
+      <p class="nameh1">
+        <strong>Your Flats</strong>
+      </p>
+      <ion-item class="select-container">
+        <!-- <ion-icon name="funnel" ></ion-icon> -->
+        <ion-select placeholder="Select Month" name="filter" (ionChange)="onSelectionChange($event)">
+          <ng-container *ngFor="let date of filterdata">
+            <ion-select-option [value]="date.dateformonth">
+              {{ date.dateformonth }}
+            </ion-select-option>
+          </ng-container>
+        </ion-select>
+        </ion-item>
+      </div>
+
+
+      <div class="listmiandiv">
+        <p class="mainmonth"><strong>{{currentmonthvar}}</strong></p>
+        <ion-grid class="tablegrid">
+          <ion-row class="tablehead">
+            <ion-col size="3"><strong>Address</strong></ion-col>
+            <ion-col size="2"><strong>renter</strong></ion-col>
+            <ion-col size="1.5"><strong>Rent</strong></ion-col>
+            <ion-col size="1.5"><strong>paid</strong></ion-col>
+            <ion-col size="2"><strong>date</strong></ion-col>
+            <ion-col size="2"><strong>pay</strong></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let item of rentdata;let i = index">
+            <ng-container *ngIf="rentdata[i][5]?.paid?.length > 0; else elseBlock">
+              <ion-col size="3">
+                kasheli koliwada thane 421302 <strong>building-</strong>ganesha <strong>flat-</strong>3/306
+              </ion-col>
+              <ion-col size="2">{{ rentdata[i][3]?.renter_name }}</ion-col>
+              <ion-col size="1.5">5000</ion-col>
+              <ion-col size="1.5">4000</ion-col>
+              <ion-col size="2">1 Mar 2024</ion-col>
+              <ion-col size="2">-</ion-col>
+            </ng-container>
+          
+            <!-- Content to display if 'paid' is empty or not present -->
+            <ng-template #elseBlock>
+              <ion-col size="3">
+                kasheli koliwada thane 421302 <strong>building-</strong>ganesha <strong>flat-</strong>3/306
+              </ion-col>
+              <ion-col size="2">{{ rentdata[i][3]?.renter_name }}</ion-col>
+              <ion-col size="1.5">5000</ion-col>
+              <ion-col size="1.5">-</ion-col>
+              <ion-col size="2">-</ion-col>
+              <ion-col size="2" style="color: red;">pay</ion-col>
+            </ng-template>
+            
+          </ion-row>
+
+          
+          
+        </ion-grid>
+        
+      </div>
+  </div>
+</div>
