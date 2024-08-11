@@ -81,3 +81,116 @@ ion-col{
     font-size: 23px;
     // border: 2px solid red;
 }
+.paybutton{
+    background-color: red;
+    width: 90%;
+    height: 30%;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+
+
+
+
+
+
+.mainpayform{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    // border: 2px solid red;
+    background-color: white;
+    width: 90%;
+    height: 80%;
+    z-index: 999;
+    overflow: auto;
+}
+.inputbox1{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:0% ;
+    // color: white;
+    padding-left: 7%;
+}
+.ion_input{
+    width: 90%;
+    height: 100%;
+    // border: 2px solid red;
+    padding-left: 5%;
+    color: white;
+
+}
+
+
+.inputbox2{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:8% ;
+    // color: white;
+    padding-left: 7%;
+
+}
+
+::placeholder{
+    color: white;
+  }
+  
+.button1{
+    position: relative;
+    background-color:#3D9BD6;
+    border-radius: 30px;
+    width: 80%;
+    height: 68px;
+    margin-left:10% ;
+    margin-top:13% ;
+}
+.payinfidiv{
+    width: 100%;
+    height: 35%;
+    // border: 2px solid red;
+}
+.paytext{
+    font-size: 30px;
+    text-align: center;
+}
+.dropbutton{
+    width: 90%;
+    height: 100%;
+    // border: 2px solid red;
+    color: white;
+
+}
+.closebutton{
+    position: absolute;
+    width: 100%;
+    height: 8%;
+}
+.closeicon{
+    float: right;
+    width: 10%;
+    height: 100%;
+    margin-top: 4%;
+    margin-right: 4%;
+}

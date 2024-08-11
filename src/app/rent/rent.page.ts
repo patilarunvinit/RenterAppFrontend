@@ -62,6 +62,7 @@ export class RentPage implements OnInit {
     
     this.serviceClass.getrent(this.currentmonthvar).subscribe((res:any)=>{
       this.rentdata=res
+      // console.log(this.rentdata[0][6]?.date_of_pay[0]["date_of_pay"])
       console.log(res)
     })  
 
@@ -90,6 +91,18 @@ export class RentPage implements OnInit {
 
   }
 
+
+  popdiplay:any="none";
+  blur:any;
+  showPopup() {
+    this.popdiplay = 'block';
+    this.blur = true
+  }
+
+  closepopup(){
+    this.popdiplay = 'none';
+    this.blur = false
+  }
 
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
