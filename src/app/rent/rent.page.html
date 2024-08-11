@@ -55,7 +55,7 @@
               <ion-col size="2" >-</ion-col>
               <ion-col size="2">
                 <div class="paybutton"> 
-                  <p class="center-text" (click)="showPopup()">
+                  <p class="center-text" (click)="showPopup(rentdata[i])">
                     <strong>pay</strong>
                   <p>
 
@@ -76,6 +76,9 @@
 
 
 
+
+
+
 <div class="mainpayform" [style.display]="popdiplay">
   <div class="closebutton">
     <ion-icon name="close" class="closeicon" (click)="closepopup()"></ion-icon>
@@ -83,25 +86,27 @@
   <div class="payinfidiv">
     <p class="paytext"><strong>PAY</strong></p>
     <div style="text-align: center;font-size: 20px;">
-      <p><strong>Address </strong><br>kasheli koliwada  thane 421302</p>
-      <p><strong>Rent </strong><br>5000</p>
-      <p><strong>Renter </strong><br>kunal pande</p>
+      <p><strong>Address </strong><br>{{popupdata[4]?.addressdata}}</p>
+      <p><strong>Rent </strong><br>{{popupdata[2]?.rent}}</p>
+      <!-- <p><strong>Renter </strong><br>kunal pande</p> -->
+      <p><strong>Renter </strong><br>{{popupdata[3]?.renter_name}}</p>
+
     </div>
 
   </div>
 
 
-  <form class="example-form" #myForm="ngForm" >
+  <form class="example-form" #myForm="ngForm" (ngSubmit)="addpay()">
     <div class="inputbox1">
-      <ion-input name="paid" type="number"  required placeholder="Enter Rent Amount" class="ion_input" > </ion-input>
+      <ion-input name="paid" [(ngModel)]="paydata.paid" type="number"  required placeholder="Enter Rent Amount" class="ion_input" > </ion-input>
     </div>
 
     <div class="inputbox2">
-      <ion-input name="date"  type="date"  required placeholder="date" class="ion_input" ></ion-input><br>
+      <ion-input name="date" [(ngModel)]="paydata.date"  type="date"  required placeholder="date" class="ion_input" ></ion-input><br>
     </div>
 
     <div class="inputbox2">
-        <ion-select class="dropbutton" placeholder="Select Transaction " name="filter" (ionChange)="onSelectionChange($event)">
+        <ion-select class="dropbutton" placeholder="Select Transaction " name="Transaction_mod" [(ngModel)]="paydata.Transaction_mod">
           <ion-select-option value="Cash" >
             Cash
           </ion-select-option>

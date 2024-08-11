@@ -91,10 +91,52 @@ export class RentPage implements OnInit {
 
   }
 
+  
+  
+  paydata = {
+      lease_id:'',
+      paid:0,
+      remain:'',
+      date: '',
+      Transaction_mod: '',
+      for_month:'',
+      
+  
+      // Add more fields as needed
+    };
+ 
+
+  
+  remain:any;
+  addpay() {
+    let paid=this.paydata["paid"]
+    let rent=this.popupdata[2]?.rent
+    this.remain=rent - paid;
+    this.paydata.remain = this.remain;
+    console.log(this.paydata)
+
+
+  }
+
+
+
+
 
   popdiplay:any="none";
   blur:any;
-  showPopup() {
+  popupdata:any=[];
+  lease_id:any;
+  for_month:any;
+  showPopup(data:any) {
+    this.popupdata=data
+    this.lease_id=this.popupdata[0]?.lease_id
+    this.for_month=this.popupdata[1]?.dateformonth
+    console.log(this.for_month)
+    this.paydata.lease_id = this.lease_id;
+    this.paydata.for_month = this.for_month;
+
+
+
     this.popdiplay = 'block';
     this.blur = true
   }
