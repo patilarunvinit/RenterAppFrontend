@@ -82,7 +82,7 @@ ion-col{
     // border: 2px solid red;
 }
 .paybutton{
-    background-color: red;
+    background-color: #D34D4D;
     width: 90%;
     height: 30%;
     border-radius: 10px;
@@ -111,7 +111,7 @@ ion-col{
     top: 10%;
     left: 5%;
     // border: 2px solid red;
-    background-color: white;
+    background-color: #2dd294;
     width: 90%;
     height: 80%;
     z-index: 999;
@@ -159,13 +159,23 @@ ion-col{
   
 .button1{
     position: relative;
-    background-color:#3D9BD6;
+    // background-color:rgb(211, 77, 77);
     border-radius: 30px;
     width: 80%;
     height: 68px;
     margin-left:10% ;
     margin-top:13% ;
 }
+
+.btn-valid {
+    background-color: #D34D4D;
+    color: white;
+  }
+  
+.btn-invalid {
+    background-color: #52ad7b;
+    color: white;
+  }
 .payinfidiv{
     width: 100%;
     height: 35%;
@@ -193,4 +203,76 @@ ion-col{
     height: 100%;
     margin-top: 4%;
     margin-right: 4%;
+}
+
+
+
+
+
+
+
+
+
+.popup{
+    display: block;
+    width: 80%;
+    height: 40%;
+    position: absolute;
+    background-color:white ;
+    left: 10%;
+    top:30%;
+    z-index: 999;
+    border-radius: 10%;
+    overflow: hidden;
+
+}
+.popiocndiv{
+    // width: 60%;
+    // height: 60%;
+    // // border: 2px solid red;
+    // margin-left: 20%;
+    animation: resize 4s forwards;
+}
+.icon-custom {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: red;
+    animation: color_rotate 4s forwards;
+    // animation-name: rotate;
+
+}
+
+@keyframes color_rotate {
+    from {color:red;}
+    to {color: rgb(0, 144, 201);}
+    100%{
+        transform: rotate(360deg);
+    }
+  }
+  
+
+@keyframes resize {
+    from {
+        width: 100%;
+        height: 100%;
+        margin-left: 0%;
+    }
+    to {
+        width: 60%;
+        height: 65%;
+        margin-left: 20%;
+    }
+}
+
+.popcontent{
+    width: 80%;
+    height: 45%;
+    margin-left: 10%;
+
+}
+.poph1{
+    text-align: center;
+    font-size:40px;
+    margin-top: 0%;
 }

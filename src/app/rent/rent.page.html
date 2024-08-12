@@ -55,7 +55,7 @@
               <ion-col size="2" >-</ion-col>
               <ion-col size="2">
                 <div class="paybutton"> 
-                  <p class="center-text" (click)="showPopup(rentdata[i])">
+                  <p class="center-text" (click)="formpopup(rentdata[i])">
                     <strong>pay</strong>
                   <p>
 
@@ -79,7 +79,7 @@
 
 
 
-<div class="mainpayform" [style.display]="popdiplay">
+<div class="mainpayform" [style.display]="popdiplay" [style.filter]="blur1rent ? 'blur(5px)' : 'none'">
   <div class="closebutton">
     <ion-icon name="close" class="closeicon" (click)="closepopup()"></ion-icon>
   </div>
@@ -98,15 +98,15 @@
 
   <form class="example-form" #myForm="ngForm" (ngSubmit)="addpay()">
     <div class="inputbox1">
-      <ion-input name="paid" [(ngModel)]="paydata.paid" type="number"  required placeholder="Enter Rent Amount" class="ion_input" > </ion-input>
+      <ion-input name="paid" [(ngModel)]="paydata.paid" type="number" required placeholder="Enter Rent Amount" class="ion_input" > </ion-input>
     </div>
 
     <div class="inputbox2">
-      <ion-input name="date" [(ngModel)]="paydata.date"  type="date"  required placeholder="date" class="ion_input" ></ion-input><br>
+      <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br>
     </div>
 
     <div class="inputbox2">
-        <ion-select class="dropbutton" placeholder="Select Transaction " name="Transaction_mod" [(ngModel)]="paydata.Transaction_mod">
+        <ion-select class="dropbutton" placeholder="Select Transaction " required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" >
           <ion-select-option value="Cash" >
             Cash
           </ion-select-option>
@@ -122,7 +122,34 @@
         </ion-select>
     </div>
 
-    <button ion-button expand="block" type="submit" class="button1">Submite</button>
+    <button 
+    ion-button expand="block" 
+    type="submit" 
+    [disabled]="!myForm.form.valid" 
+    [ngClass]="{
+      'btn-valid': myForm.form.valid,
+      'btn-invalid': !myForm.form.valid
+    }"
+    class="button1">Submite</button>
     </form>
   
 </div>
+
+
+
+
+
+
+
+<div class="popup" [style.display]="forpopup">
+  <div class="popiocndiv" >
+      <ion-icon class="icon-custom" name="checkmark-circle"></ion-icon>
+  
+  </div>
+    <div class="popcontent">
+      <h1 class="poph1" >
+        <strong>payment successful</strong>
+      </h1>
+      
+    </div>
+  </div>

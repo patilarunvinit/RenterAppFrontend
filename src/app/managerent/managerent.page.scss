@@ -152,24 +152,82 @@
     border-radius: 10%;
 }
 .popiocndiv{
-    width: 60%;
-    height: 50%;
-    // border: 2px solid red;
-    margin-left: 20%;
+    // width: 100%;
+    height: 55%;
+    padding-left: 5%;
+    animation:formaindiv 5s forwards;
 }
-.icon-custom {
+.icon-customP {
     position: relative;
-    width: 100%;
+    // width: 40%;
     height: 100%;
-    color: red;
-    animation-name: example;
-    animation:example 5s forwards;
+    display: inline-block;
+    animation:forpersonenadngome 5s forwards;
+
+}
+.icon-customH {
+    position: relative;
+    // width: 35%;
+    height: 100%;
+    // float: right;
+    display: inline-block;
+    animation:forpersonenadngome 5s forwards;
+
+}
+.icon-customS {
+    // display: none;
+    position: relative;
+    // width: 15%;
+    height: 100%;
+    margin-left: -10%;
+    color: green;
+    animation:forsuccess 5s forwards;
+
 }
 
-@keyframes example {
-    from {color:rgb(0, 144, 201);}
-    to {color: red;}
+@keyframes forpersonenadngome {
+    from {width: 50%;color: green;}
+    to {width: 40%;color: rgb(66, 159, 196);}
+    // 0%{
+    //     width: 50%;        
+    // }
+    // 50%{
+    //     width: 40%;
+    //     // float: none;
+
+    // }
+    // 100%{
+    //     width: 40%
+    //     // float: none;
+    // }
   }
+@keyframes forsuccess {
+    from {width: 0%;}
+    to {width: 20%;}
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes formaindiv {
+    0%{
+        margin-left: 15%;
+        width: 70%;
+    }
+    50%{
+        margin-left: 0%;
+        width: 100%;
+    }
+    100%{
+        margin-left: 0%;
+        width: 100%;
+    }
+}
 
 .popcontent{
     width: 80%;

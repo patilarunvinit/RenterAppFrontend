@@ -95,10 +95,10 @@ export class RentPage implements OnInit {
   
   paydata = {
       lease_id:'',
-      paid:0,
+      paid:undefined,
       remain:'',
-      date: '',
-      Transaction_mod: '',
+      date_of_pay: '',
+      transaction_mode: '',
       for_month:'',
       
   
@@ -109,12 +109,37 @@ export class RentPage implements OnInit {
   
   remain:any;
   addpay() {
-    let paid=this.paydata["paid"]
+    let paid=this.paydata["paid"]?? 0;
     let rent=this.popupdata[2]?.rent
     this.remain=rent - paid;
     this.paydata.remain = this.remain;
     console.log(this.paydata)
+    this.serviceClass.addpayment(this.paydata).subscribe((res:any)=>{
+      console.log('Response:', res);
+      if(res) {
+        this.successpopup()
+      }
+      else {
+        alert('Error To Send Data')
+      }
+    },
+    error=> {
+      // console.log(error.error.detail)
+      alert(error.error.detail)
 
+    })
+
+
+
+
+    this.paydata = {
+    lease_id:'',
+    paid:undefined,
+    remain:'',
+    date_of_pay: '',
+    transaction_mode: '',
+    for_month:'',
+  };
 
   }
 
@@ -127,7 +152,7 @@ export class RentPage implements OnInit {
   popupdata:any=[];
   lease_id:any;
   for_month:any;
-  showPopup(data:any) {
+  formpopup(data:any) {
     this.popupdata=data
     this.lease_id=this.popupdata[0]?.lease_id
     this.for_month=this.popupdata[1]?.dateformonth
@@ -146,6 +171,25 @@ export class RentPage implements OnInit {
     this.blur = false
   }
 
+
+
+  forpopup:any="none";
+  blur1rent:any;
+  successpopup() {
+    this.forpopup = 'block';
+    this.blur1rent = true
+    setTimeout(() => {
+      this.forpopup = 'none';
+      this.blur1rent = false
+      this.popdiplay = 'none';
+      this.blur = false
+    }, 4000);
+  }
+
+
+
+
+  
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 

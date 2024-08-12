@@ -46,6 +46,10 @@ export class TokenserviceService {
     return this.http.get(this.apiroot + 'renterforlease');
   }
 
+  addpayment(payment:any) {
+    return this.http.post(this.apiroot + 'addpayment',payment);
+  }
+
   addlease(lease:any) {
     console.log(lease)
     return this.http.post(this.apiroot + 'addlease',lease);

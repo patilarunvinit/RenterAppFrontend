@@ -118,7 +118,7 @@
 
 .popiocndiv{
     width: 60%;
-    height: 50%;
+    height: 60%;
     // border: 2px solid red;
     margin-left: 20%;
 }
@@ -128,7 +128,7 @@
     height: 100%;
     color: red;
     animation-name: example;
-    animation:example 5s forwards;
+    animation:example 4s forwards;
 }
 
 @keyframes example {
@@ -136,10 +136,25 @@
     to {color: red;}
   }
 
+  @keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
 .popcontent{
     width: 80%;
     height: 45%;
     margin-left: 10%;
+    animation:opacity 4s forwards;
+
 
 }
 .poph1{
