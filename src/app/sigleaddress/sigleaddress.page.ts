@@ -70,7 +70,7 @@ export class SigleaddressPage implements OnInit {
       this.renter_mobile_no = res.renter_mobile_no
       this.id_type = res.id_type
       let img = res.id_img
-      this.id_img = "http://localhost:8000" + img
+      this.id_img = "http://localhost:8000/" + img
       // alert(this.id_img)
       console.log(res)
     },

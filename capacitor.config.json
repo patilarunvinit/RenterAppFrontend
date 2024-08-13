@@ -14,5 +14,13 @@
       "KeyboardResize": "true",
       "KeyboardResizeMode": "ionic"
     }
+  },
+  "bundledWebRuntime": false,
+  "plugins": {
+    "StatusBar": {
+      "style": "DARK",  
+      "backgroundColor": "#ffffff", 
+      "overlay": true 
+    }
   }
 }
