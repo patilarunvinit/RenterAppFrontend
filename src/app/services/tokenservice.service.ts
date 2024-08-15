@@ -71,6 +71,15 @@ export class TokenserviceService {
     return this.http.get(this.apiroot + 'getmonths');
   }
 
+  getremain() {
+    return this.http.get(this.apiroot + 'getremain');
+  }
+
+  gethistory(lease_id:any) {
+    return this.http.get(this.apiroot + 'remianhistory?lease_id=' + lease_id);
+  }
+
+
 
   // ref_tokan:any;
   // refreshTokan() {

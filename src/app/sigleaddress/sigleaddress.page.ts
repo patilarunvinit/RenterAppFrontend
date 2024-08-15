@@ -17,7 +17,8 @@ export class SigleaddressPage implements OnInit {
     private route: ActivatedRoute,
     private serviceClass: TokenserviceService,
 
-  ) {this.route.queryParams.subscribe(params => {
+  ) {
+    this.route.queryParams.subscribe(params => {
     this.addressId = params['adrress_id'];
     console.log(this.addressId); 
     if (this.addressId) {
@@ -26,7 +27,8 @@ export class SigleaddressPage implements OnInit {
     } else {
       console.error('Address ID is not defined.');
     }
-  });}
+  });
+}
 
   addressId:any;
   ngOnInit() { }

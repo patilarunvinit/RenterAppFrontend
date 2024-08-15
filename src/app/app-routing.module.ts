@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'rent',
     loadChildren: () => import('./rent/rent.module').then( m => m.RentPageModule)
   },
+  {
+    path: 'remain',
+    loadChildren: () => import('./remain/remain.module').then( m => m.RemainPageModule)
+  },
+  {
+    path: 'historyremain',
+    loadChildren: () => import('./historyremain/historyremain.module').then( m => m.HistoryremainPageModule)
+  },
   
   
 ];
