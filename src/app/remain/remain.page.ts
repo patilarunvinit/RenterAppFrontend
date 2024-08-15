@@ -52,7 +52,6 @@ export class RemainPage implements OnInit {
     
     this.serviceClass.getremain().subscribe((res:any)=>{
       this.remaindata=res
-      console.log(this.remaindata[0])
     })  
 
   }
@@ -60,8 +59,8 @@ export class RemainPage implements OnInit {
 
 
 
-  historypagebutton(lease_id:any){
-    this.router.navigateByUrl('/historyremain?lease_id=' + lease_id);
+  historypagebutton(lease_id:any,remainpay:any){
+    this.router.navigateByUrl('/historyremain?lease_id=' + lease_id +'&remain='+remainpay);
   }
 
 

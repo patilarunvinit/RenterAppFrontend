@@ -17,7 +17,7 @@ export class HistoryremainPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
   lease_id:any;
-
+  remainpay:any;
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -42,6 +42,7 @@ export class HistoryremainPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.lease_id = params['lease_id'];
+      this.remainpay = params['remain']
       if (this.lease_id) {
         this.gethistorydata(this.lease_id);
       } else {
@@ -51,6 +52,27 @@ export class HistoryremainPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  heightofinfo:any="55%";
+  heightofremain:any="30%";
+  display1:any='block';
+  display2:any='none';
+  resizeheights(no:any){
+    if(no==1){
+      this.heightofinfo="10%";
+      this.heightofremain="75%";
+      this.display2='block';
+     this.display1='none';
+    }
+    else{
+      this.heightofinfo="55%";
+      this.heightofremain="30%";
+      this.display1='block';
+      this.display2='none';
+
+    }
+
   }
 
 
@@ -63,14 +85,26 @@ export class HistoryremainPage implements OnInit {
   history_data:any
   remain_data:any;
   rent_info:any;
+  address:any;
+  building:any;
+  flat:any;
+  renter_name:any;
+  total_remain:any;
+  deposit:any;
   gethistorydata(id:any){
     this.serviceClass.gethistory(id).subscribe((res:any)=>{
       // this.address=res
       this.history_data=res
       this.remain_data=this.history_data['remain_data']
       this.rent_info=this.history_data['rent_info']
-      console.log(this.remain_data)
-      console.log(this.rent_info)
+      console.log(this.remain_data[0])
+      // console.log(this.rent_info[2])
+      this.address= this.rent_info[0]['Area'] 
+      this.building=this.rent_info[0]['Building_name']
+      this.flat=this.rent_info[0]['Floor']+'/'+this.rent_info[0]['Flat_no']
+      this.renter_name=this.rent_info[1]['renter_name']
+      this.total_remain= this.rent_info[3][0]['total_remain']
+      this.deposit= this.rent_info[2][0]['deposit']
 
       
     }, 
@@ -81,6 +115,101 @@ export class HistoryremainPage implements OnInit {
     })
 
   }
+
+
+
+
+
+
+  popdiplay:any="none";
+  blur:any;
+  popupdata:any=[];
+  remainonmonth:any
+  for_month:any;
+  lease_id_selected:any;
+  formpopup(data:any) {
+    this.popupdata=data
+    console.log(data)
+    this.remainonmonth=this.popupdata?.remain
+    this.for_month=this.popupdata?.for_month
+    this.lease_id_selected=this.popupdata?.lease_id
+
+    console.log(this.remainonmonth)
+
+    this.paydata.lease_id = this.lease_id_selected;
+    this.paydata.for_month = this.for_month;
+
+    this.popdiplay = 'block';
+    this.blur = true
+  }
+
+  closepopup(){
+    this.popdiplay = 'none';
+    this.blur = false
+  }
+
+
+
+  
+  paydata = {
+    lease_id:'',
+    paid:undefined,
+    remain:'',
+    date_of_pay: '',
+    transaction_mode: '',
+    for_month:'',
+    is_remain_pay:1,
+    
+
+    // Add more fields as needed
+  };
+
+
+
+remain:any;
+addremain() {
+  let paid=this.paydata["paid"]?? 0;
+  this.remain=this.remainonmonth - paid;
+  this.paydata.remain = this.remain;
+  console.log(this.paydata)
+  this.successpopup()
+  
+
+
+
+
+  this.paydata = {
+  lease_id:'',
+  paid:undefined,
+  remain:'',
+  date_of_pay: '',
+  transaction_mode: '',
+  for_month:'',
+  is_remain_pay:1,
+
+};
+
+}
+
+
+
+
+
+
+
+
+forpopup:any="none";
+blur1rent:any;
+successpopup() {
+  this.forpopup = 'block';
+  this.blur1rent = true
+  setTimeout(() => {
+    this.forpopup = 'none';
+    this.blur1rent = false
+    this.popdiplay = 'none';
+    this.blur = false
+  }, 4000);
+}
 
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
