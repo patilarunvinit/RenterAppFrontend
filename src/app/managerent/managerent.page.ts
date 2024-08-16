@@ -16,6 +16,7 @@ export class ManagerentPage implements OnInit {
   screenHeight:any = window.innerHeight;
   addressdata:any;
   renterdata:any;
+  removeaddress:any;
 
   constructor(
     private platform: Platform,
@@ -59,6 +60,13 @@ export class ManagerentPage implements OnInit {
       this.renterdata=res
       console.log(res)
     })  
+
+
+    this.serviceClass.getremoveaddress().subscribe((res:any)=>{
+      
+      this.removeaddress=res
+      console.log(res)
+    }) 
 
    }
 
@@ -105,9 +113,10 @@ export class ManagerentPage implements OnInit {
 
   }
 
+
+
   removefromdata = {
-    renter_name:'',
-    address: '',
+    address_id: '',
     end_date: '',
     // Add more fields as needed
   };
@@ -115,36 +124,58 @@ export class ManagerentPage implements OnInit {
   removeFrom() {
     console.log(this.removefromdata)
     this.showPopup()
-    // if (this.formData.email && this.formData.password) {
-    //   console.log(this.formData);
-      
-    //   this.serviceClass.login(this.formData).subscribe((res:any)=>{
-    //   console.log('Response:', res);
-    //   if(res.jwt) {
-    //     alert("Login Success")
-    //     alert(res.jwt)
-    //     localStorage.setItem('hotelUser',JSON.stringify(res.jwt));
-    //     this.router.navigateByUrl('/main-home');
-    //   }
-    //   else {
-    //     alert('Check User Credentials')
-    //   }
-    // },
-    // error=> {
-    //   // console.log(error.error.detail)
-    //   alert(error.error.detail)
+    this.serviceClass.removelease(this.removefromdata).subscribe((res:any)=>{
+      console.log('Response:', res);
+      if(res) {
+        this.removePopup()
+        this.dataforinputs();
+      }
+      else {
+        alert('Error To Send Data')
+      }
+    },
+    error=> {
+      // console.log(error.error.detail)
+      alert(error.error.detail)
 
-    // })
+    })
 
 
-    //   this.formData = {
-    //     email: '',
-    //     password: ''
-    //     // Initialize other fields as needed
-    //   };
-    // }
+    this.removefromdata = {
+      address_id: '',
+      end_date: '',
+      // Add more fields as needed
+    };
+  
   }
 
+
+  extradiv:any='none';
+  address_id:any;
+  removeinfo:any;
+  renter_name:any;
+  total_remain:any;
+  deposit:any;
+  to_pay:any;
+  OnAddressSelect(event: any) {
+    const selectedValue = event.detail.value;
+    console.log('Selected value:', selectedValue);
+    this.address_id = selectedValue;
+
+
+    this.serviceClass.getremoveinfo(this.address_id).subscribe((res:any)=>{
+      
+      this.removeinfo=res
+      this.renter_name=this.removeinfo['renter_name']
+      this.total_remain=this.removeinfo['total_remain']
+      this.deposit=this.removeinfo['deposit']
+      this.to_pay=this.removeinfo['deposite_to_pay']
+
+      console.log(res)
+    })
+    
+    this.extradiv='block'
+  }
 
 
 
@@ -182,6 +213,18 @@ export class ManagerentPage implements OnInit {
     this.blur = true
     setTimeout(() => {
       this.popdiplay = 'none';
+      this.blur = false
+    }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
+  }
+
+
+
+  popdiplayremove:any="none";
+  removePopup() {
+    this.popdiplayremove = 'block';
+    this.blur = true
+    setTimeout(() => {
+      this.popdiplayremove = 'none';
       this.blur = false
     }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
   }

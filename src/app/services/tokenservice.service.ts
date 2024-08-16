@@ -60,6 +60,10 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addlease',lease);
   }
 
+  removelease(remove:any) {
+    return this.http.post(this.apiroot + 'removelease',remove);
+  }
+
   getaddresssingle(id:any) {
     return this.http.get(this.apiroot + 'getsingleaddress?address_id=' + id);
   }
@@ -82,6 +86,14 @@ export class TokenserviceService {
 
   gethistory(lease_id:any) {
     return this.http.get(this.apiroot + 'remianhistory?lease_id=' + lease_id);
+  }
+
+  getremoveaddress() {
+    return this.http.get(this.apiroot + 'addressonlease');
+  }
+
+  getremoveinfo(address_id:any) {
+    return this.http.get(this.apiroot + 'getremovedata?address_id=' + address_id);
   }
 
 

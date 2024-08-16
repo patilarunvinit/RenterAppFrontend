@@ -62,7 +62,8 @@
       </div>
 
      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Submite</button>
-      </form>
+     <!-- <pre>{{ myForm.valid | json }}</pre>  -->
+    </form>
 
     </div>
 
@@ -73,71 +74,64 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="fromdiv" [style.display]="removedisplay" style="display: none;">
       <p class="formtext">Remove Rent</p>
-      <form class="example-form" #myForm="ngForm" (ngSubmit)="removeFrom()">
+      <form class="example-form" #removeForm="ngForm" (ngSubmit)="removeFrom()">
      
-     <div class="inputbox2" >
-       <ion-select class="dropbutton" placeholder="Select Id Type" name="renter_name" [(ngModel)]="removefromdata.renter_name">
-         <ion-select-option value="pancard">vinit patil</ion-select-option>
-         <ion-select-option value="adharcard">ramesh patil</ion-select-option>
-         <ion-select-option value="voterid">lakhan tare</ion-select-option>
-       </ion-select>
-     </div>
+     
 
-     <div class="inputbox2" >
-       <ion-select class="dropbutton" placeholder="Select Id Type" name="address" [(ngModel)]="removefromdata.address">
-         <ion-select-option value="pancard">
-           at-kasheli koliwada
-           building-raka ali
-           floor/flat-2/250
-         </ion-select-option>
-         <ion-select-option value="adharcard">
-           at-kasheli koliwada
-           building-raka ali
-           floor/flat-2/250
-         </ion-select-option>
-         <ion-select-option value="voterid">
-           at-kasheli koliwada
-           building-raka ali
-           floor/flat-2/250
-         </ion-select-option>
-       </ion-select>
-     </div>
+        <div class="inputbox2" >
+          <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)">
+            <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
+              {{removeaddress[i]["Area"]}}
+              building-{{removeaddress[i]["Building_name"]}}
+              floor/flat-{{removeaddress[i]["Floor"]}}/{{removeaddress[i]["Flat_no"]}}
+            </ion-select-option>
+           
+          </ion-select>
+        </div>
+
+
+
+
+     <div class="extrainfodiv" [style.display]="extradiv">
+      <p class="erxtratext"><strong>Renter name:-</strong> {{renter_name}}</p>
+      <p class="erxtratext"><strong>Remain:-</strong> &#x20B9;{{total_remain}}</p>
+      <p class="erxtratext"><strong>Deposit:-</strong> &#x20B9;{{deposit}}</p>
+      <p class="erxtratext"><strong>Renter name:-</strong> &#x20B9;<span style="color: red;">{{to_pay}}</span></p>
+ 
+    </div>
+
+
 
      <div class="inputbox2">
        <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br>
      </div>
 
-    <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Submite</button>
-     </form>
+    <button ion-button expand="block" type="submit" [disabled]="!removeForm.valid" class="button1">Submite</button>
+       <!-- <pre>{{ myForm.valid | json }}</pre>    -->
+   
+  </form>
 
    </div>
-    <!-- <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
-      <div class="inputbox1">
-        <ion-input name="renter_name" type="text" [(ngModel)]="formData.renter_name" required placeholder="Enter Name" class="ion_input" > </ion-input>
-      </div>
-
-      <div class="inputbox2">
-        <ion-input name="renter_mobile_no" [(ngModel)]="formData.renter_mobile_no" type="number"   required placeholder="Enter Mobile No" class="ion_input" ></ion-input><br>
-      </div>
-
-      <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Id Type" name="id_type" [(ngModel)]="formData.id_type">
-          <ion-select-option value="pancard">PAN card</ion-select-option>
-          <ion-select-option value="adharcard">Aadhaar card</ion-select-option>
-          <ion-select-option value="voterid">voter ID card</ion-select-option>
-        </ion-select>
-      </div>
-
-      <div class="inputbox2">
-        <ion-input type="file" class="ion_input" name="id_img" [(ngModel)]="formData.id_img"></ion-input>
-      </div>
-
-      
-
-      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Login</button>
-      </form> -->
+    
   </div>
   
 </div>
@@ -159,10 +153,28 @@
 </div>
   <div class="popcontent">
     <h1 class="poph1" >
-      <strong>Submission Successful</strong>
+      <strong>Added Successfully</strong>
     </h1>
     <!-- <p class="popp">Renter successfully submitted.</p> -->
   </div>
 </div>
 <!-- [style.display]="popdiplay" 
  <mat-icon>check_circle</mat-icon>-->
+
+
+
+
+ 
+ <div class="popup" [style.display]="popdiplayremove">
+  <div class="popiocndiv" >
+    <ion-icon class="icon-customPremove" name="man"></ion-icon>
+    <ion-icon class="icon-customS" name="trash-outline"></ion-icon>
+    <ion-icon class="icon-customHremove" name="business"></ion-icon>
+  
+  </div>
+    <div class="popcontent">
+      <h1 class="poph1" >
+        <strong> Removed Successfully</strong>
+      </h1>
+    </div>
+  </div>

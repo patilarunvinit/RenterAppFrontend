@@ -92,7 +92,8 @@ ion-col{
     font-size: 2em;
     letter-spacing: 4px;
     overflow: hidden;
-    background: linear-gradient(90deg, #000, #fff, #000);
+    // background: linear-gradient(90deg, #000, #fff, #000);
+    background: linear-gradient(90deg, red, white , red);
     background-repeat: no-repeat;
     background-size: 80%;
     animation: animate 3s linear infinite;

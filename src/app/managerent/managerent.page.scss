@@ -80,6 +80,18 @@
     padding-left: 7%;
 
 }
+.extrainfodiv{
+    position: relative;
+    margin-left: 10%;
+    width: 80%;
+    // height: 160px;
+    height:40% ;
+    // border: 2px solid red;
+
+}
+.erxtratext{
+    text-align: center;
+}
 
 ::placeholder{
     color: white;
@@ -136,6 +148,13 @@
     font-size: 30px;
     text-align: center;
 }
+
+
+
+
+
+
+
 
 
 
@@ -244,3 +263,47 @@
     font-size: 20px; 
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+.icon-customPremove {
+    position: relative;
+    // width: 40%;
+    height: 100%;
+    display: inline-block;
+    animation:forpersonenadngomeremove 5s forwards;
+
+}
+.icon-customHremove {
+    position: relative;
+    // width: 35%;
+    height: 100%;
+    // float: right;
+    display: inline-block;
+    animation:forpersonenadngomeremove 5s forwards;
+
+}
+
+
+@keyframes forpersonenadngomeremove {
+    from {width: 50%;color: green;}
+    to {width: 40%;color: red;}
+    // 0%{
+    //     width: 50%;        
+    // }
+    // 50%{
+    //     width: 40%;
+    //     // float: none;
+
+    // }
+    // 100%{
+    //     width: 40%
+    //     // float: none;
+    // }
+  }
