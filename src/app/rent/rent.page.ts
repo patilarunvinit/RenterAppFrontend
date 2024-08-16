@@ -118,6 +118,7 @@ export class RentPage implements OnInit {
       console.log('Response:', res);
       if(res) {
         this.successpopup()
+        this.getfullrents()
       }
       else {
         alert('Error To Send Data')

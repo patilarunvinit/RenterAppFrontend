@@ -50,6 +50,11 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'addpayment',payment);
   }
 
+  addremainpay(remain:any) {
+    return this.http.post(this.apiroot + 'addremain',remain);
+  }
+
+
   addlease(lease:any) {
     console.log(lease)
     return this.http.post(this.apiroot + 'addlease',lease);

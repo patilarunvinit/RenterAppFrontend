@@ -167,12 +167,27 @@ export class HistoryremainPage implements OnInit {
 
 
 remain:any;
+
 addremain() {
   let paid=this.paydata["paid"]?? 0;
   this.remain=this.remainonmonth - paid;
   this.paydata.remain = this.remain;
   console.log(this.paydata)
-  this.successpopup()
+  this.serviceClass.addremainpay(this.paydata).subscribe((res:any)=>{
+    console.log('Response:', res);
+    if(res) {
+      this.successpopup()
+      this.gethistorydata(this.lease_id)
+    }
+    else {
+      alert('Error To Send Data')
+    }
+  },
+  error=> {
+    // console.log(error.error.detail)
+    alert(error.error.detail)
+
+  })
   
 
 

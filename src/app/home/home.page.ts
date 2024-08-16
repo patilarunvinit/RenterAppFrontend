@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
+import { LocalNotifications } from '@capacitor/local-notifications';
+
 
 @Component({
   selector: 'app-home',
@@ -34,7 +36,51 @@ export class HomePage {
       this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
 
     });
+
+
+
+
+
+    // this.initializeNotifications();
+
   }
+
+
+  //To SEND LOCAL NOTIFICATIONS
+
+  
+  // private async initializeNotifications() {
+  //   await LocalNotifications.requestPermissions();
+
+  //   LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
+  //     console.log('Notification clicked:', notification);
+
+  //     this.router.navigate(['/home']);
+  //   });
+  // }
+
+  // public async sendNotification() {
+  //   try {
+  //     const result = await LocalNotifications.schedule({
+  //       notifications: [
+  //         {
+  //           title: 'Hello',
+  //           body: 'This is a simple notification!',
+  //           id: Math.floor(Math.random() * 1000000),  // Generate a random integer ID
+  //           schedule: { at: new Date(new Date().getTime() + 1000) },  // Schedule for 1 second from now
+  //         }
+  //       ]
+  //     });
+  //     console.log('Notification scheduled successfully:', result);
+  //   } catch (error) {
+  //     console.error('Error scheduling notification:', error);
+  //   }
+  // }
+
+
+
+
+
 
 
   

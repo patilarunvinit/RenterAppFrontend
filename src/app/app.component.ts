@@ -16,7 +16,7 @@ export class AppComponent {
 
 
   initializeApp() {
-    StatusBar.setBackgroundColor({ color: '#ffffff' }); // Set to white or any color
-    StatusBar.setStyle({ style: Style.Dark }); // Ensure icons and text are dark
+    // StatusBar.setBackgroundColor({ color: '#ffffff' }); // Set to white or any color
+    // StatusBar.setStyle({ style: Style.Dark }); // Ensure icons and text are dark
   }
 }

@@ -39,6 +39,7 @@ export class RemainPage implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 
