@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators'
 
 
 
@@ -8,7 +10,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TokenserviceService {
   apiroot:any='http://localhost:8000/'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.autoRefreshToken(),
+    this.refreshTokan
+    
+  }
+
+  ngOnInit(){}
 
   login(obj: any) {
     console.log(obj);
@@ -98,10 +106,55 @@ export class TokenserviceService {
 
 
 
-  // ref_tokan:any;
-  // refreshTokan() {
-  //   this.ref_tokan= localStorage.getItem('ref_tokan');
-  //   alert(this.ref_tokan)
-  //   // return this.http.get(this.apiroot + 'refresh', this.ref_tokan);
-  // }
+  ref_tokan:any;
+  refreshTokan() {
+    this.ref_tokan= localStorage.getItem('ref_tokan');
+    this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
+    console.log({'refresh':this.ref_tokan})
+    this.http.post(this.apiroot + 'refresh', {'refresh':this.ref_tokan}).subscribe((res:any)=>{
+      console.log('Response:', res.access);
+      if(res.access) {
+        localStorage.setItem('hotelUser',JSON.stringify(res.access));
+
+        }
+      else {
+        alert('Check User Credentials')
+      }
+    },
+    error=> {
+      // console.log(error.error.detail)
+      alert(error.error.detail)
+
+    })
+
+  }
+
+
+  autoRefreshToken() {
+
+
+    setInterval(() => {
+      this.refreshTokan();
+    }, 8 * 1000); // 1 minute in milliseconds
+  }
+
+
+
+
+  isUserAuthenticated(): boolean {
+    const datalocal = localStorage.getItem('hotelUser');
+    if (!datalocal) {
+      return false;
+    }
+    else{
+      return true;   
+    }
+    
+    
+  }
+
+
+
+
+
 }
