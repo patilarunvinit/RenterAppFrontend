@@ -1,0 +1,78 @@
+.backimage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.upperdiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+}
+.menu{
+    position: relative;
+    width: 100%;
+    height: 5%;
+}
+.backbutton{
+    width: 10%;
+    height: 100%;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+.addressdiv{
+    position: relative;
+    width: 100%;
+    height: 45%;
+    top:5%;
+}
+.renterdiv{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    top:5%;
+}
+.headertext{
+    margin-left: 4%;
+    font-size: 30px;
+}
+.addressinfo{
+    font-size: 19px;
+    margin-left: 4%;
+    margin-bottom: 8%;
+    width: 80%;
+}
+.line{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 2%;
+    border-bottom: 1px solid black;
+}
+.notrenter{
+    text-align: center;
+}
+
+
+.popupdiv{
+    z-index: 999;
+}
+.popupimg{
+    position: absolute;
+    width: 100%;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: aqua;
+}
+.closebutton{
+    position: absolute;
+    width: 100%;
+    height: 8%;
+}
+.closeicon{
+    float: right;
+    width: 10%;
+    height: 100%;
+    margin-top: 4%;
+    margin-right: 4%;
+}

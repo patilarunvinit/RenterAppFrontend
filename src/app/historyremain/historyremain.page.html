@@ -1,0 +1,223 @@
+<div class="upperdiv" >
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+    <div class="menu">
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
+    </div>
+    <div class="namediv" [style.height]="heightofinfo" (click)="resizeheights(2)">
+      <p class="nameh1">
+        <strong>Remain History</strong>
+      </p>
+      <p class="addressinfo">
+        <strong>Renter Name :-</strong> {{renter_name}}
+      </p>
+      <p class="addressinfo">
+        <strong> Address :-</strong> {{address}}    
+      </p>
+      <p class="addressinfo">
+        <strong>Building :-</strong> {{building}}      
+      </p>
+      <p class="addressinfo">
+        <strong>Flat -</strong> {{flat}}     
+      </p>
+      <p class="addressinfo" style="color: red;">
+        <strong>Remain :-</strong> {{total_remain}}
+      </p>
+      <p class="addressinfo">
+        <strong>deposit :-</strong> {{deposit}}
+      </p>
+    </div>
+
+
+    <div class="listmiandiv" [style.height]="heightofremain" (click)="resizeheights(1)" [style.display]="display1">
+      <ion-grid class="tablegrid">
+        <ion-row class="tablehead">
+          <ion-col size="4"><strong>For Month</strong></ion-col>
+          <ion-col size="4"><strong>Paid</strong></ion-col>
+          <ion-col size="4"><strong>Remain</strong></ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let item of remain_data;let i = index">
+          <ion-col size="4">{{remain_data[i]['for_month']}}</ion-col>
+          <ion-col size="4">
+            <div *ngIf="remain_data[i]['paid'] == 0; else elseBlock" >
+              Not Paid
+            </div>
+            <ng-template #elseBlock>
+              &#x20B9;  {{remain_data[i]['paid']}}
+            </ng-template>
+          </ion-col>
+          <ion-col size="4">&#x20B9; {{remain_data[i]['remain']}}</ion-col>
+        </ion-row>
+      </ion-grid>
+      <p class="clickdiv">Click To Pay</p>
+    </div>
+
+
+    <div class="listmiandiv" [style.height]="heightofremain" [style.display]="display2" >
+      <ion-grid class="tablegrid">
+        <ion-row class="tablehead">
+          <ion-col size="4"><strong>For Month</strong></ion-col>
+          <ion-col size="3"><strong>Paid</strong></ion-col>
+          <ion-col size="3"><strong>Remain</strong></ion-col>
+          <ion-col size=""><strong></strong></ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let item of remain_data;let i = index">
+          <ion-col size="4">{{remain_data[i]['for_month']}}</ion-col>
+          <ion-col size="3">
+            <div *ngIf="remain_data[i]['paid'] == 0; else elseBlock" >
+              Not Paid
+            </div>
+            <ng-template #elseBlock>
+              &#x20B9;  {{remain_data[i]['paid']}}
+            </ng-template>
+          </ion-col>
+          <ion-col size="3">&#x20B9; {{remain_data[i]['remain']}}</ion-col>
+          <ion-col size="2">
+            <div class="paybutton" (click)="formpopup(remain_data[i])"> 
+              <p class="center-text" >
+                <strong>pay</strong>
+              <p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <p class="ortext"><strong>OR</strong></p>
+      <div class="fullpaydiv">
+        <p class="fullpaytext">
+          <strong>
+            Full Pay :-
+          </strong>
+           &#x20B9; 
+          <span style="color: red;">
+             {{remainpay}}
+          </span>
+        </p>
+        <div class="paybuttonfull"> 
+          <p class="center-text" >
+            <strong>pay</strong>
+          <p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="mainpayform" [style.display]="popdiplay" [style.filter]="blur1rent ? 'blur(5px)' : 'none'" >
+  <div class="closebutton">
+    <ion-icon name="close" class="closeicon" (click)="closepopup()"></ion-icon>
+  </div>
+  <div class="payinfidiv">
+    <p class="paytext"><strong>Remain Pay</strong></p>
+    <div style="text-align: center;font-size: 20px;">
+      <p><strong>Renter </strong><br>{{renter_name}}</p>
+      <p><strong>Remain Rent </strong><br>{{remainonmonth}}</p>
+      <p><strong>For Month </strong><br>{{for_month}}</p>
+
+    </div>
+
+  </div>
+
+
+  <form class="example-form" #myForm="ngForm" (ngSubmit)="addremain()">
+    <div class="inputbox1">
+      <ion-input name="paid" [(ngModel)]="paydata.paid" type="number" required placeholder="Enter Rent Amount" class="ion_input" > </ion-input>
+    </div>
+
+    <div class="inputbox2">
+      <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br>
+    </div>
+
+    <div class="inputbox2">
+        <ion-select class="dropbutton" placeholder="Select Transaction " required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" >
+          <ion-select-option value="Cash" >
+            Cash
+          </ion-select-option>
+          <ion-select-option value="Online" >
+            Online
+          </ion-select-option>
+          <ion-select-option value="Cheque" >
+            Cheque
+          </ion-select-option>
+          <ion-select-option value="Other" >
+            Other
+          </ion-select-option>
+        </ion-select>
+    </div>
+
+    <button 
+    ion-button expand="block" 
+    type="submit" 
+    [disabled]="!myForm.form.valid" 
+    [ngClass]="{
+      'btn-valid': myForm.form.valid,
+      'btn-invalid': !myForm.form.valid
+    }"
+    class="button1">Submite</button>
+    </form>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="popup" [style.display]="forpopup">
+  <div class="popiocndiv" >
+      <ion-icon class="icon-custom" name="checkmark-circle"></ion-icon>
+  
+  </div>
+    <div class="popcontent">
+      <h1 class="poph1" >
+        <strong>payment successful</strong>
+      </h1>
+      
+    </div>
+  </div>

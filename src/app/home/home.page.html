@@ -1,0 +1,116 @@
+<!-- (click)="sendNotification()"  got notifications -->
+<div class="upperdiv" > 
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+      <div class="cercle1">
+        <img alt="centerlogo" [src]=centerlogo class="Clogo">
+      </div>
+
+
+    <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
+      <div class="inputbox1">
+        <ion-input name="email" type="email" [(ngModel)]="formData.email" required placeholder="Username" class="ion_input" > </ion-input>
+      </div>
+      <div class="inputbox2">
+        <ion-input name="password" type="password" [(ngModel)]="formData.password" required placeholder="Password" class="ion_input" type="password"></ion-input><br>
+      </div>
+      <a href="https://www.google.com/" class="forgotlink">forgot password?</a>
+
+      <button 
+      ion-button expand="block" 
+      type="submit" 
+      [disabled]="!myForm.form.valid"  
+      [ngClass]="{
+        'btn-valid': myForm.form.valid,
+        'btn-invalid': !myForm.form.valid
+      }"
+      class="button1" >
+        Login
+      </button>
+    </form>
+
+
+  </div>
+  
+</div>
+
+
+
+
+ <div class="welcomediv" [style.display]="popupdisplay"> {{error}}</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<!-- 
+ To Use Capacitor  
+<p>
+  ionic integrations enable capacitor
+  npx cap add android
+  ionic build
+  npx cap copy
+  npx cap sync
+  npx cap open android
+</p> 
+
+To Stop Mysql
+<p>
+  sudo systemctl stop mysql
+  sudo service mysql stop
+  sudo lsof -i :3306
+  sudo /opt/lampp/lampp start
+  sudo /opt/lampp/manager-linux-x64.run
+</p>
+
+To Reset Gridle
+<p>
+  sudo chown -R $USER:$USER /home/vinit/rentapp_project
+  sudo chmod -R u+rwX /home/vinit/rentapp_project
+
+  sudo chown -R $USER:$USER /home/vinit/rentapp_project/node_modules
+  sudo chmod -R u+rwX /home/vinit/rentapp_project/node_modules
+  sudo fsck -Af
+
+  cd android
+  ./gradlew clean
+
+  npx cap sync
+  npx cap copy
+  npx cap open android
+</p>
+work
+-->
+
+       

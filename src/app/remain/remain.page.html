@@ -1,0 +1,44 @@
+<div class="upperdiv" >
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+    <div class="menu">
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
+    </div>
+    <div class="namediv">
+      <p class="nameh1">
+        <strong>Remain Rents</strong>
+      </p>
+    </div>
+
+
+    <div class="listmiandiv">
+      <p class="mainmonth"><strong>List of Remain</strong></p>
+        <ion-grid class="tablegrid">
+          <ion-row class="tablehead">
+            <ion-col size="4"><strong>renter name</strong></ion-col>
+            <ion-col size="3"><strong>remain</strong></ion-col>
+            <ion-col size="3"><strong>deposit</strong></ion-col>
+            <ion-col size="2"><strong>History</strong></ion-col>
+
+          </ion-row>
+
+          <ion-row *ngFor="let item of remaindata;let i = index">
+            <ion-col size="4">{{remaindata[i][3]["renter_name"]}}</ion-col>
+            <ion-col size="3">
+              <div *ngIf="remaindata[i][1]['remain'] >= remaindata[i][2]['deposit']; else elseBlock"  style="color: red;">
+                &#x20B9;  {{remaindata[i][1]["remain"]}}
+              </div>
+              <ng-template #elseBlock>
+                &#x20B9;  {{remaindata[i][1]["remain"]}}
+              </ng-template>
+            </ion-col>
+            <ion-col size="3">&#x20B9; {{remaindata[i][2]["deposit"]}}</ion-col>
+            <ion-col size="2" (click)="historypagebutton(remaindata[i][0]['lease_id'],remaindata[i][1]['remain'])">
+              >
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+
+<div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
+  <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  <div class="lowerdiv"  [style.height]="divHeight">
+    <div class="menu">
+      <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
+    </div>
+    <div class="namediv">
+      <p class="nameh1">
+        <strong>Add Address</strong>
+      </p>
+
+    </div>
+    <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
+      <div class="inputbox1">
+        <ion-input name="Area" type="text" [(ngModel)]="formData.Area" required placeholder="Area" class="ion_input" > </ion-input>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="Building_name" [(ngModel)]="formData.Building_name" type="text"  required placeholder="Building name" class="ion_input" ></ion-input><br>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="Floor" type="text" [(ngModel)]="formData.Floor"  required placeholder="Floor" class="ion_input" ></ion-input><br>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="Flat_no" type="text" [(ngModel)]="formData.Flat_no"  required placeholder="Flat no" class="ion_input" ></ion-input><br>
+      </div>
+
+      <div class="inputbox2">
+        <ion-input name="Rent" [(ngModel)]="formData.Rent" type="number"  required placeholder="Rent" class="ion_input" ></ion-input><br>
+      </div>
+
+      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Submite</button>
+      </form>
+  </div>
+  
+</div>
+
+    
+
+<div class="popup" [style.display]="popdiplay">
+<div class="popiocndiv" >
+    <ion-icon class="icon-custom" name="checkmark-done"></ion-icon>
+
+</div>
+  <div class="popcontent">
+    <h1 class="poph1" >
+      <strong>Submission Successful</strong>
+    </h1>
+    <!-- <p class="popp">Renter successfully submitted.</p> -->
+  </div>
+</div>

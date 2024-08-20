@@ -1,0 +1,26 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "rentapp",
+  "webDir": "www",
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000",
+      "KeyboardResize": "true",
+      "KeyboardResizeMode": "ionic"
+    }
+  },
+  "bundledWebRuntime": false,
+  "plugins": {
+    "StatusBar": {
+      "style": "DARK",  
+      "backgroundColor": "#ffffff", 
+      "overlay": true 
+    }
+  }
+}

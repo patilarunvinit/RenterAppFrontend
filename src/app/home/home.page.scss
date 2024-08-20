@@ -1,0 +1,133 @@
+.backimage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.upperdiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow:auto;
+    top:0px;
+}
+.lowerdiv{
+    width: 100%;
+    height: 100%;
+    
+}
+.cercle1{
+    position: relative;
+    width: 60%;
+    height: 25%;
+    border-radius: 50%;
+    background-color:#3D9BD6;
+    left:20% ;
+    top:12% ;
+    
+}
+.Clogo{
+
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top:50%;
+    left: 50%;;
+    transform: translate(-50%, -50%);
+}
+
+
+.inputbox1{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:36% ;
+    padding-left: 7%;
+}
+.ion_input{
+    width: 90%;
+    height: 100%;
+    padding-left: 5%;
+    color: white;
+
+}
+
+
+.inputbox2{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:8% ;
+    // color: white;
+    padding-left: 7%;
+
+}
+
+::placeholder{
+    color: white;
+  }
+  
+.button1{
+    position: relative;
+    border-radius: 30px;
+    width: 80%;
+    height: 68px;
+    margin-left:10% ;
+    margin-top:13% ;
+    font-size: 20px;
+}
+
+.btn-valid {
+    background-color: #3D9BD6;
+    color: white;
+  }
+  
+.btn-invalid {
+    background-color: #93c3e0;
+    color: white;
+  }
+.forgotlink{
+    position:relative;
+    float: right;
+    color: black;
+    margin-right:17% ;
+    margin-top:3% ;
+    
+}
+
+
+
+
+
+
+
+
+.welcomediv{
+    position: absolute;
+    top: 7%;
+    border-radius: 15px;
+    border: 2px solid red;
+    color: red;
+    z-index: 999;
+    padding:15px 25px;
+    left: 50%;;
+    transform: translate(-50%, -50%);
+    animation:bottompopup 8s forwards;
+
+}
+
+@keyframes bottompopup {
+    0% { opacity: 0;}
+    30% { opacity: 1;}
+    60% { opacity: 1;}
+    100% { opacity: 0;}
+  }
+
+ 

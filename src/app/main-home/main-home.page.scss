@@ -1,0 +1,123 @@
+.backimage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.upperdiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+}
+.menu{
+    position: relative;
+    width: 100%;
+    height: 5%;
+}
+.logoutbutton{
+    width: 10%;
+    height: 100%;
+    margin-top: 5%;
+    margin-right: 10%;
+    float: right;
+}
+.carddiv{
+    position: relative;
+    width: 80%;
+    height: 25%;
+    top: 7%;
+    left: 10%;
+    border-radius: 10%;
+    background-color: #3D9BD6;
+    overflow: hidden;
+    color: white;
+}
+.cardimg{
+    width: 100%;
+    height: 100%;
+}
+.profilediv{
+    float: right;
+    position: absolute;
+    overflow: hidden;
+    width: 30%;
+    height: 50%;
+    border-radius: 50%;
+    top:25%;
+    right: 5%;
+    // border: 3px solid black;
+}
+.profilepic{
+    width: 100%;
+    height: 100%;
+    
+}
+.infodiv{
+    position: absolute;
+    width: 60%;
+    height: 80%;
+    top:10%;
+    left:9%;
+}
+
+
+.optiondiv{
+    position: relative;
+    width: 80%;
+    height: 60%;
+    top:10%;
+    left: 10%;
+    padding-top:6.6% ;
+    
+}
+.option{
+    position: relative;
+    display: inline-flex;
+    width: 30%;
+    height: 20%;
+    margin-left:10%;
+    margin-right: 10%;
+    margin-top:6.6%;
+    margin-bottom: 6.6%;
+    border-radius: 20%;
+    background-color: #3D9BD6;
+
+}
+.fordiffcolor{
+    background-color: #BC8080;
+}
+.optionpics{
+    position: relative;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top:10%;
+}
+
+
+
+
+
+.welcomediv{
+    position: absolute;
+    top: 7%;
+    border-radius: 15px;
+    // height: 2%;
+    border: 2px solid green;
+    color: green;
+    z-index: 999;
+    padding: 15px;
+    left: 50%;;
+    transform: translate(-50%, -50%);
+    animation:bottompopup 8s forwards;
+
+}
+
+@keyframes bottompopup {
+    0% { opacity: 0;}
+    30% { opacity: 1;}
+    60% { opacity: 1;}
+    100% { opacity: 0;}
+  }
+
+ 

@@ -1,0 +1,278 @@
+.backimage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.upperdiv{
+    // filter: blur(8px);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow:auto;
+    top:0px;
+}
+.lowerdiv{
+    width: 100%;
+    height: 100%;
+    
+}
+.menu{
+    position: relative;
+    width: 100%;
+    height: 8%;
+    // border: 2px solid black;
+}
+.backbutton{
+    width: 10%;
+    height: 100%;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+.namediv{
+    position: relative;
+    width: 100%;
+    height: 10%;
+    // border: 2px solid red;
+}
+.nameh1{
+    margin-left: 4%;
+    font-size: 30px;
+    display: inline-block;
+}
+.select-container {
+    width: 40%;
+    float: right;
+    margin-top: 4%;
+    padding-right: 4%;
+  }
+  .listmiandiv{
+    position: relative;
+    width: 100%;
+    height: 75%;
+    border-radius: 60px;
+    // border: 2px solid black;
+    background-color: #3D9BD6;
+
+}
+
+.tablegrid{ 
+    position: relative;
+    width: 100%;
+    height: 80%;
+    // border: 2px solid red;
+    top:3%;
+    overflow-y: auto;
+    
+}
+ion-col{
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+.tablehead{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #3D9BD6; 
+}
+.mainmonth{
+    position: relative;
+    text-align: center;
+    top:3%;
+    font-size: 23px;
+    // border: 2px solid red;
+}
+.paybutton{
+    background-color: #D34D4D;
+    width: 90%;
+    height: 30%;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+
+
+
+
+
+
+.mainpayform{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    // border: 2px solid red;
+    background-color: #2dd294;
+    width: 90%;
+    height: 80%;
+    z-index: 999;
+    overflow: auto;
+}
+.inputbox1{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:0% ;
+    // color: white;
+    padding-left: 7%;
+}
+.ion_input{
+    width: 90%;
+    height: 100%;
+    // border: 2px solid red;
+    padding-left: 5%;
+    color: white;
+
+}
+
+
+.inputbox2{
+    position: relative;
+    width: 80%;
+    height: 68px;
+    border: 3px solid white;
+    border-radius: 30px;
+    background-color: black;
+    margin-left:10% ;
+    margin-top:8% ;
+    // color: white;
+    padding-left: 7%;
+
+}
+
+::placeholder{
+    color: white;
+  }
+  
+.button1{
+    position: relative;
+    // background-color:rgb(211, 77, 77);
+    border-radius: 30px;
+    width: 80%;
+    height: 68px;
+    margin-left:10% ;
+    margin-top:13% ;
+}
+
+.btn-valid {
+    background-color: #D34D4D;
+    color: white;
+  }
+  
+.btn-invalid {
+    background-color: #52ad7b;
+    color: white;
+  }
+.payinfidiv{
+    width: 100%;
+    height: 35%;
+    // border: 2px solid red;
+}
+.paytext{
+    font-size: 30px;
+    text-align: center;
+}
+.dropbutton{
+    width: 90%;
+    height: 100%;
+    // border: 2px solid red;
+    color: white;
+
+}
+.closebutton{
+    position: absolute;
+    width: 100%;
+    height: 8%;
+}
+.closeicon{
+    float: right;
+    width: 10%;
+    height: 100%;
+    margin-top: 4%;
+    margin-right: 4%;
+}
+
+
+
+
+
+
+
+
+
+.popup{
+    display: block;
+    width: 80%;
+    height: 40%;
+    position: absolute;
+    background-color:white ;
+    left: 10%;
+    top:30%;
+    z-index: 999;
+    border-radius: 10%;
+    overflow: hidden;
+
+}
+.popiocndiv{
+    // width: 60%;
+    // height: 60%;
+    // // border: 2px solid red;
+    // margin-left: 20%;
+    animation: resize 4s forwards;
+}
+.icon-custom {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: red;
+    animation: color_rotate 4s forwards;
+    // animation-name: rotate;
+
+}
+
+@keyframes color_rotate {
+    from {color:red;}
+    to {color: rgb(0, 144, 201);}
+    100%{
+        transform: rotate(360deg);
+    }
+  }
+  
+
+@keyframes resize {
+    from {
+        width: 100%;
+        height: 100%;
+        margin-left: 0%;
+    }
+    to {
+        width: 60%;
+        height: 65%;
+        margin-left: 20%;
+    }
+}
+
+.popcontent{
+    width: 80%;
+    height: 45%;
+    margin-left: 10%;
+
+}
+.poph1{
+    text-align: center;
+    font-size:40px;
+    margin-top: 0%;
+}

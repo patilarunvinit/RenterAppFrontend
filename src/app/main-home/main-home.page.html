@@ -1,0 +1,47 @@
+<div class="upperdiv" >
+  <img alt="back photo" [src]=backphoto class="backimage" >
+  <div class="menu">
+    <ion-icon name="log-out-outline" class="logoutbutton" (click)="clearToken()"></ion-icon>
+  </div>
+  <div class="carddiv">
+    <img alt="crad pic" [src]=card_pic class="cardimg" >
+
+    <div class="infodiv">
+      <p>NAME:- <strong>{{name}}</strong> </p>
+      <p>DOB:- <strong>{{b_date}}</strong> </p>
+      <p>NO OF FLAT'S:- <strong>{{addresscount}}</strong> </p>
+      <p>M NO:- <strong>{{mobile_no}}</strong> </p>
+    </div>
+    <div class="profilediv">
+      <img alt="Profile pic" [src]=dp class="profilepic" >
+
+    </div>
+  </div>
+  <div class="optiondiv">
+    <div class="option">
+      <img alt="Profile pic" [src]=all_flats class="optionpics" (click)="menubuttons('listadrress')">
+    </div>
+    <div class="option fordiffcolor" (click)="menubuttons('managerent')">
+      <img alt="Profile pic" [src]=manage class="optionpics" >
+
+    </div>
+    <div class="option fordiffcolor" (click)="menubuttons('rent')">
+      <img alt="Profile pic" [src]=rent class="optionpics" >
+
+    </div>
+    <div class="option" (click)="menubuttons('remain')">
+      <img alt="Profile pic" [src]=remain class="optionpics" >
+
+    </div>
+    <div class="option">
+      <img alt="Profile pic" [src]=add_renter class="optionpics" (click)="menubuttons('add-renter')" >
+
+    </div>
+    <div class="option fordiffcolor">
+      <img alt="Profile pic" [src]=add_home class="optionpics" (click)="menubuttons('add-address')">
+
+    </div>
+  </div>
+</div>
+
+<div class="welcomediv" [style.display]="popupdisplay">welcome {{name}}</div>
