@@ -20,7 +20,7 @@ export class SigleaddressPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
     this.addressId = params['adrress_id'];
-    console.log(this.addressId); 
+    // console.log(this.addressId); 
     if (this.addressId) {
       this.getadrees(this.addressId);
       this.getrenter(this.addressId);
@@ -43,14 +43,24 @@ export class SigleaddressPage implements OnInit {
   flat_no:any;
   Rent:any;
   is_on_rent:any;
+  owner_name:any;
   getadrees(id:any){
     this.serviceClass.getaddresssingle(id).subscribe((res:any)=>{
-      // this.address=res
-      this.area = res[0].Area
-      this.flat_no = res[0].Floor + "/" + res[0].Flat_no
-      this.Rent = res[0].Rent
-      this.is_on_rent = res[0].is_on_rent
-      
+      debugger
+      if (res[0] && res[0][0]) {
+        this.area = res[0][0].Area;
+        this.flat_no = res[0][0].Floor + "/" + res[0][0].Flat_no;
+        this.Rent = res[0][0].Rent;
+        this.is_on_rent = res[0][0].is_on_rent;
+      } else {
+        console.error('Error: res[0] or res[0][0] is undefined');
+      }
+
+      if (res[1]) {
+        this.owner_name = res[1].owner_name;
+      } else {
+        console.error('Error: res[1] is undefined or does not contain owner_name');
+      }
     }, 
     error=> {
       // console.log(error.error.detail)
@@ -65,20 +75,29 @@ export class SigleaddressPage implements OnInit {
   id_type:any;
   id_img:any;
   on_renter_error:any;
+  start_date:any;
   getrenter(id:any){
     
     this.serviceClass.getrentersingle(id).subscribe((res:any)=>{
-      this.renter_name = res.renter_name
-      this.renter_mobile_no = res.renter_mobile_no
-      this.id_type = res.id_type
-      let img = res.id_img
-      this.id_img = "http://localhost:8000/" + img
-      // alert(this.id_img)
-      console.log(res)
+      debugger
+      if (res[0]) {
+        this.renter_name = res[0].renter_name;
+        this.renter_mobile_no = res[0].renter_mobile_no;
+        this.id_type = res[0].id_type;
+        this.id_img = `http://localhost:8000/${res[0].id_img}`;
+      } else {
+        console.error('Error: res[0] is undefined');
+      }
+
+      if (res[1]) {
+        this.start_date = res[1].start_date;
+      } else {
+        console.error('Error: res[1] is undefined or does not contain start_date');
+      }
     },
     error=> {
       this.on_renter_error=error.error.detail
-      console.log(error.error.detail)
+      // console.log(error.error.detail)
       // alert(error.error.detail)
 
     })

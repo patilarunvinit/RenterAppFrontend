@@ -24,7 +24,7 @@ export class TokenserviceService {
   ngOnInit(){}
 
   login(obj: any) {
-    console.log(obj);
+    // console.log(obj);
     return this.http.post(this.apiroot + 'login', obj);
   }
 
@@ -121,7 +121,7 @@ export class TokenserviceService {
   ref_tokan:any= localStorage.getItem('ref_tokan');
   refreshTokan(): Observable<ResponseType> {
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
-    console.log({'refresh':this.ref_tokan})
+    // console.log({'refresh':this.ref_tokan})
     return this.http.post<ResponseType>(this.apiroot + 'refresh', {'refresh':this.ref_tokan}).pipe(
       tap(response => {
         if (response.access) {

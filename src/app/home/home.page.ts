@@ -15,7 +15,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 export class HomePage {
    divHeight:any=window.innerHeight + 'px';
    screenHeight:any = window.innerHeight;
-
+   emaildisplay:any;
    
   constructor(
     private platform: Platform,
@@ -37,6 +37,13 @@ export class HomePage {
   
       // this.initializeNotifications();
 
+     }
+
+     onEmailChange() {
+      // Reset email color when user starts typing
+      if (this.emaildisplay === 'red') {
+        this.emaildisplay = 'white';
+      }
      }
 
      formData = 
@@ -65,27 +72,69 @@ export class HomePage {
       },
       error=> {
         this.error = error.error.detail
+        if(this.error=='Invalid Email'){
+          this.formData = 
+          {
+            email: this.formData.email,
+            password: ''
+          };
+          this.emaildisplay='red';
+        }
+        else{
+          this.formData = 
+          {
+            email:this.formData.email,
+            password: ''
+          };
+        }
+        
         this.bottompopup();
   
       })
   
-  
-      this.formData = 
-      {
-        email: '',
-        password: ''
-      };
+
       }
     }
   
     
-
+    clear:any;
     popupdisplay:any="none";
+    // bottompopup() {
+    //   // Clear any existing interval
+    //   if (this.clear) {
+    //     clearInterval(this.clear);
+    //     this.popupdisplay = 'none';
+
+    //   }
+    //   else{
+    //     this.popupdisplay = 'block';
+
+    //   }
+    //   // Reset popup display and set new interval
+    //   // this.popupdisplay = 'block';
+    //   this.clear = setTimeout(() => {
+    //     this.popupdisplay = 'none';
+    //   }, 8 * 1000);  // 8 seconds
+    // }
+    
+    popupTimeout:any;
     bottompopup(){
+
+      if (this.popupTimeout) {
+        // console.log(this.popupTimeout)
+        // clearTimeout(this.popupTimeout);
+        clearTimeout(this.popupTimeout); // Correctly clear the timeout
+        this.popupTimeout = undefined;
+        // console.log(this.popupTimeout)
+
+      }
+
       this.popupdisplay="block"
-      setInterval(() => {
-        this.popupdisplay="none"
-      }, 8 * 1000); 
+      this.popupTimeout=setTimeout(() => {
+        // console.log(this.popupTimeout)
+
+        this.popupdisplay="none";
+      },  8 * 1000); 
     }
   
     backphoto:string="assets/img/pexels-photo-2310713.jpeg"

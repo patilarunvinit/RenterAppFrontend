@@ -1,4 +1,4 @@
-
+<div class="unthouch" [style.display]="hinddiv"></div>
 <div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
   <div class="lowerdiv"  [style.height]="divHeight">
@@ -30,7 +30,7 @@
        <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id" >
+        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
           <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
             {{renter.renter_name}}
           </ion-select-option>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="addfromdata.address_id">
+        <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
           <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
             {{addressdata[i]["Area"]}}
             building-{{addressdata[i]["Building_name"]}}
@@ -98,7 +98,7 @@
      
 
         <div class="inputbox2" >
-          <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)">
+          <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" >
             <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
               {{removeaddress[i]["Area"]}}
               building-{{removeaddress[i]["Building_name"]}}

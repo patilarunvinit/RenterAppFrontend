@@ -133,11 +133,14 @@ export class AddrenterPage implements OnInit {
 //For success Form Submite 
   popdiplay:any="none";
   blur:any;
+  hinddiv:any="none"
   showPopup() {
     this.popdiplay = 'block';
+    this.hinddiv = 'block';
     this.blur = true
     setTimeout(() => {
       this.popdiplay = 'none';
+      this.hinddiv = 'none';
       this.blur = false
     }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
   }
