@@ -36,6 +36,10 @@ export class ListadrressPage implements OnInit {
     // this.getalldataaddr()
   }
 
+  customActionSheetOptions: any = {
+    header: 'Address List',
+  };
+
   ngOnInit() {
     this.getalldataaddr()
   }

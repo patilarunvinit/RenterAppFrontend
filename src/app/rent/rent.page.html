@@ -1,3 +1,4 @@
+<div class="unthouch" [style.display]="hinddiv"></div>
 <div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
   <div class="lowerdiv"  [style.height]="divHeight">
@@ -10,7 +11,7 @@
       </p>
       <ion-item class="select-container">
         <!-- <ion-icon name="funnel" ></ion-icon> -->
-        <ion-select placeholder="Select Month" name="filter" (ionChange)="onSelectionChange($event)">
+        <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Your Month" [interfaceOptions]="customActionSheetOptions">
           <ng-container *ngFor="let date of filterdata">
             <ion-select-option [value]="date.dateformonth">
               {{ date.dateformonth }}
@@ -35,7 +36,17 @@
           <ion-row *ngFor="let item of rentdata;let i = index">
             <ng-container *ngIf="rentdata[i][5]?.paid?.length > 0; else elseBlock">
               <ion-col size="3">
-                kasheli koliwada thane 421302 <strong>building-</strong>ganesha <strong>flat-</strong>3/306
+                {{rentdata[i][4]?.addressdata[0].Area}}<br>  
+                <strong>
+                  building-
+                </strong>
+                {{rentdata[i][4]?.addressdata[0].Building_name}}<br> 
+                <strong>
+                  flat-
+                </strong>
+                {{rentdata[i][4]?.addressdata[0].Flat_no}}
+                /
+                {{rentdata[i][4]?.addressdata[0].Floor}}
               </ion-col>
               <ion-col size="2">{{ rentdata[i][3]?.renter_name }}</ion-col>
               <ion-col size="1.5">{{ rentdata[i][2]?.rent }}</ion-col>
@@ -47,7 +58,17 @@
             <!-- Content to display if 'paid' is empty or not present -->
             <ng-template #elseBlock>
               <ion-col size="3">
-                kasheli koliwada thane 421302 <strong>building-</strong>ganesha <strong>flat-</strong>3/306
+                {{rentdata[i][4]?.addressdata[0].Area}}<br> 
+                <strong>
+                  building-
+                </strong>
+                {{rentdata[i][4]?.addressdata[0].Building_name}}<br> 
+                <strong>
+                  flat-
+                </strong>
+                {{rentdata[i][4]?.addressdata[0].Flat_no}}
+                /
+                {{rentdata[i][4]?.addressdata[0].Floor}}
               </ion-col>
               <ion-col size="2" >{{ rentdata[i][3]?.renter_name }}</ion-col>
               <ion-col size="1.5">{{ rentdata[i][2]?.rent }}</ion-col>
@@ -106,7 +127,7 @@
     </div>
 
     <div class="inputbox2">
-        <ion-select class="dropbutton" placeholder="Select Transaction " required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" >
+        <ion-select class="dropbutton"  required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" label="Select Your Transaction">
           <ion-select-option value="Cash" >
             Cash
           </ion-select-option>

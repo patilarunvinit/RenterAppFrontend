@@ -107,7 +107,17 @@
     height: 68px;
     margin-left:10% ;
     margin-top:7% ;
+    font-size: 20px;
 }
+.btn-valid {
+    background-color: #3D9BD6;
+    color: white;
+  }
+  
+.btn-invalid {
+    background-color: #93c3e0;
+    color: white;
+  }
 .swhitchdiv{
     position: relative;
     width: 100%;

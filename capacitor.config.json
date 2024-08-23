@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "rentapp",
+  "appName": "Mrent",
   "webDir": "www",
   "cordova": {
     "preferences": {
@@ -23,4 +23,5 @@
       "overlay": true 
     }
   }
+  
 }

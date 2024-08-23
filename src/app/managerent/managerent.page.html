@@ -30,7 +30,7 @@
        <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Renter" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
+        <ion-select class="dropbutton" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
           <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
             {{renter.renter_name}}
           </ion-select-option>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="inputbox2" >
-        <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
+        <ion-select class="dropbutton" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
           <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
             {{addressdata[i]["Area"]}}
             building-{{addressdata[i]["Building_name"]}}
@@ -61,7 +61,7 @@
         <ion-input name="deposit" [(ngModel)]="addfromdata.deposit" type="number"  required placeholder="deposit" class="ion_input" ></ion-input><br>
       </div>
 
-     <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Submite</button>
+     <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
      <!-- <pre>{{ myForm.valid | json }}</pre>  -->
     </form>
 
@@ -98,7 +98,7 @@
      
 
         <div class="inputbox2" >
-          <ion-select class="dropbutton" placeholder="Select Address" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" >
+          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address">
             <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
               {{removeaddress[i]["Area"]}}
               building-{{removeaddress[i]["Building_name"]}}
@@ -125,7 +125,7 @@
        <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br>
      </div>
 
-    <button ion-button expand="block" type="submit" [disabled]="!removeForm.valid" class="button1">Submite</button>
+    <button ion-button expand="block" type="submit" [disabled]="!removeForm.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
        <!-- <pre>{{ myForm.valid | json }}</pre>    -->
    
   </form>

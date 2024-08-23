@@ -1,4 +1,5 @@
-<div class="upperdiv" >
+<div class="unthouch" [style.display]="hinddiv"></div>
+<div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
   <div class="lowerdiv"  [style.height]="divHeight">
     <div class="menu">
@@ -63,17 +64,17 @@
           <ion-col size=""><strong></strong></ion-col>
         </ion-row>
 
-        <ion-row *ngFor="let item of remain_data;let i = index">
-          <ion-col size="4">{{remain_data[i]['for_month']}}</ion-col>
+        <ion-row class="datarow" *ngFor="let item of remain_data;let i = index">
+          <ion-col size="4"><p>{{remain_data[i]['for_month']}}</p></ion-col>
           <ion-col size="3">
             <div *ngIf="remain_data[i]['paid'] == 0; else elseBlock" >
-              Not Paid
+              <p>Not Paid</p>
             </div>
             <ng-template #elseBlock>
-              &#x20B9;  {{remain_data[i]['paid']}}
+              <p>&#x20B9;  {{remain_data[i]['paid']}}</p>
             </ng-template>
           </ion-col>
-          <ion-col size="3">&#x20B9; {{remain_data[i]['remain']}}</ion-col>
+          <ion-col size="3"><p>&#x20B9; {{remain_data[i]['remain']}}</p></ion-col>
           <ion-col size="2">
             <div class="paybutton" (click)="formpopup(remain_data[i])"> 
               <p class="center-text" >
@@ -153,7 +154,7 @@
     </div>
 
     <div class="inputbox2">
-        <ion-select class="dropbutton" placeholder="Select Transaction " required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" >
+        <ion-select class="dropbutton" label="Select Transaction " required name="transaction_mode" [(ngModel)]="paydata.transaction_mode" >
           <ion-select-option value="Cash" >
             Cash
           </ion-select-option>

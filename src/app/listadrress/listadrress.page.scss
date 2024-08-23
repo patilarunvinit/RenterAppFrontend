@@ -77,8 +77,17 @@ ion-col{
     background: #3D9BD6; 
 }
 .select-container {
-    width: 40%;
+    // width: 40%;
     float: right;
     margin-top: 4%;
     padding-right: 4%;
+}
+.select-container {
+    --background: transparent;
   }
+  
+.select-container ion-select {
+    --background: transparent;
+    --border-color: transparent;
+}
+

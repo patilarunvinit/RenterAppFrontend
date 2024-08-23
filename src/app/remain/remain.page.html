@@ -22,19 +22,19 @@
 
           </ion-row>
 
-          <ion-row *ngFor="let item of remaindata;let i = index">
-            <ion-col size="4">{{remaindata[i][3]["renter_name"]}}</ion-col>
+          <ion-row *ngFor="let item of remaindata;let i = index" class="datarow">
+            <ion-col size="4" ><p>{{remaindata[i][3]["renter_name"]}}</p></ion-col>
             <ion-col size="3">
               <div *ngIf="remaindata[i][1]['remain'] >= remaindata[i][2]['deposit']; else elseBlock"  style="color: red;">
-                &#x20B9;  {{remaindata[i][1]["remain"]}}
+                <p>&#x20B9;  {{remaindata[i][1]["remain"]}}</p>
               </div>
               <ng-template #elseBlock>
-                &#x20B9;  {{remaindata[i][1]["remain"]}}
+                <p>&#x20B9;  {{remaindata[i][1]["remain"]}}</p>
               </ng-template>
             </ion-col>
-            <ion-col size="3">&#x20B9; {{remaindata[i][2]["deposit"]}}</ion-col>
-            <ion-col size="2" (click)="historypagebutton(remaindata[i][0]['lease_id'],remaindata[i][1]['remain'])">
-              >
+            <ion-col size="3"><p>&#x20B9; {{remaindata[i][2]["deposit"]}}</p></ion-col>
+            <ion-col size="2"(click)="historypagebutton(remaindata[i][0]['lease_id'],remaindata[i][1]['remain'])">
+              <p>></p>
             </ion-col>
 
           </ion-row>

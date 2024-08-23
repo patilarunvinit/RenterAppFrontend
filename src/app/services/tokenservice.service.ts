@@ -14,7 +14,7 @@ interface ResponseType {
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='http://localhost:8000/'
+  apiroot:any='https://bfbe-103-148-62-157.ngrok-free.app/'
   constructor(private http: HttpClient) { 
     // this.autoRefreshToken(),
     // this.refreshTokan

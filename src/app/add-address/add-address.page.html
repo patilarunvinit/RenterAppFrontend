@@ -32,7 +32,7 @@
         <ion-input name="Rent" [(ngModel)]="formData.Rent" type="number"  required placeholder="Rent" class="ion_input" ></ion-input><br>
       </div>
 
-      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1">Submite</button>
+      <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
       </form>
   </div>
   

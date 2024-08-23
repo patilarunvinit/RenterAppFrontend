@@ -121,7 +121,7 @@ ion-col{
   .paybutton{
     background-color: #D34D4D;
     width: 90%;
-    height: 25px;
+    height: 50%;
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -175,12 +175,13 @@ ion-col{
     position: absolute;
     top: 10%;
     left: 5%;
-    // border: 2px solid red;
+    border: 2px solid red;
     background-color: #2dd294;
     width: 90%;
     height: 80%;
     z-index: 999;
     overflow: auto;
+    border-radius: 25px;
 }
 .inputbox1{
     position: relative;
@@ -200,6 +201,7 @@ ion-col{
     // border: 2px solid red;
     padding-left: 5%;
     color: white;
+    color-scheme: dark;
 
 }
 
@@ -242,9 +244,10 @@ ion-col{
     color: white;
   }
 .payinfidiv{
-    width: 100%;
-    height: 35%;
-    border: 2px solid red;
+    position: relative;
+    width: 70%;
+    left: 15%;
+    padding-bottom: 3%;
 }
 .paytext{
     font-size: 30px;
@@ -253,7 +256,6 @@ ion-col{
 .dropbutton{
     width: 90%;
     height: 100%;
-    // border: 2px solid red;
     color: white;
 
 }
@@ -272,6 +274,17 @@ ion-col{
 
 
 
+.unthouch{
+    position: absolute;
+    top:0%;
+    width: 100%;
+    height: 100%;
+    background:transparent ;
+    z-index: 1000;
+}
+.datarow{
+    height: 15%;
+}
 
 
 
@@ -300,7 +313,7 @@ ion-col{
     background-color:white ;
     left: 10%;
     top:30%;
-    z-index: 999;
+    z-index:1111;
     border-radius: 10%;
     overflow: hidden;
 

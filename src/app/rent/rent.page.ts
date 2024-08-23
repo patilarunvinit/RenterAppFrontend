@@ -40,6 +40,11 @@ export class RentPage implements OnInit {
 
   }
 
+  customActionSheetOptions: any = {
+    header: 'Months List',
+  };
+
+
   ngOnInit() {
     this.getfullrents();
   }
@@ -176,11 +181,14 @@ export class RentPage implements OnInit {
 
   forpopup:any="none";
   blur1rent:any;
+  hinddiv:any="none";
   successpopup() {
     this.forpopup = 'block';
+    this.hinddiv = 'block';
     this.blur1rent = true
     setTimeout(() => {
       this.forpopup = 'none';
+      this.hinddiv = 'none';
       this.blur1rent = false
       this.popdiplay = 'none';
       this.blur = false

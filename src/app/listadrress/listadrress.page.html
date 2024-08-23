@@ -10,7 +10,7 @@
       </p>
       <ion-item class="select-container">
       <!-- <ion-icon name="funnel" ></ion-icon> -->
-      <ion-select placeholder="Select Available" name="filter" (ionChange)="onSelectionChange($event)">
+      <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Available" [interfaceOptions]="customActionSheetOptions" >
         <ion-select-option value="all" >
           All Address
         </ion-select-option>
@@ -51,7 +51,7 @@
 
         </ion-row>
       </ion-grid>
-      
+      <a href="https://www.flaticon.com/free-icons/or-rent" title="or rent icons">Or rent icons created by Icon home - Flaticon</a>
     </div>
   </div>
 </div>

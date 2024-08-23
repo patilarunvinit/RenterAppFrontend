@@ -215,17 +215,19 @@ addremain() {
 
 forpopup:any="none";
 blur1rent:any;
+hinddiv:any="none";
 successpopup() {
   this.forpopup = 'block';
+  this.hinddiv = 'block';
   this.blur1rent = true
   setTimeout(() => {
     this.forpopup = 'none';
+    this.hinddiv = 'none';
     this.blur1rent = false
     this.popdiplay = 'none';
     this.blur = false
   }, 4000);
 }
-
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 
