@@ -23,17 +23,7 @@ export class RemainPage implements OnInit {
     private router: Router,
     private serviceClass: TokenserviceService,
   ) { 
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
+    this.kaybordfun()
     // this.getalldataaddr()
     this.getremaindata()
   }
@@ -62,6 +52,24 @@ export class RemainPage implements OnInit {
 
   historypagebutton(lease_id:any,remainpay:any){
     this.router.navigateByUrl('/historyremain?lease_id=' + lease_id +'&remain='+remainpay);
+  }
+
+
+
+
+
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      // Move input back to original location
+      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+    });
   }
 
 

@@ -22,19 +22,7 @@ export class RentPage implements OnInit {
 
 
   ) { 
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
-
-
+    this.kaybordfun();
     this.currentmonth();
     this.getfilterdata();
 
@@ -47,6 +35,9 @@ export class RentPage implements OnInit {
 
   ngOnInit() {
     this.getfullrents();
+
+    this.selectedDate = this.formatDate(new Date().toISOString());
+
   }
 
 
@@ -97,6 +88,17 @@ export class RentPage implements OnInit {
   }
 
   
+
+
+  selectedDate:any;
+  onDateChange(event: any) {
+    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    this.selectedDate = this.formatDate(dateTimeValue);
+  }
+  formatDate(dateTimeValue: string): string {
+    const date = new Date(dateTimeValue);
+    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+  }
   
   paydata = {
       lease_id:'',
@@ -106,8 +108,6 @@ export class RentPage implements OnInit {
       transaction_mode: '',
       for_month:'',
       
-  
-      // Add more fields as needed
     };
  
 
@@ -118,6 +118,7 @@ export class RentPage implements OnInit {
     let rent=this.popupdata[2]?.rent
     this.remain=rent - paid;
     this.paydata.remain = this.remain;
+    this.paydata.date_of_pay=this.selectedDate;
     console.log(this.paydata)
     this.serviceClass.addpayment(this.paydata).subscribe((res:any)=>{
       console.log('Response:', res);
@@ -162,7 +163,7 @@ export class RentPage implements OnInit {
     this.popupdata=data
     this.lease_id=this.popupdata[0]?.lease_id
     this.for_month=this.popupdata[1]?.dateformonth
-    console.log(this.for_month)
+    console.log(this.popupdata[4]?.addressdata)
     this.paydata.lease_id = this.lease_id;
     this.paydata.for_month = this.for_month;
 
@@ -197,6 +198,19 @@ export class RentPage implements OnInit {
 
 
 
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      // Move input back to original location
+      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+    });
+  }
 
   
 

@@ -62,7 +62,13 @@ export class HomePage {
         if(res.access) {
           localStorage.setItem('hotelUser',JSON.stringify(res.access));
           localStorage.setItem('ref_tokan',JSON.stringify(res.refresh));
-  
+          
+          this.formData =
+          {
+            email:this.formData.email,
+            password: ''
+          };
+          
           this.router.navigateByUrl('/main-home');
         }
         else {

@@ -31,7 +31,7 @@ export class MainHomePage implements OnInit {
   owner_dp:any
   b_date:any;
   dp:any;
-  url:any="https://bfbe-103-148-62-157.ngrok-free.app/"
+  url:any="http://localhost:8000/"
   addresscount:any;
   ownerD(){
     
@@ -62,10 +62,20 @@ export class MainHomePage implements OnInit {
   }
 
 
-  clearToken() {
-    localStorage.removeItem('ref_tokan');
-    localStorage.removeItem('hotelUser');
-    this.router.navigateByUrl('/home');
+  logout(){
+
+    this.serviceClass.logoutApi().subscribe((res:any)=>{
+      localStorage.removeItem('ref_tokan');
+      localStorage.removeItem('hotelUser');
+      this.router.navigateByUrl('/home');
+      
+    
+    },
+    error=> {
+      alert(error.error.detail)
+      // alert("Somethink Went Wrong")
+    })  
+        
   }
 
 
@@ -75,8 +85,14 @@ export class MainHomePage implements OnInit {
     setInterval(() => {
       this.popupdisplay="none"
 
-    }, 8 * 1000); // 1 minute in milliseconds
+    }, 8 * 1000); // 8 sec in milliseconds
   }
+
+
+
+
+  
+
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
   // dp:string="assets/img/test1.jpg"

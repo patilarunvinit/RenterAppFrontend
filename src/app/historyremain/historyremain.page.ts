@@ -26,17 +26,7 @@ export class HistoryremainPage implements OnInit {
     private route: ActivatedRoute,
 
   ) { 
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
+    this.kaybordfun()
     // this.getalldataaddr()
 
 
@@ -52,6 +42,8 @@ export class HistoryremainPage implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedDate = this.formatDate(new Date().toISOString());
+
   }
 
   heightofinfo:any="55%";
@@ -149,7 +141,16 @@ export class HistoryremainPage implements OnInit {
   }
 
 
-
+  selectedDate:any;
+  onDateChange(event: any) {
+    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    this.selectedDate = this.formatDate(dateTimeValue);
+  }
+  formatDate(dateTimeValue: string): string {
+    const date = new Date(dateTimeValue);
+    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+  }
+  
   
   paydata = {
     lease_id:'',
@@ -159,9 +160,6 @@ export class HistoryremainPage implements OnInit {
     transaction_mode: '',
     for_month:'',
     is_remain_pay:1,
-    
-
-    // Add more fields as needed
   };
 
 
@@ -172,6 +170,7 @@ addremain() {
   let paid=this.paydata["paid"]?? 0;
   this.remain=this.remainonmonth - paid;
   this.paydata.remain = this.remain;
+  this.paydata.date_of_pay = this.selectedDate;
   console.log(this.paydata)
   this.serviceClass.addremainpay(this.paydata).subscribe((res:any)=>{
     console.log('Response:', res);
@@ -227,6 +226,25 @@ successpopup() {
     this.popdiplay = 'none';
     this.blur = false
   }, 4000);
+}
+
+
+
+
+
+
+kaybordfun(){
+  this.platform.keyboardDidShow.subscribe(ev => {
+    const { keyboardHeight } = ev;
+    this.divHeight = this.screenHeight + "px";  
+    // Do something with the keyboard height such as translating an input above the keyboard.
+  });
+
+  this.platform.keyboardDidHide.subscribe(() => {
+    // Move input back to original location
+    this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+  });
 }
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"

@@ -107,7 +107,11 @@
   <div class="payinfidiv">
     <p class="paytext"><strong>PAY</strong></p>
     <div style="text-align: center;font-size: 20px;">
-      <p><strong>Address </strong><br>{{popupdata[4]?.addressdata}}</p>
+      <p><strong>Address </strong><br>
+        {{popupdata[4]?.addressdata[0].Building_name}}, 
+        {{popupdata[4]?.addressdata[0].Floor}}/
+        {{popupdata[4]?.addressdata[0].Flat_no}},
+        {{popupdata[4]?.addressdata[0].Area}}</p>
       <p><strong>Rent </strong><br>{{popupdata[2]?.rent}}</p>
       <!-- <p><strong>Renter </strong><br>kunal pande</p> -->
       <p><strong>Renter </strong><br>{{popupdata[3]?.renter_name}}</p>
@@ -123,7 +127,14 @@
     </div>
 
     <div class="inputbox2">
-      <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br>
+      <!-- <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br> -->
+      <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
     </div>
 
     <div class="inputbox2">

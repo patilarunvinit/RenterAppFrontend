@@ -20,10 +20,10 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
-    if (req.url.includes('https://bfbe-103-148-62-157.ngrok-free.app/login')) {
+    if (req.url.includes('http://localhost:8000/login')) {
       return next.handle(req); // Skip interception for login requests
     }
-    else if(req.url.includes('https://bfbe-103-148-62-157.ngrok-free.app/refresh')){
+    else if(req.url.includes('http://localhost:8000/refresh')){
       return next.handle(req);
     }
     else{
@@ -66,7 +66,8 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(newAuthReq);
       }),
       catchError((err) => {
-        this.router.navigate(['/home']); // Redirect to login
+        // this.router.navigate(['/home']); // Redirect to login
+        alert(err.error.detail)
         return throwError(err);
       })
     );

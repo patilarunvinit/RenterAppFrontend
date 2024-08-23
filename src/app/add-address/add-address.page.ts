@@ -6,6 +6,10 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
 import { jwtDecode } from 'jwt-decode';
+import { Location } from '@angular/common';
+
+import { App } from '@capacitor/app';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -22,20 +26,12 @@ export class AddAddressPage implements OnInit {
     private keyboard: Keyboard,
     private router: Router,
     private serviceClass: TokenserviceService,
+    private location: Location,
+    private alertController: AlertController
+
 
   ) { 
-
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
+    this.kaybordfun()
   }
   userId:any;
   ngOnInit() {
@@ -114,6 +110,27 @@ export class AddAddressPage implements OnInit {
       this.blur = false
     }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
   }
+
+
+
+
+
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      // Move input back to original location
+      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+    });
+  }
+
+
+  
 
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 }

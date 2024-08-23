@@ -150,7 +150,14 @@
     </div>
 
     <div class="inputbox2">
-      <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br>
+      <!-- <ion-input name="date_of_pay" [(ngModel)]="paydata.date_of_pay"  type="date" required placeholder="date" class="ion_input" ></ion-input><br> -->
+      <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
     </div>
 
     <div class="inputbox2">

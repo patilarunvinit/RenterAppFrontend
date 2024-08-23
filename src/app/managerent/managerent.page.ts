@@ -26,26 +26,34 @@ export class ManagerentPage implements OnInit {
 
   ) { 
 
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
+    this.kaybordfun()
      
 
   }
 
   ngOnInit() {
     this.dataforinputs()
+    
+    this.selectedDateAdd = this.formatDate(new Date().toISOString());
+    this.selectedDateRemove = this.formatDate(new Date().toISOString());
+
   }
 
-  
+
+  selectedDateAdd:any;
+  onDateChangeAdd(event: any) {
+    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    this.selectedDateAdd = this.formatDate(dateTimeValue);
+  }
+  selectedDateRemove:any;
+  onDateChangeRemove(event: any) {
+    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    this.selectedDateRemove = this.formatDate(dateTimeValue);
+  }
+  formatDate(dateTimeValue: string): string {
+    const date = new Date(dateTimeValue);
+    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+  }
 
    dataforinputs(){
 
@@ -78,12 +86,12 @@ export class ManagerentPage implements OnInit {
     start_date: '',
     rent:'',
     deposit:''
-
-    // Add more fields as needed
   };
 
   addFrom() {
-    console.log(this.addfromdata)
+ 
+    this.addfromdata.start_date=this.selectedDateAdd;
+
     this.serviceClass.addlease(this.addfromdata).subscribe((res:any)=>{
       console.log('Response:', res);
       if(res) {
@@ -118,12 +126,14 @@ export class ManagerentPage implements OnInit {
   removefromdata = {
     address_id: '',
     end_date: '',
-    // Add more fields as needed
   };
 
   removeFrom() {
+
+    this.removefromdata.end_date=this.selectedDateRemove;
+
+    
     console.log(this.removefromdata)
-    this.showPopup()
     this.serviceClass.removelease(this.removefromdata).subscribe((res:any)=>{
       console.log('Response:', res);
       if(res) {
@@ -144,7 +154,6 @@ export class ManagerentPage implements OnInit {
     this.removefromdata = {
       address_id: '',
       end_date: '',
-      // Add more fields as needed
     };
   
   }
@@ -176,7 +185,6 @@ export class ManagerentPage implements OnInit {
     
     this.extradiv='block'
   }
-
 
 
   backbutton(){
@@ -236,6 +244,24 @@ export class ManagerentPage implements OnInit {
 
 
   
+
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      // Move input back to original location
+      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+    });
+  }
+
+
+
+
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 
 }

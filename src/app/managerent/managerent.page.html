@@ -50,7 +50,14 @@
       </div>
 
       <div class="inputbox2">
-        <ion-input name="start_date" [(ngModel)]="addfromdata.start_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br>
+        <!-- <ion-input  name="start_date" [(ngModel)]="addfromdata.start_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
+        <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChangeAdd($event)"></ion-datetime>
+          </ng-template>
+        </ion-modal>
       </div>
 
       <div class="inputbox2">
@@ -98,7 +105,7 @@
      
 
         <div class="inputbox2" >
-          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address">
+          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address" required>
             <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
               {{removeaddress[i]["Area"]}}
               building-{{removeaddress[i]["Building_name"]}}
@@ -122,7 +129,14 @@
 
 
      <div class="inputbox2">
-       <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br>
+       <!-- <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
+       <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+
+       <ion-modal [keepContentsMounted]="true">
+         <ng-template>
+           <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChangeRemove($event)"></ion-datetime>
+         </ng-template>
+       </ion-modal>
      </div>
 
     <button ion-button expand="block" type="submit" [disabled]="!removeForm.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>

@@ -28,18 +28,7 @@ export class AddrenterPage implements OnInit {
     private serviceClass: TokenserviceService,
 
   ) { 
-
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
-    });
+     this.kaybordfun();
   }
 
   
@@ -145,6 +134,21 @@ export class AddrenterPage implements OnInit {
     }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
   }
 
+
+
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+      // Do something with the keyboard height such as translating an input above the keyboard.
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      // Move input back to original location
+      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+
+    });
+  }
 
   
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"

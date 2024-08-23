@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map,tap } from 'rxjs/operators'
 
+import { Router } from '@angular/router';
+
 
 interface ResponseType {
   access: any; // Adjust as needed
@@ -14,8 +16,11 @@ interface ResponseType {
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='https://bfbe-103-148-62-157.ngrok-free.app/'
-  constructor(private http: HttpClient) { 
+  apiroot:any='http://localhost:8000/'
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) { 
     // this.autoRefreshToken(),
     // this.refreshTokan
   
@@ -114,12 +119,19 @@ export class TokenserviceService {
     return this.http.get(this.apiroot + 'getremovedata?address_id=' + address_id);
   }
 
+  logoutApi() {
+    this.ref_tokan= localStorage.getItem('ref_tokan');
+    this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
+    return this.http.post(this.apiroot + 'logout', {'refresh': this.ref_tokan});
+  }
+
 //work
 
 
  
-  ref_tokan:any= localStorage.getItem('ref_tokan');
+  ref_tokan:any;
   refreshTokan(): Observable<ResponseType> {
+    this.ref_tokan= localStorage.getItem('ref_tokan');
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
     // console.log({'refresh':this.ref_tokan})
     return this.http.post<ResponseType>(this.apiroot + 'refresh', {'refresh':this.ref_tokan}).pipe(
@@ -131,7 +143,12 @@ export class TokenserviceService {
         }
       }),
       catchError((error) => {
-        alert(error.error.detail);
+        //invallied token here
+        // alert(error.error.detail);
+
+        localStorage.removeItem('ref_tokan');
+        localStorage.removeItem('hotelUser');
+        this.router.navigateByUrl('/home');
         return throwError(error);
       })  
     );
