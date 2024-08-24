@@ -43,6 +43,7 @@ export class HistoryremainPage implements OnInit {
 
   ngOnInit() {
     this.selectedDate = this.formatDate(new Date().toISOString());
+    this.fullselectedDate = this.formatDate(new Date().toISOString());
 
   }
 
@@ -89,7 +90,7 @@ export class HistoryremainPage implements OnInit {
       this.history_data=res
       this.remain_data=this.history_data['remain_data']
       this.rent_info=this.history_data['rent_info']
-      console.log(this.remain_data[0])
+      console.log(this.remain_data[0].for_month)
       // console.log(this.rent_info[2])
       this.address= this.rent_info[0]['Area'] 
       this.building=this.rent_info[0]['Building_name']
@@ -115,6 +116,7 @@ export class HistoryremainPage implements OnInit {
 
   popdiplay:any="none";
   blur:any;
+  zindex:any;
   popupdata:any=[];
   remainonmonth:any
   for_month:any;
@@ -132,20 +134,31 @@ export class HistoryremainPage implements OnInit {
     this.paydata.for_month = this.for_month;
 
     this.popdiplay = 'block';
-    this.blur = true
+    this.blur = true;
+    this.hinddiv = "block"
+    this.zindex = 888
+
   }
 
   closepopup(){
     this.popdiplay = 'none';
-    this.blur = false
+    this.blur = false;
+    this.hinddiv = "none"
+
   }
 
 
   selectedDate:any;
-  onDateChange(event: any) {
+  onDateChangesingle(event: any) {
     const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
     this.selectedDate = this.formatDate(dateTimeValue);
   }
+  fullselectedDate:any;
+  onDateChangefull(event: any) {
+    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    this.fullselectedDate = this.formatDate(dateTimeValue);
+  }
+  
   formatDate(dateTimeValue: string): string {
     const date = new Date(dateTimeValue);
     return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
@@ -215,20 +228,105 @@ addremain() {
 forpopup:any="none";
 blur1rent:any;
 hinddiv:any="none";
-successpopup() {
+successpopup(redirectAfterPopup: boolean = false) {
   this.forpopup = 'block';
   this.hinddiv = 'block';
-  this.blur1rent = true
+  this.blur1rent = true,
+  this.zindex = 1000
+
   setTimeout(() => {
     this.forpopup = 'none';
     this.hinddiv = 'none';
     this.blur1rent = false
     this.popdiplay = 'none';
     this.blur = false
+
+    if (redirectAfterPopup) {
+      this.router.navigateByUrl('/remain');
+    }
   }, 4000);
 }
 
 
+
+
+
+
+
+
+  fullpopdiplay:any="none";
+  fullformpopup() {
+    this.fullpopdiplay = 'block';
+    this.blur = true;
+    this.hinddiv = "block";
+    this.zindex = 888
+
+  }
+
+  fullclosepopup(){
+    this.fullpopdiplay = 'none';
+    this.blur = false;
+    this.hinddiv = "none"
+  }
+
+
+
+  
+
+  fullpaydata = {
+    lease_id:'',
+    paid:0.00,
+    remain:0,
+    date_of_pay: '',
+    transaction_mode: '',
+    for_month:'',
+    is_remain_pay:1,
+  };
+
+
+
+for_months:any;
+fullremain() {
+  this.fullpaydata.lease_id=this.remain_data[0].lease_id
+  this.fullpaydata.paid = parseFloat(this.remainpay) || 0.00;
+  this.fullpaydata.date_of_pay = this.fullselectedDate;
+  const payload = {
+    fullpaydata: this.fullpaydata,
+    for_months: Array.isArray(this.remain_data) ? this.remain_data.map((item: any) => ({ for_month: item.for_month })) : this.remain_data
+  };
+  console.log(payload)
+  this.serviceClass.fullremainpay(payload).subscribe((res:any)=>{
+    console.log('Response:', res);
+    if(res) {
+      this.successpopup(true)
+
+    }
+    else {
+      alert('Error To Send Data')
+    }
+  },
+  error=> {
+    // console.log(error.error.detail)
+    alert(error.error.detail)
+
+  })
+  
+
+
+
+
+  this.fullpaydata = {
+  lease_id:'',
+  paid:0.00,
+  remain:0,
+  date_of_pay: '',
+  transaction_mode: '',
+  for_month:'',
+  is_remain_pay:1,
+
+};
+
+}
 
 
 

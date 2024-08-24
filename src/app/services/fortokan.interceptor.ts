@@ -67,7 +67,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((err) => {
         // this.router.navigate(['/home']); // Redirect to login
-        alert(err.error.detail)
+        // alert(err.error.detail)
         return throwError(err);
       })
     );

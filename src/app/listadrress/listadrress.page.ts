@@ -57,12 +57,24 @@ export class ListadrressPage implements OnInit {
   }
 
   addressdata:any;
+  error:any;
+  noData: boolean = false; 
+  loading: boolean = false; 
   getalldataaddr(){
     
     this.serviceClass.getadrress(this.selectedValue).subscribe((res:any)=>{
       this.addressdata=res
+      this.noData = this.addressdata.length === 0; // Check if data is empty
+      this.loading = false; // End loading
       console.log(res)
-    })  
+    },
+    error=> {
+      this.error = error.error.detail
+      this.noData = false; // Reset noData flag in case of an error
+      this.loading = false; // End loading
+
+    })
+  
 
   }
 

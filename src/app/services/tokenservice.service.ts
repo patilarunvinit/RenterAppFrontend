@@ -78,6 +78,10 @@ export class TokenserviceService {
   }
 
 
+  fullremainpay(data:any) {
+    return this.http.post(this.apiroot + 'addfullremain',data);
+  }
+
   addlease(lease:any) {
     console.log(lease)
     return this.http.post(this.apiroot + 'addlease',lease);

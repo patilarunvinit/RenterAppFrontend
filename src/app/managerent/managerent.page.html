@@ -130,11 +130,11 @@
 
      <div class="inputbox2">
        <!-- <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
-       <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+       <ion-datetime-button class="dateinput" datetime="datetime1" presentation="date"></ion-datetime-button>
 
        <ion-modal [keepContentsMounted]="true">
          <ng-template>
-           <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChangeRemove($event)"></ion-datetime>
+           <ion-datetime id="datetime1" presentation="date" (ionChange)="onDateChangeRemove($event)"></ion-datetime>
          </ng-template>
        </ion-modal>
      </div>
