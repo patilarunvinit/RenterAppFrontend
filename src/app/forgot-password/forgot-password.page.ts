@@ -100,6 +100,9 @@ formData =
 };
 submitForm() {
       console.log(this.formData)
+      let email = this.formData.email
+      this.router.navigateByUrl('/cpassword?email=' + email)
+
     }
 
     otpSent = false;

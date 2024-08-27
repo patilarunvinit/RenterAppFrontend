@@ -36,14 +36,19 @@ export class AppComponent {
       const currentUrl = this.router.url;
       console.log('Current URL:', currentUrl); // Log the current URL for debugging
 
+      const path = currentUrl.split('?')[0]; // Get the path without query parameters
+      const queryParams = new URLSearchParams(currentUrl.split('?')[1] || ''); // Extract query parameters
+
+      const emailParam = queryParams.get('email');
+
       if (this.authService.isUserAuthenticated()) {
         // Redirect to /main-home if the current URL is /home
-        if (currentUrl === '/home') {
+        if (path === '/home') {
           this.router.navigateByUrl('/main-home');
         }
       } else {
         // If not authenticated, redirect to /home unless on /forgot-password
-        if (currentUrl !== '/forgot-password' && currentUrl !== '/home') {
+        if ((path !== '/cpassword' || !emailParam) && path !== '/forgot-password' && path !== '/home') {
           this.router.navigateByUrl('/home');
         }
       }
