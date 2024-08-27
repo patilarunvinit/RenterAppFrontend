@@ -142,6 +142,15 @@ export class HomePage {
         this.popupdisplay="none";
       },  8 * 1000); 
     }
+
+
+
+
+
+
+    forgotpass(){
+      this.router.navigateByUrl('/forgot-password');
+    }
   
     backphoto:string="assets/img/pexels-photo-2310713.jpeg"
     centerlogo:string="assets/img/user-solid.svg"

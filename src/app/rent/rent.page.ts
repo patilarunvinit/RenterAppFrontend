@@ -54,13 +54,24 @@ export class RentPage implements OnInit {
   }
   
   rentdata:any;
+  error:any;
+  noData: boolean = false; 
+  loading: boolean = false; 
   getfullrents(){
     
     this.serviceClass.getrent(this.currentmonthvar).subscribe((res:any)=>{
       this.rentdata=res
       // console.log(this.rentdata[0][6]?.date_of_pay[0]["date_of_pay"])
+      this.noData = this.rentdata.length === 0; // Check if data is empty
+      this.loading = false; // End loading
       console.log(res)
-    })  
+    },
+    error=> {
+      this.error = error.error.detail
+      this.noData = false; // Reset noData flag in case of an error
+      this.loading = false; // End loading
+
+    })
 
   }
 

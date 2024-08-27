@@ -8,6 +8,11 @@
       <p class="nameh1">
         <strong>Your Flats</strong>
       </p>
+
+      <div *ngIf="error; else nomenu">
+        
+      </div>
+      <ng-template #nomenu>
       <ion-item class="select-container">
       <!-- <ion-icon name="funnel" ></ion-icon> -->
       <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Available" [interfaceOptions]="customActionSheetOptions" >
@@ -22,6 +27,7 @@
         </ion-select-option>
       </ion-select>
       </ion-item>
+    </ng-template>
     </div>
     
     

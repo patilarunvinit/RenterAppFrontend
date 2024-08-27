@@ -14,7 +14,7 @@
       <div class="inputbox2">
         <ion-input name="password" type="password" [(ngModel)]="formData.password" required placeholder="Password" class="ion_input" type="password"></ion-input><br>
       </div>
-      <a href="https://www.google.com/" class="forgotlink">forgot password?</a>
+      <a (click)="forgotpass()" class="forgotlink">forgot password?</a>
 
       <button 
       ion-button expand="block" 

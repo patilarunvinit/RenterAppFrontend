@@ -6,6 +6,8 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-managerent',
   templateUrl: './managerent.page.html',
@@ -55,18 +57,30 @@ export class ManagerentPage implements OnInit {
     return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
   }
 
+
+   errorremoveaddress:any;
+   erroraddaddress:any;
+   erroraddrenter:any;
    dataforinputs(){
 
     this.serviceClass.getadrressforlease().subscribe((res:any)=>{
       
       this.addressdata=res
       console.log(res)
+    },
+    error=> {
+      this.erroraddaddress = error.error.detail
+      
     })  
 
     this.serviceClass.getreanterforlease().subscribe((res:any)=>{
       
       this.renterdata=res
       console.log(res)
+    },
+    error=> {
+      this.erroraddrenter = error.error.detail
+      
     })  
 
 
@@ -74,6 +88,10 @@ export class ManagerentPage implements OnInit {
       
       this.removeaddress=res
       console.log(res)
+    },
+    error=> {
+      this.errorremoveaddress = error.error.detail
+      
     }) 
 
    }
@@ -87,6 +105,12 @@ export class ManagerentPage implements OnInit {
     rent:'',
     deposit:''
   };
+
+
+  isFormInvalid(form: NgForm): boolean {
+    return !form.valid || !!this.erroraddrenter || !!this.erroraddaddress;
+  }
+
 
   addFrom() {
  
@@ -127,6 +151,10 @@ export class ManagerentPage implements OnInit {
     address_id: '',
     end_date: '',
   };
+
+  isFormInvalidremove(form: NgForm): boolean {
+    return !form.valid || !!this.errorremoveaddress ;
+  }
 
   removeFrom() {
 

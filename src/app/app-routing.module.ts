@@ -47,6 +47,11 @@ const routes: Routes = [
     path: 'historyremain',
     loadChildren: () => import('./historyremain/historyremain.module').then( m => m.HistoryremainPageModule)
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  
   
   
 ];

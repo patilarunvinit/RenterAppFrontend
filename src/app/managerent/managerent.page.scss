@@ -114,6 +114,7 @@ html, body {
     padding-left: 7%;
 
 }
+
 .extrainfodiv{
     position: relative;
     margin-left: 10%;
@@ -141,14 +142,18 @@ html, body {
     margin-top:7% ;
     font-size: 20px;
 }
-.btn-valid {
-    background-color: #3D9BD6;
-    color: white;
-  }
+// .btn-valid {
+//     background-color: #3D9BD6;
+//     color: white;
+//   }
   
-.btn-invalid {
+// .btn-invalid {
+//     background-color: #93c3e0;
+//     color: white;
+//   }
+  button:disabled {
     background-color: #93c3e0;
-    color: white;
+    cursor: not-allowed;
   }
 .swhitchdiv{
     position: relative;
@@ -359,4 +364,15 @@ html, body {
     height: 100%;
     background:transparent ;
     z-index: 800;
+}
+
+
+.nodatadrop{
+    color: rgb(255, 139, 139);
+    text-align: center;
+    font-size: 20px;
+}
+
+.nodateborder{
+    border: 2px solid red;
 }

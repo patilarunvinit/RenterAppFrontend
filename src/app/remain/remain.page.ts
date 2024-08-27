@@ -39,10 +39,22 @@ export class RemainPage implements OnInit {
 
 
   remaindata:any;
+  error:any;
+  noData: boolean = false; 
+  loading: boolean = false; 
   getremaindata(){
     
     this.serviceClass.getremain().subscribe((res:any)=>{
       this.remaindata=res
+      this.noData = this.remaindata.length === 0; // Check if data is empty
+      this.loading = false; // End loading
+      console.log(res)
+    },
+    error=> {
+      this.error = error.error.detail
+      this.noData = false; // Reset noData flag in case of an error
+      this.loading = false; // End loading
+
     })  
 
   }

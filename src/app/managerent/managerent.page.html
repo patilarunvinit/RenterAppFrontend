@@ -29,6 +29,12 @@
        <p class="formtext">Add Lease</p>
        <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
+
+
+      <div class="inputbox2 nodateborder" *ngIf="erroraddrenter; else addrenter">
+        <p class="nodatadrop" >{{erroraddrenter}}</p>
+      </div>
+      <ng-template #addrenter>  
       <div class="inputbox2" >
         <ion-select class="dropbutton" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
           <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
@@ -36,8 +42,16 @@
           </ion-select-option>
          
         </ion-select>
+        
       </div>
+      </ng-template>
 
+
+
+      <div class="inputbox2 nodateborder" *ngIf="erroraddaddress; else addaddres">
+        <p class="nodatadrop" >{{erroraddaddress}}</p>
+      </div>
+      <ng-template #addaddres>
       <div class="inputbox2" >
         <ion-select class="dropbutton" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
           <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
@@ -47,7 +61,9 @@
           </ion-select-option>
          
         </ion-select>
+        
       </div>
+      </ng-template>
 
       <div class="inputbox2">
         <!-- <ion-input  name="start_date" [(ngModel)]="addfromdata.start_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
@@ -68,8 +84,9 @@
         <ion-input name="deposit" [(ngModel)]="addfromdata.deposit" type="number"  required placeholder="deposit" class="ion_input" ></ion-input><br>
       </div>
 
-     <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
+     <button ion-button expand="block" type="submit" [disabled]="isFormInvalid(myForm)" class="button1" >Submite</button>
      <!-- <pre>{{ myForm.valid | json }}</pre>  -->
+     <!-- [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}" -->
     </form>
 
     </div>
@@ -102,10 +119,17 @@
       <p class="formtext">Remove Rent</p>
       <form class="example-form" #removeForm="ngForm" (ngSubmit)="removeFrom()">
      
-     
 
-        <div class="inputbox2" >
-          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address" required>
+        <div class="inputbox2 nodateborder" *ngIf="errorremoveaddress; else removeaddres">
+          <p class="nodatadrop" >{{errorremoveaddress}}</p>
+        </div>
+       
+
+
+        <ng-template #removeaddres>
+        <div class="inputbox2" >         
+
+          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address"  required>
             <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
               {{removeaddress[i]["Area"]}}
               building-{{removeaddress[i]["Building_name"]}}
@@ -113,7 +137,9 @@
             </ion-select-option>
            
           </ion-select>
+          
         </div>
+      </ng-template>
 
 
 
@@ -139,7 +165,7 @@
        </ion-modal>
      </div>
 
-    <button ion-button expand="block" type="submit" [disabled]="!removeForm.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
+    <button ion-button expand="block" type="submit" [disabled]="isFormInvalidremove(removeForm)" class="button1" >Submite</button>
        <!-- <pre>{{ myForm.valid | json }}</pre>    -->
    
   </form>

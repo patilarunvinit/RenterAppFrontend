@@ -9,6 +9,10 @@
       <p class="nameh1">
         <strong>Rents</strong>
       </p>
+      <div *ngIf="error; else nomenu">
+        
+      </div>
+      <ng-template #nomenu>
       <ion-item class="select-container">
         <!-- <ion-icon name="funnel" ></ion-icon> -->
         <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Your Month" [interfaceOptions]="customActionSheetOptions">
@@ -19,6 +23,7 @@
           </ng-container>
         </ion-select>
         </ion-item>
+      </ng-template>
       </div>
 
 
@@ -33,6 +38,22 @@
             <ion-col size="2"><strong>date</strong></ion-col>
             <ion-col size="2"><strong>pay</strong></ion-col>
           </ion-row>
+
+          <div *ngIf="noData">
+            <p class="nodatatext">No data available.</p>
+          </div>
+    
+          <!-- Display loading message -->
+          <div *ngIf="loading">
+            <p class="nodatatext">Loading...</p>
+          </div>
+    
+          <!-- Display error message -->
+          <div *ngIf="error">
+            <p class="nodatatext">{{error}}</p>
+          </div>
+
+
           <ion-row *ngFor="let item of rentdata;let i = index">
             <ng-container *ngIf="rentdata[i][5]?.paid?.length > 0; else elseBlock">
               <ion-col size="3">
