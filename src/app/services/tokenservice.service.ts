@@ -16,7 +16,7 @@ interface ResponseType {
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='https://f390-103-148-62-157.ngrok-free.app/'
+  apiroot:any='http://localhost:8000/'
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -123,6 +123,19 @@ export class TokenserviceService {
     return this.http.get(this.apiroot + 'getremovedata?address_id=' + address_id);
   }
 
+  sendotpapi(email:any) {
+    return this.http.post(this.apiroot + 'request_otp' , email);
+  }
+
+  verifyotp(data:any) {
+    return this.http.post(this.apiroot + 'verify_otp', data);
+  }
+
+  paswordchange(data:any) {
+    return this.http.post(this.apiroot + 'reset_password' , data);
+  }
+
+  
   logoutApi() {
     this.ref_tokan= localStorage.getItem('ref_tokan');
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');

@@ -7,6 +7,9 @@ import { Platform } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
+
+
 @Component({
   selector: 'app-cpassword',
   templateUrl: './cpassword.page.html',
@@ -22,7 +25,7 @@ export class CpasswordPage implements OnInit {
     private keyboard: Keyboard,
     private router: Router,
     private route: ActivatedRoute,
-
+    private serviceClass: TokenserviceService,
 
   ) { 
     this. kaybordfun();
@@ -64,10 +67,24 @@ export class CpasswordPage implements OnInit {
       console.log('Form Data:', this.formData.newPassword);
       const tosend ={
         email:this.email,
-        password:this.formData.newPassword
+        new_password:this.formData.newPassword
       }
       console.log(tosend)
-      // Perform password change logic here
+      this.serviceClass.paswordchange(tosend).subscribe((res:any)=>{
+        console.log('Response:', res);
+        if(res) {
+          this.backbutton()
+
+        }
+        this.formData = {
+          newPassword: '',
+          confirmPassword: ''
+        };
+        
+      },
+      error=> {
+        console.log(error.error.error)
+      })
     } else {
       console.log('Form is invalid or passwords do not match');
     }

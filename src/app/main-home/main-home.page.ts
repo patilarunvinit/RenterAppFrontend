@@ -31,7 +31,7 @@ export class MainHomePage implements OnInit {
   owner_dp:any
   b_date:any;
   dp:any;
-  url:any="https://f390-103-148-62-157.ngrok-free.app/"
+  url:any="http://localhost:8000/"
   addresscount:any;
   ownerD(){
     

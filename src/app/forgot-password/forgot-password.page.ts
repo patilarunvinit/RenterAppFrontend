@@ -5,6 +5,8 @@ import { Platform } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
+import { TokenserviceService } from 'src/app/services/tokenservice.service'
+
 import { OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -20,6 +22,8 @@ export class ForgotPasswordPage implements OnInit {
     private platform: Platform,
     private keyboard: Keyboard,
     private router: Router,
+    private serviceClass: TokenserviceService,
+
 
   ) { 
     this. kaybordfun()
@@ -96,12 +100,21 @@ export class ForgotPasswordPage implements OnInit {
 formData = 
      {
       email: '',
-      Otp:''
+      otp_code:''
 };
 submitForm() {
       console.log(this.formData)
       let email = this.formData.email
-      this.router.navigateByUrl('/cpassword?email=' + email)
+      this.serviceClass.verifyotp(this.formData).subscribe((res:any)=>{
+        console.log('Response:', res);
+        if(res) {
+          this.router.navigateByUrl('/cpassword?email=' + email)
+        }
+        
+      },
+      error=> {
+        console.log(error.error.detail)
+      })
 
     }
 
@@ -109,15 +122,35 @@ submitForm() {
     sendOtp() {
       if (this.isEmailValid) {
         if (!this.otpSent) {
-          // Handle OTP sending logic here
           console.log('Sending OTP...');
-          // Assume OTP is sent successfully
-          this.otpSent = true; // Mark OTP as sent
-          this.startCountdown();
+          let email ={'email': this.formData.email}
+
+          this.serviceClass.sendotpapi(email).subscribe((res:any)=>{
+            console.log('Response:', res);
+            if(res) {
+              this.otpSent = true; 
+              this.startCountdown();
+            }
+            
+          },
+          error=> {
+            console.log(error.error.error)
+          })
+
         } else {
-          // Handle resend OTP logic here
           console.log('Sending OTP again...');
-          this.startCountdown();
+          let email ={'email': this.formData.email}
+          this.serviceClass.sendotpapi(email).subscribe((res:any)=>{
+            console.log('Response:', res);
+            if(res) {
+              this.startCountdown();
+            }
+            
+          },
+          error=> {
+            console.log(error.error.detail)
+          })
+          
         }
       } else {
         console.log('Invalid email address');

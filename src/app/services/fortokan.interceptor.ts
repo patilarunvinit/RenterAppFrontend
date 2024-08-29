@@ -20,11 +20,18 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
-    if (req.url.includes('https://f390-103-148-62-157.ngrok-free.app/login')) {
-      return next.handle(req); // Skip interception for login requests
-    }
-    else if(req.url.includes('https://f390-103-148-62-157.ngrok-free.app/refresh')){
-      return next.handle(req);
+    const excludedUrls = [
+      'http://localhost:8000/login',
+      'http://localhost:8000/refresh',
+      'http://localhost:8000/request_otp',
+      'http://localhost:8000/verify_otp',
+      'http://localhost:8000/reset_password',
+
+      // Add more URLs or patterns here
+    ];
+    
+    if (excludedUrls.some(excludedUrl => req.url.startsWith(excludedUrl))) {
+      return next.handle(req); // Skip interception for URLs in the excludedUrls list
     }
     else{
       let datalocal:any = localStorage.getItem("hotelUser")
