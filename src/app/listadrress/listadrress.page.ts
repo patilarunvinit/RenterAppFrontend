@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
-
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
 
@@ -16,6 +15,7 @@ export class ListadrressPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
 
+
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -23,39 +23,48 @@ export class ListadrressPage implements OnInit {
     private serviceClass: TokenserviceService,
   ) { 
     this.kaybordfun()
-    // this.getalldataaddr()
   }
 
-  customActionSheetOptions: any = {
-    header: 'Address List',
-  };
+
 
   ngOnInit() {
     this.getalldataaddr()
   }
 
 
+
+  //backbutton fun
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
   
+
+
+  //header for menu option
+  customActionSheetOptions: any = {
+    header: 'Address List',
+  };
+
+
+  
+  //menu option selection default=all
   selectedValue:any="all";
   onSelectionChange(event: any) {
     this.selectedValue = event.detail.value;
-    console.log('Selected value:', this.selectedValue);
     this.getalldataaddr()
   }
 
 
 
-  singlepagebutton(address_id:any){
-    // localStorage.setItem('address_id',JSON.stringify(address_id));
-    // this.router.navigateByUrl('/sigleaddress');
 
+  //single address route with address_id
+  singlepagebutton(address_id:any){
     this.router.navigateByUrl('/sigleaddress?adrress_id=' + address_id);
-    // this.router.navigate(['/sigleaddress'], { queryParams: { address_id } });
   }
 
+
+
+  // get address data (full)
   addressdata:any;
   error:any;
   noData: boolean = false; 
@@ -64,34 +73,29 @@ export class ListadrressPage implements OnInit {
     
     this.serviceClass.getadrress(this.selectedValue).subscribe((res:any)=>{
       this.addressdata=res
-      this.noData = this.addressdata.length === 0; // Check if data is empty
-      this.loading = false; // End loading
-      console.log(res)
+      this.noData = this.addressdata.length === 0; 
+      this.loading = false; 
     },
     error=> {
       this.error = error.error.detail
-      this.noData = false; // Reset noData flag in case of an error
-      this.loading = false; // End loading
+      this.noData = false; 
+      this.loading = false; 
 
     })
   
-
   }
 
 
 
-
+  //keybord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
+      this.divHeight = '100%';     
     });
   }
 

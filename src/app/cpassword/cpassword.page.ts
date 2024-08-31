@@ -61,6 +61,7 @@ export class CpasswordPage implements OnInit {
   };
 
   // Function to handle form submission
+  error:any;
   submitForm(form: any) {
     if (form.valid && this.passwordsMatch() && this.isPasswordValid()) {
       // Handle form submission
@@ -83,7 +84,12 @@ export class CpasswordPage implements OnInit {
         
       },
       error=> {
-        console.log(error.error.error)
+        console.log(error.error.error);
+        this.error = error.error.error
+        this.formData = {
+          newPassword: '',
+          confirmPassword: ''
+        };
       })
     } else {
       console.log('Form is invalid or passwords do not match');

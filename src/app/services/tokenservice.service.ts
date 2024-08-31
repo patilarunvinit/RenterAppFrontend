@@ -56,7 +56,7 @@ export class TokenserviceService {
   }
 
   addRenter(renter:any) {
-    console.log(renter)
+    console.log('renter = ' + renter)
     return this.http.post(this.apiroot + 'addrenter',renter);
   }
 

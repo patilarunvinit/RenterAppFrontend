@@ -1,27 +1,39 @@
-
+<!-- main page -->
 <div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
+  
+  
   <img alt="back photo" [src]=backphoto class="backimage" >
+  
+  
   <div class="menu">
     <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
   </div>
+
+  <!-- address data -->
   <div class="addressdiv">
+
     <p class="headertext">
       <strong>
         Flat Information
       </strong>
     </p>
+
     <p class="addressinfo">
       Owner Name :- {{owner_name}}
     </p>
+
     <p class="addressinfo">
       Address :- {{area}}
     </p>
+
     <p class="addressinfo">
       Flat No :- {{flat_no}}
     </p>
+
     <p class="addressinfo">
       Rent :- {{Rent}}
     </p>
+    
     <p class="addressinfo" *ngIf="is_on_rent; else elseBlock">
       Available: Yes
     </p>
@@ -30,22 +42,33 @@
         Available: No
       </p>
     </ng-template>
-  <div class="line"></div>
+
+    <div class="line"></div>
+
   </div>
+
+  <!-- renter data -->
   <div class="renterdiv" *ngIf="is_on_rent; else elsediv">
+
     <P class="addressinfo">
       Renter :- {{renter_name}}
     </P>
+
     <P class="addressinfo">
       Mobile No :- {{renter_mobile_no}}
     </P>
+    
     <P class="addressinfo" (click)="showPopup()" >
       Id Proof :- <span style="color: blue;">{{id_type}}</span>
     </P>
+
     <P class="addressinfo">
       Start Date :- {{start_date}}
     </P>
+
   </div>
+
+  <!-- if not renter data -->
   <ng-template #elsediv>
     <div class="renterdiv">
       <p class="notrenter">
@@ -56,9 +79,19 @@
 
 
 </div>
+
+
+
+
+
+
+<!-- image popup -->
 <div class="popupdiv" [style.display]="popdiplay">
+  
   <div class="closebutton">
     <ion-icon name="close" class="closeicon" (click)="closepopup()"></ion-icon>
   </div>
+
   <img [src]=id_img alt="id card" class="popupimg">
+
 </div>

@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
-
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
-
 import { jwtDecode } from 'jwt-decode';
 import { Location } from '@angular/common';
-
-import { App } from '@capacitor/app';
 import { AlertController } from '@ionic/angular';
 
 
@@ -30,14 +26,21 @@ export class AddAddressPage implements OnInit {
     private alertController: AlertController
 
 
-  ) { 
+  ){ 
     this.kaybordfun()
   }
+
+
+
+
   userId:any;
   ngOnInit() {
 
     this.initializeUserData();
   }
+
+
+
 
   initializeUserData() {
     const accessToken = localStorage.getItem('hotelUser');
@@ -45,15 +48,18 @@ export class AddAddressPage implements OnInit {
       try {
         const decodedToken = jwtDecode<any>(accessToken);
         this.userId = decodedToken.user_id;
-        console.log(`User ID: ${this.userId}`);
         this.initializeFormData(); // Initialize formData only after userId is set
       } catch (e) {
-        console.error('Invalid token', e);
+        this.router.navigateByUrl('/home');
       }
     } else {
-      console.error('No access token found');
-    }
+        this.router.navigateByUrl('/home');
+      }
   }
+
+
+
+
 
   formData:any;
   initializeFormData() {
@@ -64,25 +70,27 @@ export class AddAddressPage implements OnInit {
       Floor: '',
       Flat_no: '',
       Rent: '',
-      // Add more fields as needed
     };
   }
 
+
+
+  
+  // for submite form 
+  error:any;
   submitForm() {
-    console.log(this.formData)
-    // this.showPopup()
     this.serviceClass.addAdrress(this.formData).subscribe((res:any)=>{
-      console.log('Response:', res);
       if(res) {
         this.showPopup()
       }
       else {
-        alert('Error To Send Data')
+        this.error = 'Error To Send Data' ; 
+        this.wrongshowPopup()
       }
     },
     error=> {
-      // console.log(error.error.detail)
-      alert(error.error.detail)
+      this.error = error.error.detail
+      this.wrongshowPopup()
 
     })
 
@@ -91,12 +99,19 @@ export class AddAddressPage implements OnInit {
   }
 
 
+
+
+  //For back button 
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
 
 
 
+
+
+
+  //For success Form Submite
   popdiplay:any="none";
   blur:any;
   hinddiv:any="none"
@@ -108,26 +123,45 @@ export class AddAddressPage implements OnInit {
       this.popdiplay = 'none';
       this.hinddiv = 'none';
       this.blur = false
-    }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
+    }, 4000); 
   }
 
 
 
 
 
+
+   //For error Form Submite 
+   wrongpopdiplay:any="none";
+   wrongshowPopup() {
+     this.wrongpopdiplay = 'block';
+     this.hinddiv = 'block';
+     this.blur = true
+     setTimeout(() => {
+       this.wrongpopdiplay = 'none';
+       this.hinddiv = 'none';
+       this.blur = false
+     }, 4000); 
+   }
+
+
+
+
+
+
+  //for kaybord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+      this.divHeight = '100%';      
 
     });
   }
+
 
 
   

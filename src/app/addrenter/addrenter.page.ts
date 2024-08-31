@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
-
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
-
-
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
 import { ElementRef, ViewChild } from '@angular/core';
-
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -21,6 +16,8 @@ export class AddrenterPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
 
+
+
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -32,11 +29,16 @@ export class AddrenterPage implements OnInit {
   }
 
   
+
+
   userId:any;
   ngOnInit() {
-
     this.initializeUserData();
   }
+
+
+
+
 
   initializeUserData() {
     const accessToken = localStorage.getItem('hotelUser');
@@ -44,20 +46,20 @@ export class AddrenterPage implements OnInit {
       try {
         const decodedToken = jwtDecode<any>(accessToken);
         this.userId = decodedToken.user_id;
-        console.log(`User ID: ${this.userId}`);
         this.initializeFormData(); // Initialize formData only after userId is set
       } catch (e) {
-        console.error('Invalid token', e);
+        this.router.navigateByUrl('/home');
       }
     } else {
-      console.error('No access token found');
-    }
+        this.router.navigateByUrl('/home');
+      }
   }
+
 
   formData:any;
   initializeFormData() {
     this.formData = {
-      owner_id: this.userId,
+      owner_id: this.userId || '',
       renter_name: '',
       renter_mobile_no: '',
       id_type: '',
@@ -69,16 +71,18 @@ export class AddrenterPage implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
 
+  //file change event
   file!:File;
   onFileSelected(event: any) {
     this.file = event.target.files[0];
     this.formData.id_img = this.file; 
   }
 
- //Form For Add renter 
+  //Form For Add renter 
+  error:any;
   submitForm() {
     const formData = new FormData();
-    formData.append('owner_id',"1");
+    formData.append('owner_id',this.userId);
     formData.append('renter_name', this.formData.renter_name);
     formData.append('renter_mobile_no', this.formData.renter_mobile_no);
     formData.append('id_type', this.formData.id_type)
@@ -86,21 +90,19 @@ export class AddrenterPage implements OnInit {
       formData.append('id_img', this.file);
     }
  
-
-    console.log(this.formData.id_img)
     this.serviceClass.addRenter(formData).subscribe((res:any)=>{
-      console.log('Response:', res);
       if(res) {
         this.showPopup()
         
       }
       else {
-        alert('Error To Send Data')
+        this.wrongshowPopup();
       }
       
     },
     error=> {
-      alert(error.error.detail)
+      this.error = error.error.detail
+      this.wrongshowPopup()
     })
     
     this.initializeFormData();
@@ -111,7 +113,7 @@ export class AddrenterPage implements OnInit {
 
 
 
-//For back button
+  //For back button
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
@@ -119,7 +121,7 @@ export class AddrenterPage implements OnInit {
 
 
 
-//For success Form Submite 
+  //For success Form Submite 
   popdiplay:any="none";
   blur:any;
   hinddiv:any="none";
@@ -131,25 +133,41 @@ export class AddrenterPage implements OnInit {
       this.popdiplay = 'none';
       this.hinddiv = 'none';
       this.blur = false
-    }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
+    }, 4000); 
   }
 
 
 
+  //For error Form Submite 
+  wrongpopdiplay:any="none";
+  wrongshowPopup() {
+    this.wrongpopdiplay = 'block';
+    this.hinddiv = 'block';
+    this.blur = true
+    setTimeout(() => {
+      this.wrongpopdiplay = 'none';
+      this.hinddiv = 'none';
+      this.blur = false
+    }, 4000);
+  }
+
+
+
+  //key bord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+      this.divHeight = '100%';      
 
     });
   }
 
   
+
+
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
 }

@@ -102,23 +102,34 @@ formData =
       email: '',
       otp_code:''
 };
+
+mainerror:any;
 submitForm() {
       console.log(this.formData)
       let email = this.formData.email
       this.serviceClass.verifyotp(this.formData).subscribe((res:any)=>{
         console.log('Response:', res);
         if(res) {
-          this.router.navigateByUrl('/cpassword?email=' + email)
+          this.router.navigateByUrl('/cpassword?email=' + email);
+          this.mainerror = '';
         }
         
       },
       error=> {
-        console.log(error.error.detail)
+        console.log(error.error.error);
+        this.mainerror = error.error.error;
+        this.formData = 
+         {
+          email: this.formData.email,
+          otp_code:''
+        };
+        
       })
 
     }
 
     otpSent = false;
+    error:any;
     sendOtp() {
       if (this.isEmailValid) {
         if (!this.otpSent) {
@@ -130,11 +141,13 @@ submitForm() {
             if(res) {
               this.otpSent = true; 
               this.startCountdown();
+              this.error=''
             }
             
           },
           error=> {
             console.log(error.error.error)
+            this.error = error.error.error
           })
 
         } else {
@@ -144,16 +157,18 @@ submitForm() {
             console.log('Response:', res);
             if(res) {
               this.startCountdown();
+              this.error=''
             }
             
           },
           error=> {
             console.log(error.error.detail)
+            this.error = error.error.error
           })
           
         }
       } else {
-        console.log('Invalid email address');
+        this.error ='Invalid email address'
         // Optionally, you can also trigger email validation here if needed
       }
     }

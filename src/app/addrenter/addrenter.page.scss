@@ -157,13 +157,62 @@
     }
 }
 
+.icon-custom-wrong {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: red;
+    animation-name: example;
+    animation:wrong 4s forwards;
+}
+@keyframes wrong {
+    0%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    30%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 1;
+    }
+    70%{
+        opacity: 0;
+    }
+    80%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+    
+  }
+.popcontent-wrong{
+    width: 80%;
+    height: 45%;
+    margin-left: 10%;
+
+}
 
 .popcontent{
     width: 80%;
     height: 45%;
     margin-left: 10%;
     animation:opacity 4s forwards;
-
 
 }
 .poph1{
@@ -185,4 +234,14 @@
     height: 100%;
     background:transparent ;
     z-index: 800;
+}
+
+.errormsg{
+    color: red;
+    font-size: 20px;
+    position: relative;
+    text-align: center;
+    margin-top: 4%;
+    width: 80%;
+    margin-left: 10%;
 }

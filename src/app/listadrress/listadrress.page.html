@@ -1,45 +1,62 @@
 <div class="upperdiv" >
+  
+  
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  
+  
   <div class="lowerdiv"  [style.height]="divHeight">
+    
+    <!-- back buttton -->
     <div class="menu">
       <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
     </div>
+    
+    <!-- menu -->
     <div class="namediv">
       <p class="nameh1">
         <strong>Your Flats</strong>
       </p>
 
-      <div *ngIf="error; else nomenu">
-        
-      </div>
+      <!-- empty display nenu -->
+      <div *ngIf="error; else nomenu"></div>
+
       <ng-template #nomenu>
-      <ion-item class="select-container">
-      <!-- <ion-icon name="funnel" ></ion-icon> -->
-      <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Available" [interfaceOptions]="customActionSheetOptions" >
-        <ion-select-option value="all" >
-          All Address
-        </ion-select-option>
-        <ion-select-option value=0 >
-          Available
-        </ion-select-option>
-        <ion-select-option value=1 >
-          Not Available
-        </ion-select-option>
-      </ion-select>
-      </ion-item>
-    </ng-template>
+        <ion-item class="select-container">
+          <ion-select name="filter" (ionChange)="onSelectionChange($event)" placeholder="Select Available" [interfaceOptions]="customActionSheetOptions" >
+            <ion-select-option value="all" >
+              All Address
+            </ion-select-option>
+            <ion-select-option value=0 >
+              Available
+            </ion-select-option>
+            <ion-select-option value=1 >
+              Not Available
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ng-template>
     </div>
     
     
+    <!-- main list data -->
     <div class="listmiandiv">
+
       <ion-grid class="tablegrid">
         <ion-row class="tablehead">
+         
           <ion-col size="4"><strong>Address</strong></ion-col>
+          
           <ion-col size="2"><strong>Flat no</strong></ion-col>
+          
           <ion-col size="2"><strong>Rent</strong></ion-col>
+          
           <ion-col size="3"><strong>Available</strong></ion-col>
+          
           <ion-col ><strong></strong></ion-col>
+
         </ion-row>
+
+        <!-- if not data -->
         <div *ngIf="noData">
             <p class="nodatatext">No data available.</p>
         </div>
@@ -54,18 +71,24 @@
             <p class="nodatatext">{{error}}</p>
         </div>
     
+
         <!-- Display the data if available -->
         <ng-container *ngIf="!noData && !loading && !error">
+
           <ion-row *ngFor="let item of addressdata; let i = index">
+           
             <ion-col size="4">
               {{item.Area}}<br> <strong>building- </strong> {{item.Building_name}}
             </ion-col>
+            
             <ion-col size="2">
               {{item.Floor}}/{{item.Flat_no}}
             </ion-col>
+            
             <ion-col size="2">
               {{item.Rent}}
             </ion-col>
+            
             <ion-col size="3">
               <div *ngIf="item.is_on_rent; else availableBlock">
                 NO
@@ -74,13 +97,24 @@
                 YES
               </ng-template>
             </ion-col>
+            
             <ion-col>
               <strong (click)="singlepagebutton(item.id)" style="cursor: pointer;">></strong>
             </ion-col>
+
           </ion-row>
+
         </ng-container>
+
       </ion-grid>
+
+
       <a style="display: none;" href="https://www.flaticon.com/free-icons/or-rent" title="or rent icons">Or rent icons created by Icon home - Flaticon</a>
+    
     </div>
+
+
   </div>
+
+
 </div>

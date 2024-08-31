@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
-
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
-
 import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-managerent',
@@ -27,77 +25,87 @@ export class ManagerentPage implements OnInit {
     private serviceClass: TokenserviceService,
 
   ) { 
+      this.kaybordfun()    
+    }
 
-    this.kaybordfun()
-     
 
-  }
+
 
   ngOnInit() {
-    this.dataforinputs()
-    
+    this.dataforinputs();    
     this.selectedDateAdd = this.formatDate(new Date().toISOString());
     this.selectedDateRemove = this.formatDate(new Date().toISOString());
 
   }
 
 
+
+
+
+  //select date fun for both
   selectedDateAdd:any;
   onDateChangeAdd(event: any) {
-    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    const dateTimeValue = event.detail.value; 
     this.selectedDateAdd = this.formatDate(dateTimeValue);
   }
   selectedDateRemove:any;
   onDateChangeRemove(event: any) {
-    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    const dateTimeValue = event.detail.value; 
     this.selectedDateRemove = this.formatDate(dateTimeValue);
   }
+
+
+
+  // Convert to 'YYYY-MM-DD'
   formatDate(dateTimeValue: string): string {
     const date = new Date(dateTimeValue);
-    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+    return date.toISOString().split('T')[0]; 
   }
 
 
+
+
+
+   // data for drop inputs
    errorremoveaddress:any;
    erroraddaddress:any;
    erroraddrenter:any;
    dataforinputs(){
 
+    //add lease address
     this.serviceClass.getadrressforlease().subscribe((res:any)=>{
-      
       this.addressdata=res
-      console.log(res)
     },
     error=> {
       this.erroraddaddress = error.error.detail
-      
     })  
 
+    //add lease renter
     this.serviceClass.getreanterforlease().subscribe((res:any)=>{
-      
       this.renterdata=res
-      console.log(res)
     },
     error=> {
       this.erroraddrenter = error.error.detail
-      
     })  
 
-
+    //remove lease address
     this.serviceClass.getremoveaddress().subscribe((res:any)=>{
-      
-      this.removeaddress=res
-      console.log(res)
+        this.removeaddress=res
     },
     error=> {
       this.errorremoveaddress = error.error.detail
-      
     }) 
 
    }
 
 
 
+
+
+
+   
+
+  // add form function start
   addfromdata = {
     renter_id:'',
     address_id: '',
@@ -106,32 +114,33 @@ export class ManagerentPage implements OnInit {
     deposit:''
   };
 
-
+  //check form validations
   isFormInvalid(form: NgForm): boolean {
     return !form.valid || !!this.erroraddrenter || !!this.erroraddaddress;
   }
 
-
+ 
+  //add from
+  error:any
   addFrom() {
  
     this.addfromdata.start_date=this.selectedDateAdd;
 
     this.serviceClass.addlease(this.addfromdata).subscribe((res:any)=>{
-      console.log('Response:', res);
       if(res) {
         this.showPopup()
         this.dataforinputs();
       }
       else {
-        alert('Error To Send Data')
+        this.error = 'Error To Send Data'
+        this.wrongshowPopup()
       }
     },
     error=> {
-      // console.log(error.error.detail)
-      alert(error.error.detail)
+      this.error = error.error.detail
+      this.wrongshowPopup()
 
     })
-
     
     this.addfromdata = {
       renter_id:'',
@@ -139,45 +148,47 @@ export class ManagerentPage implements OnInit {
       start_date: '',
       rent:'',
       deposit:''
-  
-      // Add more fields as needed
     };
 
   }
 
 
 
+
+
+  //remove from start 
   removefromdata = {
     address_id: '',
     end_date: '',
   };
 
+  //check form validations
   isFormInvalidremove(form: NgForm): boolean {
     return !form.valid || !!this.errorremoveaddress ;
   }
 
+  //remove form
+  removeerror:any;
   removeFrom() {
-
     this.removefromdata.end_date=this.selectedDateRemove;
-
-    
-    console.log(this.removefromdata)
     this.serviceClass.removelease(this.removefromdata).subscribe((res:any)=>{
-      console.log('Response:', res);
       if(res) {
+        this.extradiv='none'
         this.removePopup()
         this.dataforinputs();
       }
       else {
-        alert('Error To Send Data')
+        this.extradiv='none'
+        this.removeerror = 'Error To Send Data'
+        this.wrongshowPopup()
       }
     },
     error=> {
-      // console.log(error.error.detail)
-      alert(error.error.detail)
+      this.extradiv='none'
+      this.removeerror = error.error.detail
+      this.wrongshowPopup()
 
     })
-
 
     this.removefromdata = {
       address_id: '',
@@ -187,6 +198,9 @@ export class ManagerentPage implements OnInit {
   }
 
 
+
+
+  // extra data for remove forms 
   extradiv:any='none';
   address_id:any;
   removeinfo:any;
@@ -196,25 +210,21 @@ export class ManagerentPage implements OnInit {
   to_pay:any;
   OnAddressSelect(event: any) {
     const selectedValue = event.detail.value;
-    console.log('Selected value:', selectedValue);
     this.address_id = selectedValue;
-
-
     this.serviceClass.getremoveinfo(this.address_id).subscribe((res:any)=>{
-      
       this.removeinfo=res
       this.renter_name=this.removeinfo['renter_name']
       this.total_remain=this.removeinfo['total_remain']
       this.deposit=this.removeinfo['deposit']
       this.to_pay=this.removeinfo['deposite_to_pay']
-
-      console.log(res)
     })
-    
     this.extradiv='block'
   }
 
 
+
+
+  //backbutton fun
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
@@ -222,7 +232,7 @@ export class ManagerentPage implements OnInit {
 
 
 
-
+  // form selection
   adddispaly:any;
   removedisplay:any;
   addbackcolor:any;
@@ -242,6 +252,8 @@ export class ManagerentPage implements OnInit {
 
 
 
+
+  // success popup
   popdiplay:any="none";
   blur:any;
   hinddiv:any="none"
@@ -253,11 +265,14 @@ export class ManagerentPage implements OnInit {
       this.popdiplay = 'none';
       this.hinddiv = 'none';
       this.blur = false
-    }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
+    }, 4000); 
   }
 
 
 
+
+
+  // error popup
   popdiplayremove:any="none";
   removePopup() {
     this.popdiplayremove = 'block';
@@ -267,22 +282,36 @@ export class ManagerentPage implements OnInit {
       this.popdiplayremove = 'none';
       this.hinddiv = 'none';
       this.blur = false
-    }, 4000); // Adjust 3000 milliseconds to change popup display duration (3 seconds in this example)
+    }, 4000); 
   }
 
 
-  
 
+   //For error Form Submite 
+   wrongpopdiplay:any="none";
+   wrongshowPopup() {
+     this.wrongpopdiplay = 'block';
+     this.hinddiv = 'block';
+     this.blur = true
+     setTimeout(() => {
+       this.wrongpopdiplay = 'none';
+       this.hinddiv = 'none';
+       this.blur = false
+     }, 4000);
+   }
+ 
+
+
+  
+  //keybord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
+      this.divHeight = '100%';      
 
     });
   }

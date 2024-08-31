@@ -1,17 +1,32 @@
+<!-- to make blur full height -->
 <div class="unthouch" [style.display]="hinddiv"></div>
+
+
+<!-- main page -->
 <div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
+  
+  
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  
+  
   <div class="lowerdiv"  [style.height]="divHeight">
+    
+    
     <div class="menu">
       <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
     </div>
+    
+    
     <div class="namediv">
       <p class="nameh1">
         <strong>Add Address</strong>
       </p>
 
     </div>
+   
+   
     <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
+     
       <div class="inputbox1">
         <ion-input name="Area" type="text" [(ngModel)]="formData.Area" required placeholder="Area" class="ion_input" > </ion-input>
       </div>
@@ -33,22 +48,50 @@
       </div>
 
       <button ion-button expand="block" type="submit" [disabled]="!myForm.form.valid" class="button1" [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}">Submite</button>
-      </form>
+    
+      <div class="errormsg" >{{error}}</div>  
+    
+    </form>
+
+
   </div>
+  
   
 </div>
 
     
 
+
+
+
+<!-- success popup -->
 <div class="popup" [style.display]="popdiplay">
-<div class="popiocndiv" >
+  <div class="popiocndiv" >
     <ion-icon class="icon-custom" name="checkmark-done"></ion-icon>
 
-</div>
+  </div>
   <div class="popcontent">
     <h1 class="poph1" >
       <strong>Submission Successful</strong>
     </h1>
-    <!-- <p class="popp">Renter successfully submitted.</p> -->
   </div>
+</div>
+
+
+
+
+
+
+
+<!-- error popup -->
+<div class="popup" [style.display]="wrongpopdiplay">
+  <div class="popiocndiv" >
+      <ion-icon class="icon-custom-wrong" name="alert-circle-outline"></ion-icon>
+  
+  </div>
+    <div class="popcontent-wrong">
+      <h1 class="poph1" >
+        <strong>Some Think Went Wrong</strong>
+      </h1>
+    </div>
 </div>

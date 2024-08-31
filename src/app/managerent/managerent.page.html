@@ -1,16 +1,29 @@
+<!-- to make blur full height -->
 <div class="unthouch" [style.display]="hinddiv"></div>
+
+
+<!-- main page -->
 <div class="upperdiv" [style.filter]="blur ? 'blur(5px)' : 'none'">
+  
+  
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  
+  
   <div class="lowerdiv"  [style.height]="divHeight">
+   
+   
     <div class="menu">
       <ion-icon (click)="backbutton()" name="arrow-back-outline" class="backbutton"></ion-icon>
     </div>
+    
+    
     <div class="namediv">
       <p class="nameh1">
         <strong>Manage Lease</strong>
       </p>
-
     </div>
+   
+    <!-- form selection -->
     <div class="swhitchdiv">
       <div class="addbutton" (click)="add()" [style.background-color]="addbackcolor">
          <p class="addremaovetext">Add</p>
@@ -21,73 +34,88 @@
     </div>
 
 
-
-
-
-
+    <!-- add lease form start -->
     <div class="fromdiv" [style.display]="adddispaly" >
-       <p class="formtext">Add Lease</p>
-       <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
       
-
-
-      <div class="inputbox2 nodateborder" *ngIf="erroraddrenter; else addrenter">
-        <p class="nodatadrop" >{{erroraddrenter}}</p>
-      </div>
-      <ng-template #addrenter>  
-      <div class="inputbox2" >
-        <ion-select class="dropbutton" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
-          <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
-            {{renter.renter_name}}
-          </ion-select-option>
-         
-        </ion-select>
+      
+      <p class="formtext">Add Lease</p>
+      
+      <form class="example-form" #myForm="ngForm" (ngSubmit)="addFrom()">
         
-      </div>
-      </ng-template>
-
-
-
-      <div class="inputbox2 nodateborder" *ngIf="erroraddaddress; else addaddres">
-        <p class="nodatadrop" >{{erroraddaddress}}</p>
-      </div>
-      <ng-template #addaddres>
-      <div class="inputbox2" >
-        <ion-select class="dropbutton" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
-          <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
-            {{addressdata[i]["Area"]}}
-            building-{{addressdata[i]["Building_name"]}}
-            floor/flat-{{addressdata[i]["Floor"]}}/{{addressdata[i]["Flat_no"]}}
-          </ion-select-option>
-         
-        </ion-select>
         
-      </div>
-      </ng-template>
 
-      <div class="inputbox2">
-        <!-- <ion-input  name="start_date" [(ngModel)]="addfromdata.start_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
-        <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+        <div class="inputbox2 nodateborder" *ngIf="erroraddrenter; else addrenter">
+          <p class="nodatadrop" >{{erroraddrenter}}</p>
+        </div>
+        
+        <ng-template #addrenter>  
+          <div class="inputbox2" >
+            <ion-select class="dropbutton" name="renter_id" [(ngModel)]="addfromdata.renter_id" label="Select Your Renter">
+              <ion-select-option [value]="renter.id" *ngFor="let renter of renterdata;let i = index">
+                {{renter.renter_name}}
+              </ion-select-option>
+            </ion-select>          
+          </div>
+        </ng-template>
+  
+  
 
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChangeAdd($event)"></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </div>
+  
+        <div class="inputbox2 nodateborder" *ngIf="erroraddaddress; else addaddres">
+          <p class="nodatadrop" >{{erroraddaddress}}</p>
+        </div>
 
-      <div class="inputbox2">
-        <ion-input name="rent" [(ngModel)]="addfromdata.rent" type="number"  required placeholder="Rent" class="ion_input" ></ion-input><br>
-      </div>
+        <ng-template #addaddres>
+        <div class="inputbox2" >
+          <ion-select class="dropbutton" name="address_id" [(ngModel)]="addfromdata.address_id" label="Select Your Address">
+            <ion-select-option [value]="item.id" *ngFor="let item of addressdata;let i = index">
+              {{addressdata[i]["Area"]}}
+              building-{{addressdata[i]["Building_name"]}}
+              floor/flat-{{addressdata[i]["Floor"]}}/{{addressdata[i]["Flat_no"]}}
+            </ion-select-option>           
+          </ion-select>         
+        </div>
+        </ng-template>
+  
 
-      <div class="inputbox2">
-        <ion-input name="deposit" [(ngModel)]="addfromdata.deposit" type="number"  required placeholder="deposit" class="ion_input" ></ion-input><br>
-      </div>
 
-     <button ion-button expand="block" type="submit" [disabled]="isFormInvalid(myForm)" class="button1" >Submite</button>
-     <!-- <pre>{{ myForm.valid | json }}</pre>  -->
-     <!-- [ngClass]="{'btn-valid': myForm.form.valid,'btn-invalid': !myForm.form.valid}" -->
-    </form>
+
+        <div class="inputbox2">
+          <ion-datetime-button class="dateinput" datetime="datetime" presentation="date"></ion-datetime-button>
+  
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" presentation="date" (ionChange)="onDateChangeAdd($event)"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+  
+
+
+
+        <div class="inputbox2">
+          <ion-input name="rent" [(ngModel)]="addfromdata.rent" type="number"  required placeholder="Rent" class="ion_input" ></ion-input><br>
+        </div>
+  
+
+
+
+        <div class="inputbox2">
+          <ion-input name="deposit" [(ngModel)]="addfromdata.deposit" type="number"  required placeholder="deposit" class="ion_input" ></ion-input><br>
+        </div>
+  
+
+
+
+       <button ion-button expand="block" type="submit" [disabled]="isFormInvalid(myForm)" class="button1" >Submite</button>
+       
+
+
+       <div class="errormsg" >{{error}}</div>  
+
+
+
+      </form>
 
     </div>
 
@@ -98,79 +126,63 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- remove lease form start -->
     <div class="fromdiv" [style.display]="removedisplay" style="display: none;">
+      
+      
       <p class="formtext">Remove Rent</p>
-      <form class="example-form" #removeForm="ngForm" (ngSubmit)="removeFrom()">
      
-
+     
+      <form class="example-form" #removeForm="ngForm" (ngSubmit)="removeFrom()">
+        
+        
         <div class="inputbox2 nodateborder" *ngIf="errorremoveaddress; else removeaddres">
           <p class="nodatadrop" >{{errorremoveaddress}}</p>
         </div>
        
-
-
         <ng-template #removeaddres>
-        <div class="inputbox2" >         
+          <div class="inputbox2" >   
+            <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address"  required>
+              <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
+                {{removeaddress[i]["Area"]}}
+                building-{{removeaddress[i]["Building_name"]}}
+                floor/flat-{{removeaddress[i]["Floor"]}}/{{removeaddress[i]["Flat_no"]}}
+              </ion-select-option>
+            </ion-select>            
+          </div> 
+        </ng-template>
 
-          <ion-select class="dropbutton" name="address_id" [(ngModel)]="removefromdata.address_id" (ionChange)="OnAddressSelect($event)" label="Select Your Address"  required>
-            <ion-select-option [value]="item.id" *ngFor="let item of removeaddress;let i = index" >
-              {{removeaddress[i]["Area"]}}
-              building-{{removeaddress[i]["Building_name"]}}
-              floor/flat-{{removeaddress[i]["Floor"]}}/{{removeaddress[i]["Flat_no"]}}
-            </ion-select-option>
-           
-          </ion-select>
-          
+
+
+        <!-- extra data -->
+        <div class="extrainfodiv" [style.display]="extradiv">
+          <p class="erxtratext"><strong>Renter name:-</strong> {{renter_name}}</p>
+          <p class="erxtratext"><strong>Remain:-</strong> &#x20B9;{{total_remain}}</p>
+          <p class="erxtratext"><strong>Deposit:-</strong> &#x20B9;{{deposit}}</p>
+          <p class="erxtratext"><strong>Renter name:-</strong> &#x20B9;<span style="color: red;">{{to_pay}}</span></p>
         </div>
-      </ng-template>
 
 
-
-
-     <div class="extrainfodiv" [style.display]="extradiv">
-      <p class="erxtratext"><strong>Renter name:-</strong> {{renter_name}}</p>
-      <p class="erxtratext"><strong>Remain:-</strong> &#x20B9;{{total_remain}}</p>
-      <p class="erxtratext"><strong>Deposit:-</strong> &#x20B9;{{deposit}}</p>
-      <p class="erxtratext"><strong>Renter name:-</strong> &#x20B9;<span style="color: red;">{{to_pay}}</span></p>
- 
-    </div>
-
-
-
-     <div class="inputbox2">
-       <!-- <ion-input name="end_date" [(ngModel)]="removefromdata.end_date" type="date"  required placeholder="Select a date" class="ion_input"></ion-input><br> -->
-       <ion-datetime-button class="dateinput" datetime="datetime1" presentation="date"></ion-datetime-button>
-
-       <ion-modal [keepContentsMounted]="true">
-         <ng-template>
-           <ion-datetime id="datetime1" presentation="date" (ionChange)="onDateChangeRemove($event)"></ion-datetime>
-         </ng-template>
-       </ion-modal>
-     </div>
-
-    <button ion-button expand="block" type="submit" [disabled]="isFormInvalidremove(removeForm)" class="button1" >Submite</button>
-       <!-- <pre>{{ myForm.valid | json }}</pre>    -->
+        <div class="inputbox2">
+          <ion-datetime-button class="dateinput" datetime="datetime1" presentation="date"></ion-datetime-button>
    
-  </form>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime1" presentation="date" (ionChange)="onDateChangeRemove($event)"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>  
 
-   </div>
+
+        <button ion-button expand="block" type="submit" [disabled]="isFormInvalidremove(removeForm)" class="button1" >Submite</button>
+   
+
+        <div class="errormsg" >{{removeerror}}</div>
+
+   
+      </form>
+
+    </div>
     
   </div>
   
@@ -183,38 +195,54 @@
 
 
 
-
+<!-- success remove popup -->
 <div class="popup" [style.display]="popdiplay">
-<div class="popiocndiv" >
-  <ion-icon class="icon-customP" name="man"></ion-icon>
-  <ion-icon class="icon-customS" name="checkmark-circle-outline"></ion-icon>
-  <ion-icon class="icon-customH" name="business"></ion-icon>
-
-</div>
-  <div class="popcontent">
-    <h1 class="poph1" >
-      <strong>Added Successfully</strong>
-    </h1>
-    <!-- <p class="popp">Renter successfully submitted.</p> -->
+  <div class="popiocndiv" >
+    <ion-icon class="icon-customP" name="man"></ion-icon>
+    <ion-icon class="icon-customS" name="checkmark-circle-outline"></ion-icon>
+    <ion-icon class="icon-customH" name="business"></ion-icon>
+  
   </div>
+    <div class="popcontent">
+      <h1 class="poph1" >
+        <strong>Added Successfully</strong>
+      </h1>
+    </div>
 </div>
-<!-- [style.display]="popdiplay" 
- <mat-icon>check_circle</mat-icon>-->
 
 
 
 
  
- <div class="popup" [style.display]="popdiplayremove">
+<!-- success remove popup -->
+<div class="popup" [style.display]="popdiplayremove">
   <div class="popiocndiv" >
     <ion-icon class="icon-customPremove" name="man"></ion-icon>
     <ion-icon class="icon-customS" name="trash-outline"></ion-icon>
     <ion-icon class="icon-customHremove" name="business"></ion-icon>
+  </div>
+  <div class="popcontent">
+    <h1 class="poph1" >
+      <strong> Removed Successfully</strong>
+    </h1>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- error popup -->
+<div class="popup" [style.display]="wrongpopdiplay">
+  <div class="popiocndiv" >
+      <ion-icon class="icon-custom-wrong" name="alert-circle-outline"></ion-icon>
   
   </div>
-    <div class="popcontent">
+    <div class="popcontent-wrong">
       <h1 class="poph1" >
-        <strong> Removed Successfully</strong>
+        <strong>Some Think Went Wrong</strong>
       </h1>
     </div>
-  </div>
+</div>
