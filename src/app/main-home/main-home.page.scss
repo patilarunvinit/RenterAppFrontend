@@ -120,5 +120,12 @@
     60% { opacity: 1;}
     100% { opacity: 0;}
   }
-
- 
+.logout_error{
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    width: 70%;
+    top:2%;
+    text-align: center;
+    z-index: 999;
+}

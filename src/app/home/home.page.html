@@ -1,19 +1,29 @@
 <!-- (click)="sendNotification()"  got notifications -->
+
+<!-- main page -->
 <div class="upperdiv" > 
+  
+  
   <img alt="back photo" [src]=backphoto class="backimage" [style.height]="divHeight">
+  
+  
   <div class="lowerdiv"  [style.height]="divHeight">
-      <div class="cercle1">
-        <img alt="centerlogo" [src]=centerlogo class="Clogo">
-      </div>
+      
+    <div class="cercle1">
+      <img alt="centerlogo" [src]=centerlogo class="Clogo">
+    </div>
 
-
+    <!-- login from -->
     <form class="example-form" #myForm="ngForm" (ngSubmit)="submitForm()">
+      
       <div class="inputbox1">
         <ion-input name="email" type="email" [(ngModel)]="formData.email" required placeholder="Username" class="ion_input"  (ngModelChange)="onEmailChange()" [style.color]="emaildisplay"> </ion-input>
       </div>
+      
       <div class="inputbox2">
         <ion-input name="password" type="password" [(ngModel)]="formData.password" required placeholder="Password" class="ion_input" type="password"></ion-input><br>
       </div>
+      
       <a (click)="forgotpass()" class="forgotlink">forgot password?</a>
 
       <button 
@@ -27,17 +37,21 @@
       class="button1" >
         Login
       </button>
+    
+    
     </form>
 
 
   </div>
+  
   
 </div>
 
 
 
 
- <div class="welcomediv" [style.display]="popupdisplay"> {{error}}</div>
+<!-- error msg display -->
+<div class="welcomediv" [style.display]="popupdisplay"> {{error}}</div>
 
   
 

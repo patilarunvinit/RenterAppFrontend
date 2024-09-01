@@ -18,8 +18,9 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 export class CpasswordPage implements OnInit {
   divHeight: any;
   screenHeight: any;
-
   email:any;
+
+
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -29,28 +30,18 @@ export class CpasswordPage implements OnInit {
 
   ) { 
     this. kaybordfun();
-
-
     this.route.queryParams.subscribe(params => {
       this.email = params['email'];
     });
   }
 
+
+
   ngOnInit() {
   }
-  kaybordfun(){
-    this.platform.keyboardDidShow.subscribe(ev => {
-      const { keyboardHeight } = ev;
-      this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
-    });
-  
-    this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
 
-    });
-  }
+
+
 
   
 
@@ -60,19 +51,17 @@ export class CpasswordPage implements OnInit {
     confirmPassword: ''
   };
 
+
+  
   // Function to handle form submission
   error:any;
   submitForm(form: any) {
     if (form.valid && this.passwordsMatch() && this.isPasswordValid()) {
-      // Handle form submission
-      console.log('Form Data:', this.formData.newPassword);
       const tosend ={
         email:this.email,
         new_password:this.formData.newPassword
       }
-      console.log(tosend)
       this.serviceClass.paswordchange(tosend).subscribe((res:any)=>{
-        console.log('Response:', res);
         if(res) {
           this.backbutton()
 
@@ -84,17 +73,15 @@ export class CpasswordPage implements OnInit {
         
       },
       error=> {
-        console.log(error.error.error);
         this.error = error.error.error
         this.formData = {
           newPassword: '',
           confirmPassword: ''
         };
       })
-    } else {
-      console.log('Form is invalid or passwords do not match');
     }
   }
+
 
   // Check if passwords match
   passwordsMatch(): boolean {
@@ -131,8 +118,22 @@ export class CpasswordPage implements OnInit {
 
 
 
+  //keybord open
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+    });
+  
+    this.platform.keyboardDidHide.subscribe(() => {
+      this.divHeight = '100%';   
+    });
+  }
 
 
+ 
+
+  //back button fun
   backbutton(){
     this.router.navigateByUrl('/home');
   }

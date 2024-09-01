@@ -17,6 +17,7 @@ export class RemainPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
 
+
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -24,20 +25,25 @@ export class RemainPage implements OnInit {
     private serviceClass: TokenserviceService,
   ) { 
     this.kaybordfun()
-    // this.getalldataaddr()
     this.getremaindata()
   }
 
-  ngOnInit() {
-    
-  }
+
+  ngOnInit() {}
 
 
+
+
+
+  // back button fun
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
 
 
+
+
+  // get remain data to show
   remaindata:any;
   error:any;
   noData: boolean = false; 
@@ -46,15 +52,13 @@ export class RemainPage implements OnInit {
     
     this.serviceClass.getremain().subscribe((res:any)=>{
       this.remaindata=res
-      this.noData = this.remaindata.length === 0; // Check if data is empty
-      this.loading = false; // End loading
-      console.log(res)
+      this.noData = this.remaindata.length === 0; 
+      this.loading = false; 
     },
     error=> {
       this.error = error.error.detail
-      this.noData = false; // Reset noData flag in case of an error
-      this.loading = false; // End loading
-
+      this.noData = false; 
+      this.loading = false;
     })  
 
   }
@@ -62,6 +66,8 @@ export class RemainPage implements OnInit {
 
 
 
+
+  //redirect with lease_id and remainpay
   historypagebutton(lease_id:any,remainpay:any){
     this.router.navigateByUrl('/historyremain?lease_id=' + lease_id +'&remain='+remainpay);
   }
@@ -69,18 +75,16 @@ export class RemainPage implements OnInit {
 
 
 
-
+ 
+  //kaybord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
+      this.divHeight = '100%';     
     });
   }
 

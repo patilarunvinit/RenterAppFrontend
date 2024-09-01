@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenserviceService } from 'src/app/services/tokenservice.service'
-
 import { Router } from '@angular/router';
 
 
@@ -20,12 +19,20 @@ export class MainHomePage implements OnInit {
   
 
 
+
+
   ngOnInit() {
     this.ownerD();
     this.bottompopup();
   }
 
 
+
+
+
+
+
+  // to fatch data like owner data and address count
   mobile_no:any;
   name:any;
   owner_dp:any
@@ -52,40 +59,53 @@ export class MainHomePage implements OnInit {
 
   }
 
+
+
+
+
+  // menu button click
   token:any;
   menubuttons(menu:any){
       this.router.navigateByUrl('/' + menu);
       this.token= localStorage.getItem('hotelUser');
-    console.log(this.token)
-    
-
+      this.error = '';  
   }
 
 
+
+
+
+
+  // logout button
+  error:any;
   logout(){
 
     this.serviceClass.logoutApi().subscribe((res:any)=>{
       localStorage.removeItem('ref_tokan');
       localStorage.removeItem('hotelUser');
       this.router.navigateByUrl('/home');
-      
-    
+      this.error = '';    
     },
     error=> {
-      alert(error.error.detail)
-      // alert("Somethink Went Wrong")
+      this.error = error.error.detail;
     })  
         
   }
 
 
+
+
+
+
+
+  // wellcome msg popup
   popupdisplay:any="none";
   bottompopup(){
     this.popupdisplay="block"
     setInterval(() => {
       this.popupdisplay="none"
 
-    }, 8 * 1000); // 8 sec in milliseconds
+    }, 8 * 1000); 
   }
 
 
@@ -93,9 +113,8 @@ export class MainHomePage implements OnInit {
 
   
 
-
+  // images
   backphoto:string="assets/img/pexels-photo-2310713.jpeg"
-  // dp:string="assets/img/test1.jpg"
   all_flats:string="assets/img/all_flats.png"
   manage:string="assets/img/manage.png"
   rent:string="assets/img/rent.png"

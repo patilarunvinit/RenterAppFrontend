@@ -17,6 +17,7 @@ export class HomePage {
    screenHeight:any = window.innerHeight;
    emaildisplay:any;
    
+
   constructor(
     private platform: Platform,
     private keyboard: Keyboard,
@@ -24,36 +25,31 @@ export class HomePage {
     private serviceClass: TokenserviceService,
               
     ){
-
-      this.platform.keyboardDidShow.subscribe(ev => {
-        const { keyboardHeight } = ev;
-        this.divHeight = this.screenHeight + "px";  
-      });
-    
-      this.platform.keyboardDidHide.subscribe(() => {
-        this.divHeight = '100%';      
-  
-      });
-  
-      // this.initializeNotifications();
+      this.kaybordfun();
 
      }
 
-     onEmailChange() {
-      // Reset email color when user starts typing
+    
+
+
+    // after wrong email turn text into white 
+    onEmailChange() {
       if (this.emaildisplay === 'red') {
         this.emaildisplay = 'white';
       }
-     }
+    }
 
-     formData = 
-     {
+
+
+
+    formData = 
+    {
       email: '',
       password: '',
     };
 
 
-
+    // main input form 
     error:any;
     submitForm() {
       if (this.formData.email && this.formData.password) {
@@ -97,104 +93,55 @@ export class HomePage {
         this.bottompopup();
   
       })
-  
-
       }
     }
   
     
+
+
+    // from error popup
     clear:any;
     popupdisplay:any="none";
-    // bottompopup() {
-    //   // Clear any existing interval
-    //   if (this.clear) {
-    //     clearInterval(this.clear);
-    //     this.popupdisplay = 'none';
-
-    //   }
-    //   else{
-    //     this.popupdisplay = 'block';
-
-    //   }
-    //   // Reset popup display and set new interval
-    //   // this.popupdisplay = 'block';
-    //   this.clear = setTimeout(() => {
-    //     this.popupdisplay = 'none';
-    //   }, 8 * 1000);  // 8 seconds
-    // }
-    
     popupTimeout:any;
     bottompopup(){
 
       if (this.popupTimeout) {
-        // console.log(this.popupTimeout)
-        // clearTimeout(this.popupTimeout);
-        clearTimeout(this.popupTimeout); // Correctly clear the timeout
+        clearTimeout(this.popupTimeout); 
         this.popupTimeout = undefined;
-        // console.log(this.popupTimeout)
-
       }
-
       this.popupdisplay="block"
       this.popupTimeout=setTimeout(() => {
-        // console.log(this.popupTimeout)
-
-        this.popupdisplay="none";
+      this.popupdisplay="none";
       },  8 * 1000); 
     }
 
 
+  //forgot password button
+  forgotpass(){
+    this.router.navigateByUrl('/forgot-password');
+  }
 
 
 
 
-    forgotpass(){
-      this.router.navigateByUrl('/forgot-password');
-    }
+
+  //key bord open
+  kaybordfun(){
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.divHeight = this.screenHeight + "px";  
+    });
   
-    backphoto:string="assets/img/pexels-photo-2310713.jpeg"
-    centerlogo:string="assets/img/user-solid.svg"
+    this.platform.keyboardDidHide.subscribe(() => {
+      this.divHeight = '100%';      
 
+    });
+  }
 
-    
   
+  backphoto:string="assets/img/pexels-photo-2310713.jpeg"
+  centerlogo:string="assets/img/user-solid.svg"
+
+     
 }
-
-
-
-
-  //To SEND LOCAL NOTIFICATIONS
-
-  
-  // private async initializeNotifications() {
-  //   await LocalNotifications.requestPermissions();
-
-  //   LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
-  //     console.log('Notification clicked:', notification);
-
-  //     this.router.navigate(['/home']);
-  //   });
-  // }
-
-  // public async sendNotification() {
-  //   try {
-  //     const result = await LocalNotifications.schedule({
-  //       notifications: [
-  //         {
-  //           title: 'Hello',
-  //           body: 'This is a simple notification!',
-  //           id: Math.floor(Math.random() * 1000000),  // Generate a random integer ID
-  //           schedule: { at: new Date(new Date().getTime() + 1000) },  // Schedule for 1 second from now
-  //         }
-  //       ]
-  //     });
-  //     console.log('Notification scheduled successfully:', result);
-  //   } catch (error) {
-  //     console.error('Error scheduling notification:', error);
-  //   }
-  // }
-
-
-
-
 

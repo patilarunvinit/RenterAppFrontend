@@ -5,7 +5,6 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 
 
 
-
 @Component({
   selector: 'app-rent',
   templateUrl: './rent.page.html',
@@ -14,6 +13,8 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 export class RentPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
+
+
 
   constructor(
     private platform: Platform,
@@ -25,34 +26,46 @@ export class RentPage implements OnInit {
     this.kaybordfun();
     this.currentmonth();
     this.getfilterdata();
-
   }
 
+
+
+
+
+
+  // set header for drop list
   customActionSheetOptions: any = {
     header: 'Months List',
   };
 
 
+
+
+
+
+
   ngOnInit() {
     this.getfullrents();
-
     this.selectedDate = this.formatDate(new Date().toISOString());
-
   }
 
 
+
+
+
+  // back button fun
   backbutton(){
     this.router.navigateByUrl('/main-home');
   }
 
 
 
-  onSelectionChange(event: any) {
-    this.currentmonthvar = event.detail.value;
-    console.log('Selected value:', this.currentmonthvar);
-    this.getfullrents()
-  }
   
+
+
+
+
+  // get rent for selected month
   rentdata:any;
   error:any;
   noData: boolean = false; 
@@ -61,22 +74,27 @@ export class RentPage implements OnInit {
     
     this.serviceClass.getrent(this.currentmonthvar).subscribe((res:any)=>{
       this.rentdata=res
-      // console.log(this.rentdata[0][6]?.date_of_pay[0]["date_of_pay"])
-      this.noData = this.rentdata.length === 0; // Check if data is empty
-      this.loading = false; // End loading
-      console.log(res)
+      this.noData = this.rentdata.length === 0; 
+      this.loading = false; 
     },
     error=> {
       this.error = error.error.detail
-      this.noData = false; // Reset noData flag in case of an error
-      this.loading = false; // End loading
-
+      this.noData = false; 
+      this.loading = false; 
     })
-
   }
 
+
+
+
+
+
+
+
+
+  // get current month for api as well as show
   currentmonthvar:any;
- currentmonth(){
+  currentmonth(){
    const now = new Date();
 
     const lastMonthDate = new Date(now.getTime());
@@ -85,32 +103,54 @@ export class RentPage implements OnInit {
     const year = lastMonthDate.getFullYear();
     const formattedMonth = month < 10 ? `0${month}` : `${month}`;
     this.currentmonthvar= `${year}-${formattedMonth}`
- }
+  }
 
 
+
+
+
+
+
+
+  // get filter pay months list
   filterdata:any;
   getfilterdata(){
     
     this.serviceClass.getfilerdate().subscribe((res:any)=>{
       this.filterdata=res
-      console.log(res)
-    })  
-
+    }) 
   }
 
   
+ 
 
 
+
+  // select month from month list
+  onSelectionChange(event: any) {
+    this.currentmonthvar = event.detail.value;
+    this.getfullrents()
+  }
+
+
+
+
+  // date change check
   selectedDate:any;
   onDateChange(event: any) {
-    const dateTimeValue = event.detail.value; // e.g., 2024-08-14T18:17:00
+    const dateTimeValue = event.detail.value; 
     this.selectedDate = this.formatDate(dateTimeValue);
   }
+  //get 'YYYY-MM-DD' formate date
   formatDate(dateTimeValue: string): string {
     const date = new Date(dateTimeValue);
-    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+    return date.toISOString().split('T')[0]; 
   }
   
+
+
+
+
   paydata = {
       lease_id:'',
       paid:undefined,
@@ -123,6 +163,8 @@ export class RentPage implements OnInit {
  
 
   
+  
+  //pay form 
   remain:any;
   addpay() {
     let paid=this.paydata["paid"]?? 0;
@@ -130,34 +172,30 @@ export class RentPage implements OnInit {
     this.remain=rent - paid;
     this.paydata.remain = this.remain;
     this.paydata.date_of_pay=this.selectedDate;
-    console.log(this.paydata)
     this.serviceClass.addpayment(this.paydata).subscribe((res:any)=>{
-      console.log('Response:', res);
       if(res) {
         this.successpopup()
         this.getfullrents()
       }
       else {
-        alert('Error To Send Data')
+        // alert('Error To Send Data')
+        this.wrongshowPopup()
       }
     },
     error=> {
-      // console.log(error.error.detail)
-      alert(error.error.detail)
-
+      // alert(error.error.detail)
+      this.wrongshowPopup()
     })
 
 
-
-
     this.paydata = {
-    lease_id:'',
-    paid:undefined,
-    remain:'',
-    date_of_pay: '',
-    transaction_mode: '',
-    for_month:'',
-  };
+      lease_id:'',
+      paid:undefined,
+      remain:'',
+      date_of_pay: '',
+      transaction_mode: '',
+      for_month:'',
+    };
 
   }
 
@@ -165,6 +203,10 @@ export class RentPage implements OnInit {
 
 
 
+
+  
+
+  // open pay form popup
   popdiplay:any="none";
   blur:any;
   popupdata:any=[];
@@ -174,16 +216,12 @@ export class RentPage implements OnInit {
     this.popupdata=data
     this.lease_id=this.popupdata[0]?.lease_id
     this.for_month=this.popupdata[1]?.dateformonth
-    console.log(this.popupdata[4]?.addressdata)
     this.paydata.lease_id = this.lease_id;
     this.paydata.for_month = this.for_month;
-
-
-
     this.popdiplay = 'block';
     this.blur = true
   }
-
+  // close pay form popup
   closepopup(){
     this.popdiplay = 'none';
     this.blur = false
@@ -191,6 +229,12 @@ export class RentPage implements OnInit {
 
 
 
+
+
+
+
+
+  // pay success popup
   forpopup:any="none";
   blur1rent:any;
   hinddiv:any="none";
@@ -209,19 +253,35 @@ export class RentPage implements OnInit {
 
 
 
+
+  //For error Form Submite 
+  wrongpopdiplay:any="none";
+  wrongshowPopup() {
+    this.wrongpopdiplay = 'block';
+    this.hinddiv = 'block';
+    this.blur1rent = true
+    setTimeout(() => {
+      this.wrongpopdiplay = 'none';
+      this.hinddiv = 'none';
+      this.blur1rent = false
+    }, 4000);
+  }
+
+
+
+  //keybord open
   kaybordfun(){
     this.platform.keyboardDidShow.subscribe(ev => {
       const { keyboardHeight } = ev;
       this.divHeight = this.screenHeight + "px";  
-      // Do something with the keyboard height such as translating an input above the keyboard.
     });
   
     this.platform.keyboardDidHide.subscribe(() => {
-      // Move input back to original location
-      this.divHeight = '100%';      // Do something with the keyboard height such as translating an input above the keyboard.
-
+      this.divHeight = '100%'; 
     });
   }
+
+
 
   
 
