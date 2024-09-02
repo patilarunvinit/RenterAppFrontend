@@ -87,7 +87,7 @@ export class SigleaddressPage implements OnInit {
         this.renter_name = res[0].renter_name;
         this.renter_mobile_no = res[0].renter_mobile_no;
         this.id_type = res[0].id_type;
-        this.id_img = `http://localhost:8000/${res[0].id_img}`;
+        this.id_img = `https://b5da-103-148-62-157.ngrok-free.app/${res[0].id_img}`;
       } 
 
       if (res[1]) {

@@ -14,8 +14,8 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./forgot-password.page.scss'],
 })
 export class ForgotPasswordPage implements OnInit {
-  divHeight: any;
-  screenHeight: any;
+  divHeight:any=window.innerHeight + 'px';
+   screenHeight:any = window.innerHeight;
 
   constructor(
     private platform: Platform,

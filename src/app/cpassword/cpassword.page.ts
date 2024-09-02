@@ -16,8 +16,8 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
   styleUrls: ['./cpassword.page.scss'],
 })
 export class CpasswordPage implements OnInit {
-  divHeight: any;
-  screenHeight: any;
+  divHeight:any=window.innerHeight + 'px';
+  screenHeight:any = window.innerHeight;
   email:any;
 
 
