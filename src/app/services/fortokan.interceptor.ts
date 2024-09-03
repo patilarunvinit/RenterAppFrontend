@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
-    let url = 'https://b5da-103-148-62-157.ngrok-free.app/'
+    let url = 'http://localhost:8000/'
     const excludedUrls = [
        url + 'login',
        url + 'refresh',
