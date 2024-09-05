@@ -16,7 +16,7 @@ interface ResponseType {
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='http://localhost:8000/'
+  apiroot:any='http://127.0.0.1:8000/'
   constructor(
     private http: HttpClient,
     private router: Router,

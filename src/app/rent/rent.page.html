@@ -22,7 +22,7 @@
         <strong>Rents</strong>
       </p>
     
-      <div *ngIf="error; else nomenu"></div>
+      <div *ngIf="!filterdata; else nomenu"></div>
       
       <ng-template #nomenu>
         <ion-item class="select-container">
@@ -34,7 +34,7 @@
             </ng-container>
           </ion-select>
         </ion-item>
-      </ng-template>
+      </ng-template> 
       </div>
 
 

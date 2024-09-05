@@ -194,7 +194,8 @@ onDateChangefull(event: any) {
 // create date formate = 'YYYY-MM-DD'
 formatDate(dateTimeValue: string): string {
   const date = new Date(dateTimeValue);
-  return date.toISOString().split('T')[0]; 
+  date.setDate(date.getDate() + 1);
+  return date.toISOString().split('T')[0];  
 }
   
 

@@ -38,7 +38,7 @@ export class MainHomePage implements OnInit {
   owner_dp:any
   b_date:any;
   dp:any;
-  url:any="http://localhost:8000/"
+  url:any="https://adnyatech.pythonanywhere.com/"
   addresscount:any;
   ownerD(){
     

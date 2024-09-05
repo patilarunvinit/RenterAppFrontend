@@ -5,6 +5,7 @@ import { TokenserviceService } from './services/tokenservice.service';
 import { filter } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
+import { Network } from '@capacitor/network';
 
 
 @Component({
@@ -17,7 +18,16 @@ export class AppComponent {
     private authService: TokenserviceService,
     private router: Router,
     private platform: Platform
-  ) {}
+  ) {
+     // Initial network status check
+     this.checkNetworkStatus();
+
+     // Set up an event listener to detect changes in network status
+     window.addEventListener('online', () => this.updateNetworkStatus('','none'));
+     window.addEventListener('offline', () => this.updateNetworkStatus('You are offline!','block'));
+
+    
+  }
 
 
 
@@ -29,6 +39,27 @@ export class AppComponent {
     this.mobile_backbutton();
   
   }
+
+
+
+// To Check Internet Connection
+network_msg:any;
+netdisplay:any = 'none'
+async checkNetworkStatus() {
+  const status = await Network.getStatus();
+  if (status.connected) {
+    this.updateNetworkStatus('You are online!', 'none');
+  } else {
+    this.updateNetworkStatus('You are offline!', 'block');
+  }
+}
+
+updateNetworkStatus(message: string, display: string) {
+  this.network_msg = message;
+  this.netdisplay = display;
+}
+
+
 
 
 
@@ -64,9 +95,9 @@ mobile_backbutton(){
     const currentPath = this.currentUrl.split('?')[0];
     
     if (currentPath === '/home' || currentPath === '/main-home') {
-      
+      if (!info.canGoBack) {
         App.exitApp();
-      
+      }
     } else {
       if (info.canGoBack) {
       } else {

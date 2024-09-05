@@ -58,7 +58,7 @@
             },
             "development": {
               "buildOptimizer": false,
-              "optimization": true,
+              "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -149,8 +149,7 @@
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
     }
-  }
-  
+  }  
 }
 
 

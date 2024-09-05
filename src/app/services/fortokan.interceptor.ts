@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
-    let url = 'http://localhost:8000/'
+    let url = 'http://127.0.0.1:8000/'
     const excludedUrls = [
        url + 'login',
        url + 'refresh',

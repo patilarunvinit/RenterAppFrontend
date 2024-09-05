@@ -59,6 +59,7 @@ export class ManagerentPage implements OnInit {
   // Convert to 'YYYY-MM-DD'
   formatDate(dateTimeValue: string): string {
     const date = new Date(dateTimeValue);
+    date.setDate(date.getDate() + 1);
     return date.toISOString().split('T')[0]; 
   }
 

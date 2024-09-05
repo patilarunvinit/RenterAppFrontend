@@ -76,8 +76,10 @@ export class RentPage implements OnInit {
       this.rentdata=res
       this.noData = this.rentdata.length === 0; 
       this.loading = false; 
+      this.error = ''
     },
     error=> {
+      this.rentdata = ''
       this.error = error.error.detail
       this.noData = false; 
       this.loading = false; 
@@ -118,7 +120,8 @@ export class RentPage implements OnInit {
     
     this.serviceClass.getfilerdate().subscribe((res:any)=>{
       this.filterdata=res
-    }) 
+    })
+
   }
 
   
@@ -144,7 +147,8 @@ export class RentPage implements OnInit {
   //get 'YYYY-MM-DD' formate date
   formatDate(dateTimeValue: string): string {
     const date = new Date(dateTimeValue);
-    return date.toISOString().split('T')[0]; 
+    date.setDate(date.getDate() + 1);
+    return date.toISOString().split('T')[0];  
   }
   
 
