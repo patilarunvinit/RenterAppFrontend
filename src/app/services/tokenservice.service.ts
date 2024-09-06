@@ -16,20 +16,15 @@ interface ResponseType {
   providedIn: 'root'
 })
 export class TokenserviceService {
-  apiroot:any='http://127.0.0.1:8000/'
+  apiroot:any='https://adnyatech.pythonanywhere.com/'
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) { 
-    // this.autoRefreshToken(),
-    // this.refreshTokan
-  
-  }
+  ) {}
 
   ngOnInit(){}
 
   login(obj: any) {
-    // console.log(obj);
     return this.http.post(this.apiroot + 'login', obj);
   }
 
@@ -56,7 +51,6 @@ export class TokenserviceService {
   }
 
   addRenter(renter:any) {
-    console.log('renter = ' + renter)
     return this.http.post(this.apiroot + 'addrenter',renter);
   }
 
@@ -83,7 +77,6 @@ export class TokenserviceService {
   }
 
   addlease(lease:any) {
-    console.log(lease)
     return this.http.post(this.apiroot + 'addlease',lease);
   }
 
@@ -142,7 +135,7 @@ export class TokenserviceService {
     return this.http.post(this.apiroot + 'logout', {'refresh': this.ref_tokan});
   }
 
-//work
+
 
 
  
@@ -150,18 +143,13 @@ export class TokenserviceService {
   refreshTokan(): Observable<ResponseType> {
     this.ref_tokan= localStorage.getItem('ref_tokan');
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
-    // console.log({'refresh':this.ref_tokan})
     return this.http.post<ResponseType>(this.apiroot + 'refresh', {'refresh':this.ref_tokan}).pipe(
       tap(response => {
         if (response.access) {
           localStorage.setItem('hotelUser', JSON.stringify(response.access));
-        } else {
-          // alert('Check User Credentials');
-        }
+        } 
       }),
       catchError((error) => {
-        //invallied token here
-        // alert(error.error.detail);
 
         localStorage.removeItem('ref_tokan');
         localStorage.removeItem('hotelUser');
@@ -169,27 +157,7 @@ export class TokenserviceService {
         return throwError(error);
       })  
     );
-    
-    
-    
-    
-    
-    
-    // .subscribe((res:any)=>{
-    //   console.log('Response:', res.access);
-    //   if(res.access) {
-    //     localStorage.setItem('hotelUser',JSON.stringify(res.access));
-
-    //     }
-    //   else {
-    //     alert('Check User Credentials')
-    //   }
-    // },
-    // error=> {
-    //   // console.log(error.error.detail)
-    //   alert(error.error.detail)
-
-    // })
+  
 
   }
 
@@ -200,17 +168,6 @@ export class TokenserviceService {
 
 
   
-
-
-
-  // autoRefreshToken() {
-
-  //   if(this.ref_tokan){
-  //     setInterval(() => {
-  //       this.refreshTokan();
-  //     }, 8 * 1000); 
-  //   }
-  // }
 
 
 

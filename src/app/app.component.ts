@@ -6,6 +6,9 @@ import { filter } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { Network } from '@capacitor/network';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+
 
 
 @Component({
@@ -21,6 +24,7 @@ export class AppComponent {
   ) {
      // Initial network status check
      this.checkNetworkStatus();
+     this.hidewhite();
 
      // Set up an event listener to detect changes in network status
      window.addEventListener('online', () => this.updateNetworkStatus('','none'));
@@ -79,8 +83,14 @@ router_fun(){
       if (path === '/home') {
         this.router.navigateByUrl('/main-home');
       }
+      else if(path === '/'){
+        this.router.navigateByUrl('/main-home');
+      }
     } else {
       if ((path !== '/cpassword' || !emailParam) && path !== '/forgot-password' && path !== '/home') {
+        this.router.navigateByUrl('/home');
+      }
+      if(path === '/'){
         this.router.navigateByUrl('/home');
       }
     }
@@ -90,17 +100,17 @@ router_fun(){
 
 
 //mobile back button 
-mobile_backbutton(){
+mobile_backbutton() {
   App.addListener('backButton', (info) => {
-    const currentPath = this.currentUrl.split('?')[0];
+    // Get the current path using the router
+    const currentPath = this.router.url.split('?')[0];
     
+    // Check if the current path is '/home' or '/main-home'
     if (currentPath === '/home' || currentPath === '/main-home') {
-      if (!info.canGoBack) {
         App.exitApp();
-      }
     } else {
-      if (info.canGoBack) {
-      } else {
+      if (!info.canGoBack) {
+        // If there's no history to go back to, exit the app
         App.exitApp();
       }
     }
@@ -109,6 +119,10 @@ mobile_backbutton(){
   
 
 
-
+hidewhite(){
+  setTimeout(() => {
+    SplashScreen.hide();
+  }, 2000);
+}
   
 }

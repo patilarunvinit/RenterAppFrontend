@@ -73,7 +73,7 @@ export class HomePage {
         }
       },
       error=> {
-        this.error = error.error.detail
+        this.error = error.error.detail ;
         if(this.error=='Invalid Email'){
           this.formData = 
           {
@@ -93,6 +93,7 @@ export class HomePage {
         this.bottompopup();
   
       })
+      
       }
     }
   

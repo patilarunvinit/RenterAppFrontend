@@ -31,6 +31,7 @@
     "@capacitor/filesystem": "^6.0.1",
     "@capacitor/local-notifications": "^6.1.0",
     "@capacitor/network": "^6.0.2",
+    "@capacitor/splash-screen": "^6.0.2",
     "@capacitor/status-bar": "^6.0.1",
     "@ionic-native/keyboard": "^5.36.0",
     "@ionic/angular": "^8.2.7",

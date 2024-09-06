@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, throwError,switchMap } from 'rxjs';
+import { catchError, Observable, throwError,switchMap,of } from 'rxjs';
 import { Router } from '@angular/router'; 
 import {TokenserviceService} from './tokenservice.service'
 
@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
-    let url = 'http://127.0.0.1:8000/'
+    let url = 'https://adnyatech.pythonanywhere.com/'
     const excludedUrls = [
        url + 'login',
        url + 'refresh',
@@ -28,7 +28,6 @@ export class TokenInterceptor implements HttpInterceptor {
        url + 'verify_otp',
        url + 'reset_password',
 
-      // Add more URLs or patterns here
     ];
     
     if (excludedUrls.some(excludedUrl => req.url.startsWith(excludedUrl))) {
@@ -37,23 +36,15 @@ export class TokenInterceptor implements HttpInterceptor {
     else{
       let datalocal:any = localStorage.getItem("hotelUser")
       let localTokan = JSON.parse(datalocal);
-    // console.log(localTokan)
     
     const request = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${localTokan}`)});
-    // alert(datalocal)
     return next.handle(request).pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
-            // Handle unauthorized error, e.g., redirect to login
-            // this.services.refreshTokan();
             return this.handleAuthError(error, req, next);
-          } else if (error.status === 403) {
-            // Handle forbidden error, e.g., show a message
-            console.error('Forbidden request:', error.message);
-          }
-          // Rethrow the error
-          return throwError(error);
+          } 
+          return of(null as unknown as HttpEvent<any>);
         })
       );
     }
@@ -65,7 +56,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private handleAuthError(error: HttpErrorResponse, authReq: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.services.refreshTokan().pipe(
-      switchMap((response: { access: string }) => { // Ensure ResponseType matches
+      switchMap((response: { access: string }) => { 
         const newAuthReq = authReq.clone({
           setHeaders: {
             Authorization: `Bearer ${response.access}`
@@ -74,9 +65,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(newAuthReq);
       }),
       catchError((err) => {
-        // this.router.navigate(['/home']); // Redirect to login
-        // alert(err.error.detail)
-        return throwError(err);
+        return of(null as unknown as HttpEvent<any>);
       })
     );
   }
