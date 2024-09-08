@@ -38,6 +38,7 @@
     "@ionic-native/keyboard": "^5.36.0",
     "@ionic-native/screen-orientation": "^5.36.0",
     "@ionic/angular": "^8.2.7",
+    "@ionic/pwa-elements": "^3.3.0",
     "cors": "^2.8.5",
     "ionicons": "^7.0.0",
     "jsonwebtoken": "^9.0.2",

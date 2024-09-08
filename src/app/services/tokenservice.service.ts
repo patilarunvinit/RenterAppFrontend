@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map,tap } from 'rxjs/operators'
-
+import { of } from 'rxjs'
 import { Router } from '@angular/router';
+
+import { Network, NetworkStatus } from '@capacitor/network';
+import { BehaviorSubject } from 'rxjs';
+
 
 
 interface ResponseType {
@@ -20,7 +24,9 @@ export class TokenserviceService {
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) {}
+  ) {
+    this.initializeNetworkStatus();
+  }
 
   ngOnInit(){}
 
@@ -184,8 +190,27 @@ export class TokenserviceService {
     
   }
 
+  private networkStatus = new BehaviorSubject<NetworkStatus | null>(null);
 
 
+  private async initializeNetworkStatus() {
+    // Fetch the initial status
+    const status = await Network.getStatus();
+    this.networkStatus.next(status);
+    console.log(this.networkStatus)
 
+    // Listen for network status changes
+    Network.addListener('networkStatusChange', (status) => {
+      this.networkStatus.next(status);
+    });
+  }
 
+  public getNetworkStatus() {
+    return this.networkStatus.asObservable();
+  }
+
+  public checkInternetAccess() {
+    return this.http.get('https://jsonplaceholder.typicode.com/todos/1', { responseType: 'json' })
+  }
+  
 }

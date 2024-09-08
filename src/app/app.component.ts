@@ -28,19 +28,7 @@ export class AppComponent {
      this.checkNetworkStatus();
      this.hidewhite();
 
-     // Set up an event listener to detect changes in network status
-     window.addEventListener('load', () => {
-      this.checkNetworkStatus();
-    });
-    
-    window.addEventListener('online', () => {
-      this.updateNetworkStatus('You are online!', 'none');
-    });
-    
-    window.addEventListener('offline', () => {
-      this.updateNetworkStatus('You are offline!', 'block');
-    });
-
+     
 
 
 
@@ -56,6 +44,9 @@ export class AppComponent {
     this.router_fun();   
   
     this.mobile_backbutton();
+    this.checkNetworkStatus();
+
+
   
   }
 
@@ -65,17 +56,22 @@ export class AppComponent {
 network_msg:any;
 netdisplay:any = 'none'
 async checkNetworkStatus() {
-  try {
-    const status = await Network.getStatus();
-    if (status.connected) {
-      this.updateNetworkStatus('You are online!', 'none');
-    } else {
-      this.updateNetworkStatus('You are offline!', 'block');
-    }
-  } catch (error) {
-    console.error('Error checking network status:', error);
-    this.updateNetworkStatus('Network status unknown', 'block');
+  this.authService.getNetworkStatus().subscribe((status) => {
+    if (status?.connected) {
+      // Check internet access
+      this.authService.checkInternetAccess().subscribe((res:any)=>{
+        this.updateNetworkStatus('You are online!', 'none');
+ 
+      },
+      error=> {
+        this.updateNetworkStatus('You are offline!', 'block');
+      })        
   }
+  else {
+    this.updateNetworkStatus('You are offline!', 'block');
+  }
+});
+
 }
 
 
