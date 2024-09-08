@@ -7,6 +7,7 @@ import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { Network } from '@capacitor/network';
 import { SplashScreen } from '@capacitor/splash-screen';
+import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 
 
 
@@ -20,17 +21,31 @@ export class AppComponent {
   constructor(
     private authService: TokenserviceService,
     private router: Router,
-    private platform: Platform
+    private platform: Platform,
+    private screenOrientation: ScreenOrientation
   ) {
      // Initial network status check
      this.checkNetworkStatus();
      this.hidewhite();
 
      // Set up an event listener to detect changes in network status
-     window.addEventListener('online', () => this.updateNetworkStatus('','none'));
-     window.addEventListener('offline', () => this.updateNetworkStatus('You are offline!','block'));
-
+     window.addEventListener('load', () => {
+      this.checkNetworkStatus();
+    });
     
+    window.addEventListener('online', () => {
+      this.updateNetworkStatus('You are online!', 'none');
+    });
+    
+    window.addEventListener('offline', () => {
+      this.updateNetworkStatus('You are offline!', 'block');
+    });
+
+
+
+
+     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
   }
 
 
@@ -50,13 +65,20 @@ export class AppComponent {
 network_msg:any;
 netdisplay:any = 'none'
 async checkNetworkStatus() {
-  const status = await Network.getStatus();
-  if (status.connected) {
-    this.updateNetworkStatus('You are online!', 'none');
-  } else {
-    this.updateNetworkStatus('You are offline!', 'block');
+  try {
+    const status = await Network.getStatus();
+    if (status.connected) {
+      this.updateNetworkStatus('You are online!', 'none');
+    } else {
+      this.updateNetworkStatus('You are offline!', 'block');
+    }
+  } catch (error) {
+    console.error('Error checking network status:', error);
+    this.updateNetworkStatus('Network status unknown', 'block');
   }
 }
+
+
 
 updateNetworkStatus(message: string, display: string) {
   this.network_msg = message;
@@ -122,7 +144,7 @@ mobile_backbutton() {
 hidewhite(){
   setTimeout(() => {
     SplashScreen.hide();
-  }, 2000);
+  }, 500);
 }
   
 }

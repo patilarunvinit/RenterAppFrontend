@@ -7,6 +7,7 @@ import {TokenInterceptor}  from "./services/fortokan.interceptor"
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 
 
 
@@ -18,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
-    {provide:HTTP_INTERCEPTORS , useClass: TokenInterceptor, multi: true}
+    {provide:HTTP_INTERCEPTORS , useClass: TokenInterceptor, multi: true},
+    ScreenOrientation,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     
   ],
   bootstrap: [AppComponent],
