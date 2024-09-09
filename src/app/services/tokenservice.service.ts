@@ -30,10 +30,10 @@ export class TokenserviceService {
 
   ngOnInit(){}
 
+  // backend api call start
   login(obj: any) {
     return this.http.post(this.apiroot + 'login', obj);
   }
-
 
 
   Ownerdata() {
@@ -140,15 +140,18 @@ export class TokenserviceService {
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
     return this.http.post(this.apiroot + 'logout', {'refresh': this.ref_tokan});
   }
-
-
+  // back end api call end
 
 
  
+
+
+  // refresh token fun
   ref_tokan:any;
   refreshTokan(): Observable<ResponseType> {
     this.ref_tokan= localStorage.getItem('ref_tokan');
     this.ref_tokan = this.ref_tokan.replace(/^"(.*)"$/, '$1');
+    //api for refresh
     return this.http.post<ResponseType>(this.apiroot + 'refresh', {'refresh':this.ref_tokan}).pipe(
       tap(response => {
         if (response.access) {
@@ -156,28 +159,22 @@ export class TokenserviceService {
         } 
       }),
       catchError((error) => {
-
+        // if refresh token expair delete both token
         localStorage.removeItem('ref_tokan');
         localStorage.removeItem('hotelUser');
         this.router.navigateByUrl('/home');
         return throwError(error);
       })  
-    );
-  
+    ); 
 
   }
 
 
-
-
-  
-
-
-  
+ 
 
 
 
-
+  // fun to help app component in routing process
   isUserAuthenticated(): boolean {
     const datalocal = localStorage.getItem('hotelUser');
     if (!datalocal) {
@@ -190,14 +187,25 @@ export class TokenserviceService {
     
   }
 
+
+
+
+
+
+
+  // network check start
+
+
+
+  // initialize a network
   private networkStatus = new BehaviorSubject<NetworkStatus | null>(null);
 
 
+  //main network fun
   private async initializeNetworkStatus() {
     // Fetch the initial status
     const status = await Network.getStatus();
     this.networkStatus.next(status);
-    console.log(this.networkStatus)
 
     // Listen for network status changes
     Network.addListener('networkStatusChange', (status) => {
@@ -205,12 +213,16 @@ export class TokenserviceService {
     });
   }
 
+
+  // fun to pass network data to app component
   public getNetworkStatus() {
     return this.networkStatus.asObservable();
   }
 
+
+  // fun to check is internet is on even if wifi/net on 
   public checkInternetAccess() {
-    return this.http.get('https://jsonplaceholder.typicode.com/todos/1', { responseType: 'json' })
+    return this.http.get('https://jsonplaceholder.typicode.com/todos/1')
   }
   
 }

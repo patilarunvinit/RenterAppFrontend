@@ -1,8 +1,10 @@
 <ion-app>
     <ion-router-outlet></ion-router-outlet>
-    <div class="wrapper six" [style.display]="netdisplay">
+
+    <div class="wrapper six" *ngIf="netdisplay === 'block'" >
         <div>
             <h3 class="flicker">{{network_msg}}</h3>
         </div>
     </div>
+    
 </ion-app>

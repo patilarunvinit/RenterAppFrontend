@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Router,NavigationEnd } from '@angular/router';
 import { TokenserviceService } from './services/tokenservice.service';
 import { filter } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
-import { Network } from '@capacitor/network';
 import { SplashScreen } from '@capacitor/splash-screen';
-import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 
 
 
@@ -17,70 +16,102 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+
   constructor(
     private authService: TokenserviceService,
     private router: Router,
     private platform: Platform,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
   ) {
-     // Initial network status check
+     // to check network in start of app
      this.checkNetworkStatus();
+     
+     // hide white screen in app opning
      this.hidewhite();
 
-     
-
-
-
-     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+     // start loop to check internet connection
+     this.networkagain()
 
   }
 
 
 
   currentUrl:any;
-  ngOnInit() {
+  async ngOnInit() {
+    // for routing
     this.currentUrl = this.router.url
-    this.router_fun();   
-  
-    this.mobile_backbutton();
+    await this.router_fun();   
+    
+    // mobile backbutton and exit app
+    await this.mobile_backbutton();
+    
+    // check network of mobile
     this.checkNetworkStatus();
 
-
-  
+    // lock screen
+    await this.lockOrientationToPortrait();
   }
+
+
+
+
+  // app screen rotaion lock
+  private async lockOrientationToPortrait() {
+    // Lock orientation to portrait
+    await ScreenOrientation.lock({ orientation: 'portrait' });
+    
+  }
+
+
 
 
 
 // To Check Internet Connection
-network_msg:any;
-netdisplay:any = 'none'
 async checkNetworkStatus() {
   this.authService.getNetworkStatus().subscribe((status) => {
-    if (status?.connected) {
+    if (status?.connectionType === 'cellular' || status?.connectionType === 'wifi') {
       // Check internet access
-      this.authService.checkInternetAccess().subscribe((res:any)=>{
-        this.updateNetworkStatus('You are online!', 'none');
- 
-      },
-      error=> {
+      this.authService.checkInternetAccess().subscribe(
+        (res: any) => {
+          this.ngZone.run(() => {
+            this.updateNetworkStatus('You are online!', 'none');
+          });
+        },
+        (error) => {
+          this.ngZone.run(() => {
+            this.updateNetworkStatus('You are offline!', 'block');
+          });
+        }
+      );
+    } else {
+      this.ngZone.run(() => {
         this.updateNetworkStatus('You are offline!', 'block');
-      })        
-  }
-  else {
-    this.updateNetworkStatus('You are offline!', 'block');
-  }
-});
-
+      });
+    }
+  });
 }
 
 
-
+network_msg:any;
+netdisplay:any = 'none'
+//set values for massage and display (network error)
 updateNetworkStatus(message: string, display: string) {
   this.network_msg = message;
   this.netdisplay = display;
 }
 
+
+// loop to get internet error 
+// we have to think again on this
+networkagain() {
+  setInterval(() => {
+    this.checkNetworkStatus();
+  }, 5000);
+}
 
 
 
@@ -137,10 +168,12 @@ mobile_backbutton() {
   
 
 
+// hide white screen
 hidewhite(){
   setTimeout(() => {
     SplashScreen.hide();
   }, 500);
 }
+
   
 }

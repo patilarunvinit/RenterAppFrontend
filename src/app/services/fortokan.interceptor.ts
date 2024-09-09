@@ -7,19 +7,22 @@ import {TokenserviceService} from './tokenservice.service'
 
 
 
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private router:Router,
     private services:TokenserviceService,
+    ){}
 
-  ){}
+
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
    
+
+
     let url = 'https://adnyatech.pythonanywhere.com/'
     const excludedUrls = [
        url + 'login',
@@ -27,8 +30,11 @@ export class TokenInterceptor implements HttpInterceptor {
        url + 'request_otp',
        url + 'verify_otp',
        url + 'reset_password',
+       'https://jsonplaceholder.typicode.com/todos/1'
 
     ];
+    
+
     
     if (excludedUrls.some(excludedUrl => req.url.startsWith(excludedUrl))) {
       return next.handle(req); // Skip interception for URLs in the excludedUrls list
@@ -41,6 +47,7 @@ export class TokenInterceptor implements HttpInterceptor {
       headers: req.headers.set('Authorization', `Bearer ${localTokan}`)});
     return next.handle(request).pipe(
         catchError((error: HttpErrorResponse) => {
+          // this.AppComponent.checkNetworkStatus()
           if (error.status === 401) {
             return this.handleAuthError(error, req, next);
           } 
