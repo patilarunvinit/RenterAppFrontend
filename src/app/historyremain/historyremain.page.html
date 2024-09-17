@@ -17,35 +17,35 @@
     
     <!-- remain renter info -->
     <div class="namediv" [style.height]="heightofinfo" (click)="resizeheights(2)">
-    
+      <div style="height: 100%;overflow:visible;border: 2px solid white;">
       <p class="nameh1">
         <strong>Remain History</strong>
       </p>
     
-      <p class="addressinfo">
+      <p class="addressinfo" [style.display]="otherdisplay">
         <strong>Renter Name :-</strong> {{renter_name}}
       </p>
     
-      <p class="addressinfo">
+      <p class="addressinfo" [style.display]="otherdisplay">
         <strong> Address :-</strong> {{address}}    
       </p>
     
-      <p class="addressinfo">
+      <p class="addressinfo" [style.display]="otherdisplay">
         <strong>Building :-</strong> {{building}}      
       </p>
     
-      <p class="addressinfo">
+      <p class="addressinfo" [style.display]="otherdisplay">
         <strong>Flat -</strong> {{flat}}     
       </p>
     
-      <p class="addressinfo" style="color: red;">
+      <p class="addressinfo" style="color: red;" [style.display]="otherdisplay">
         <strong>Remain :-</strong> {{total_remain}}
       </p>
     
-      <p class="addressinfo">
+      <p class="addressinfo" [style.display]="otherdisplay">
         <strong>deposit :-</strong> {{deposit}}
       </p>
-
+     </div>
     </div>
 
 

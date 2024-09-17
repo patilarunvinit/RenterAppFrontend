@@ -65,18 +65,22 @@ heightofinfo:any="55%";
 heightofremain:any="30%";
 display1:any='block';
 display2:any='none';
+otherdisplay:any='block'
 resizeheights(no:any){
   if(no==1){
     this.heightofinfo="10%";
     this.heightofremain="75%";
     this.display2='block';
     this.display1='none';
+    this.otherdisplay='none'
   }
   else{
     this.heightofinfo="55%";
     this.heightofremain="30%";
     this.display1='block';
     this.display2='none';
+    this.otherdisplay='block'
+
   }
 }
 
