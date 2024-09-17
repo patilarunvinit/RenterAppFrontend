@@ -48,7 +48,8 @@ html, body {
 .inputbox1{
     position: relative;
     width: 80%;
-    height: 68px;
+    // height: 68px;
+    height: 10%;
     border: 3px solid white;
     border-radius: 30px;
     background-color: black;
@@ -60,7 +61,6 @@ html, body {
 .ion_input{
     width: 90%;
     height: 100%;
-    // border: 2px solid red;
     padding-left: 5%;
     color: white;
     background-color: black;
@@ -75,7 +75,6 @@ html, body {
 .dropbutton{
     width: 90%;
     height: 100%;
-    // border: 2px solid red;
     color: white;
 
 }
@@ -104,9 +103,10 @@ html, body {
 .inputbox2{
     position: relative;
     width: 80%;
-    height: 68px;
+    // height: 68px;
+    height: 12%;
     border: 3px solid white;
-    border-radius: 30px;
+    border-radius: 35px;
     background-color: black;
     margin-left:10% ;
     margin-top:4% ;
@@ -132,12 +132,16 @@ html, body {
     color: white;
   }
   
+  .example-form{
+    height: 90%;
+}
 .button1{
     position: relative;
     background-color:#3D9BD6;
-    border-radius: 30px;
+    border-radius: 35px;
     width: 80%;
-    height: 68px;
+    // height: 68px;
+    height: 12%;
     margin-left:10% ;
     margin-top:7% ;
     font-size: 20px;

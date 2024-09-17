@@ -29,8 +29,8 @@
         <ion-row class="tablehead">
           <ion-col size="4"><strong>renter name</strong></ion-col>
           <ion-col size="3"><strong>remain</strong></ion-col>
-          <ion-col size="3"><strong>deposit</strong></ion-col>
-          <ion-col size="2"><strong>History</strong></ion-col>
+          <ion-col size="2.6"><strong>deposit</strong></ion-col>
+          <ion-col size="2.4"><strong>History</strong></ion-col>
 
         </ion-row>
 
@@ -52,7 +52,7 @@
 
 
         <!-- if there is data -->
-        <ion-row *ngFor="let item of remaindata;let i = index" class="datarow">
+        <ion-row *ngFor="let item of remaindata;let i = index" >
          
           <ion-col size="4" ><p>{{remaindata[i][3]["renter_name"]}}</p></ion-col>
           
@@ -66,9 +66,9 @@
           
           </ion-col>
           
-          <ion-col size="3"><p>&#x20B9; {{remaindata[i][2]["deposit"]}}</p></ion-col>
+          <ion-col size="2.6"><p>&#x20B9; {{remaindata[i][2]["deposit"]}}</p></ion-col>
           
-          <ion-col size="2"(click)="historypagebutton(remaindata[i][0]['lease_id'],remaindata[i][1]['remain'])">
+          <ion-col size="2.4"(click)="historypagebutton(remaindata[i][0]['lease_id'],remaindata[i][1]['remain'])">
             <p>></p>
           </ion-col>
 
