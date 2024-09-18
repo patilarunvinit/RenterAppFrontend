@@ -35,6 +35,10 @@
     // height: 100%;
     // border: 2px solid red;
 }
+.insidenamediv{
+    height: 100%;
+    overflow:visible;
+}
 .nameh1{
     margin-left: 4%;
     font-size: 30px;
@@ -50,7 +54,6 @@
     // height: 75%;
     // height: 30%;
     border-radius: 60px;
-    // border: 2px solid black;
     background-color: #3D9BD6;
 
 }
@@ -58,11 +61,10 @@
 .tablegrid{ 
     position: relative;
     width: 100%;
-    height: 62%;
+    height: 61%;
     top:9%;
     overflow-y: auto;
     border-radius: 25px;//to hind exstra part from main
-    
 }
 ion-col{
     text-align: center;
@@ -127,6 +129,7 @@ ion-col{
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+    margin-top: 0%;
   }
   .paybutton{
     background-color: #D34D4D;
@@ -142,32 +145,41 @@ ion-col{
 
 
 
-
+.ORmaindiv{
+    top: 10%;
+    position:relative;
+    height: 30%;
+}
 .ortext{
     position: relative;
-    top:4%;
+    margin-top: 2%;
     font-size: 30px;
     text-align: center;
+    height: 30%;
+    margin-bottom: 0%;
 
 }
 .fullpaydiv{
     width: 100%;
-    height: 15%;
+    height: 65%;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 .fullpaytext{
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
+    margin-top: 1%;
 }
 
 
 .paybuttonfull{
     background-color: #D34D4D;
     width: 70%;
-    height: 40%;
+    height: 35%;
     margin-left: 15%;
     border-radius: 10px;
     position: relative;
-
+    margin-top: -3%;
 }
 
 
@@ -199,7 +211,7 @@ ion-col{
     position: relative;
     width: 80%;
     height: 68px;
-    border: 3px solid white;
+    // border: 3px solid white;
     border-radius: 30px;
     background-color: black;
     margin-left:10% ;
@@ -315,9 +327,7 @@ ion-col{
     background:transparent ;
     // z-index: 1000;
 }
-.datarow{
-    height: 15%;
-}
+
 
 
 

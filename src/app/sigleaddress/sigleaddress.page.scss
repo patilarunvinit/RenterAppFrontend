@@ -8,6 +8,7 @@
     width: 100%;
     height: 100%;
     top:0px;
+    overflow: auto;
 }
 .menu{
     position: relative;
@@ -23,24 +24,31 @@
 .addressdiv{
     position: relative;
     width: 100%;
-    height: 45%;
+    // height: 46%;
     top:5%;
+
 }
 .renterdiv{
     position: relative;
     width: 100%;
-    height: 40%;
+    // height: 40%;
     top:5%;
 }
 .headertext{
     margin-left: 4%;
+    margin-top: 2%;
     font-size: 30px;
 }
 .addressinfo{
     font-size: 19px;
     margin-left: 4%;
-    margin-bottom: 8%;
+    height: 13%;
+    margin-bottom: 7%;
+    margin-top: 0%;
     width: 80%;
+}
+.extram{
+    margin-top: 2%;
 }
 .line{
     width: 95%;

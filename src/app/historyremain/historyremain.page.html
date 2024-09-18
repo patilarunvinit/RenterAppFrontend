@@ -17,7 +17,7 @@
     
     <!-- remain renter info -->
     <div class="namediv" [style.height]="heightofinfo" (click)="resizeheights(2)">
-      <div style="height: 100%;overflow:visible;border: 2px solid white;">
+      <div class="insidenamediv">
       <p class="nameh1">
         <strong>Remain History</strong>
       </p>
@@ -106,7 +106,7 @@
 
         </ion-row>
 
-        <ion-row class="datarow" *ngFor="let item of remain_data;let i = index">
+        <ion-row  *ngFor="let item of remain_data;let i = index">
           
           <ion-col size="4"><p>{{remain_data[i]['for_month']}}</p></ion-col>
          
@@ -134,31 +134,36 @@
       </ion-grid>
      
      
-      <p class="ortext"><strong>OR</strong></p>
-     
-     
-      <div class="fullpaydiv">
-      
-        <p class="fullpaytext">
-          <strong>
-            Full Pay :-
-          </strong>
-           &#x20B9; 
-          <span style="color: red;">
-             {{remainpay}}
-          </span>
-        </p>
-      
-        <div class="paybuttonfull" (click)="fullformpopup()"> 
-        
-          <p class="center-text">
-            <strong>pay</strong>
+
+
+      <div class="ORmaindiv" >
+        <p class="ortext"><strong>OR</strong></p>
          
-            <p>
+        <div class="fullpaydiv">
+      
+          <p class="fullpaytext">
+            <strong>
+              Full Pay :-
+            </strong>
+             &#x20B9; 
+            <span style="color: red;">
+               {{remainpay}}
+            </span>
+          </p>
+        
+          <div class="paybuttonfull" (click)="fullformpopup()"> 
+          
+            <p class="center-text">
+              <strong>pay</strong>
+           
+              <p>
+          </div>
+  
         </div>
 
       </div>
 
+      
     </div>
 
   </div>
