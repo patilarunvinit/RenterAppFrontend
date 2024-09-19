@@ -82,8 +82,14 @@
     margin-left:10% ;
     margin-top:13% ;
     font-size: 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
 }
-
+.button-text {
+    flex-grow: 1; 
+    text-align: center; 
+}
 .btn-valid {
     background-color: #3D9BD6;
     color: white;
@@ -131,3 +137,35 @@
   }
 
  
+
+
+
+
+  
+
+  
+
+.load {
+        width: 12%; /* Take full width of parent */
+        aspect-ratio: 1; /* Maintain a 1:1 ratio for a circle */
+        background: transparent;
+        border: solid 3px black;
+        border-radius: 50%;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        animation: rotate 1s linear infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute; /* Position the spinner absolutely */
+        right: 10px;
+    }
+    
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }

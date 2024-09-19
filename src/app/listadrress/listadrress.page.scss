@@ -54,7 +54,7 @@
     border-radius: 60px;
     // border: 2px solid black;
     background-color: #3D9BD6;
-
+    
 }
 
 .tablegrid{ 
@@ -97,4 +97,34 @@ ion-col{
 .nodatatext{
     text-align: center;
     font-size: 20px;
+}
+
+
+
+.load {
+    width: 12%; /* Take full width of parent */
+    aspect-ratio: 1; /* Maintain a 1:1 ratio for a circle */
+    background: transparent;
+    border: solid 3px black;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    animation: rotate 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Position the spinner absolutely */
+    top:45%;
+    left:45%;
+    transform: translate(-50%, -50%);
+    margin: 0%;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

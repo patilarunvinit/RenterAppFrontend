@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class RemainPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
+  leaddispay:any = "none"
 
 
   constructor(
@@ -49,13 +50,18 @@ export class RemainPage implements OnInit {
   noData: boolean = false; 
   loading: boolean = false; 
   getremaindata(){
-    
+    this.leaddispay = "block"
+
     this.serviceClass.getremain().subscribe((res:any)=>{
+      this.leaddispay = "none"
+
       this.remaindata=res
       this.noData = this.remaindata.length === 0; 
       this.loading = false; 
     },
     error=> {
+      this.leaddispay = "none"
+
       this.error = error.error.detail
       this.noData = false; 
       this.loading = false;

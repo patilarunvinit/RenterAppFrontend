@@ -13,6 +13,7 @@ import { TokenserviceService } from 'src/app/services/tokenservice.service'
 export class RentPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
+  leaddispay:any = "none"
 
 
 
@@ -71,14 +72,19 @@ export class RentPage implements OnInit {
   noData: boolean = false; 
   loading: boolean = false; 
   getfullrents(){
-    
+    this.leaddispay = "block"
+
     this.serviceClass.getrent(this.currentmonthvar).subscribe((res:any)=>{
+      this.leaddispay = "none"
+
       this.rentdata=res
       this.noData = this.rentdata.length === 0; 
       this.loading = false; 
       this.error = ''
     },
     error=> {
+      this.leaddispay = "none"
+
       this.rentdata = ''
       this.error = error.error.detail
       this.noData = false; 

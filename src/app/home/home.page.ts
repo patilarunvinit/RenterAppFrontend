@@ -16,7 +16,7 @@ export class HomePage {
    divHeight:any=window.innerHeight + 'px';
    screenHeight:any = window.innerHeight;
    emaildisplay:any;
-   
+   leaddispay:any="none"
 
   constructor(
     private platform: Platform,
@@ -53,7 +53,7 @@ export class HomePage {
     error:any;
     submitForm() {
       if (this.formData.email && this.formData.password) {
-        
+        this.leaddispay = "block"
         this.serviceClass.login(this.formData).subscribe((res:any)=>{
         if(res.access) {
           localStorage.setItem('hotelUser',JSON.stringify(res.access));
@@ -71,8 +71,10 @@ export class HomePage {
           this.error = 'Check User Credentials'
           this.bottompopup();
         }
+        this.leaddispay = "none"
       },
       error=> {
+        this.leaddispay = "none"
         this.error = error.error.detail ;
         if(this.error=='Invalid Email'){
           this.formData = 

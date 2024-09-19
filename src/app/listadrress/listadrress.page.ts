@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ListadrressPage implements OnInit {
   divHeight:any=window.innerHeight + 'px';
   screenHeight:any = window.innerHeight;
-
+  leaddispay:any = "none"
 
   constructor(
     private platform: Platform,
@@ -70,13 +70,18 @@ export class ListadrressPage implements OnInit {
   noData: boolean = false; 
   loading: boolean = false; 
   getalldataaddr(){
+    this.leaddispay = "block"
     
     this.serviceClass.getadrress(this.selectedValue).subscribe((res:any)=>{
+      this.leaddispay = "none"
+
       this.addressdata=res
       this.noData = this.addressdata.length === 0; 
       this.loading = false; 
     },
     error=> {
+      this.leaddispay = "none"
+      
       this.error = error.error.detail
       this.noData = false; 
       this.loading = false; 
