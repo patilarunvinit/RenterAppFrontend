@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-home.page.scss'],
 })
 export class MainHomePage implements OnInit {
-
+  loadcardtext:any = "inline-block"
 
   constructor(
     private serviceClass: TokenserviceService,
@@ -23,7 +23,6 @@ export class MainHomePage implements OnInit {
 
   ngOnInit() {
     this.ownerD();
-    this.bottompopup();
   }
 
 
@@ -43,6 +42,10 @@ export class MainHomePage implements OnInit {
   ownerD(){
     
     this.serviceClass.Ownerdata().subscribe((res:any)=>{
+      // to stop lead 
+      this.loadcardtext = "none"
+      this.bottompopup(); 
+
       this.mobile_no = res.mobile_no
       this.name = res.name
       this.owner_dp = res.owner_photo

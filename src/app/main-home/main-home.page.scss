@@ -129,3 +129,24 @@
     text-align: center;
     z-index: 999;
 }
+
+
+
+
+
+
+
+.textarea {
+    opacity: 0.6;
+    animation: loop 1.5s infinite;
+}
+@keyframes loop {
+    0% {
+        color: rgb(48, 47, 47);
+        background-color: rgb(48, 47, 47);
+    }
+    100% {
+        color: rgb(117, 116, 116);
+        background-color: rgb(117, 116, 116);
+    }
+}

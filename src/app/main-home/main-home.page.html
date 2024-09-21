@@ -20,13 +20,32 @@
     <img alt="crad pic" [src]=card_pic class="cardimg" >
 
     <div class="infodiv">
-      <p>NAME:- <strong>{{name}}</strong> </p>
-      <p>DOB:- <strong>{{b_date}}</strong> </p>
-      <p>NO OF FLAT'S:- <strong>{{addresscount}}</strong> </p>
-      <p>M NO:- <strong>{{mobile_no}}</strong> </p>
+      <p>
+        NAME:- 
+         <strong [style.display]="loadcardtext" [style.width]="'60%'" class="textarea">v</strong> 
+         <strong>{{name}}</strong>
+      </p>
+
+      <p>
+        DOB:-
+         <strong [style.display]="loadcardtext" [style.width]="'50%'" class="textarea">v</strong> 
+         <strong>{{b_date}}</strong> 
+      </p>
+
+      <p>
+        NO OF FLAT'S:-
+         <strong [style.display]="loadcardtext" [style.width]="'25%'" class="textarea">v</strong> 
+         <strong>{{addresscount}}</strong>
+      </p>
+
+      <p>
+        M NO:-
+         <strong [style.display]="loadcardtext" [style.width]="'60%'" class="textarea">v</strong> 
+         <strong>{{mobile_no}}</strong> </p>
     </div>
 
     <div class="profilediv">
+      <strong [style.display]="loadcardtext" [style.width]="'100%'" [style.height]="'100%'" class="textarea">v</strong> 
       <img alt="Profile pic" [src]=dp class="profilepic" >
     </div>
 
