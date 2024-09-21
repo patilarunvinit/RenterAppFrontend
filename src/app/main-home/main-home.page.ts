@@ -46,6 +46,7 @@ export class MainHomePage implements OnInit {
       this.loadcardtext = "none"
       this.bottompopup(); 
 
+      // to set data
       this.mobile_no = res.mobile_no
       this.name = res.name
       this.owner_dp = res.owner_photo
