@@ -55,6 +55,7 @@ export class MainHomePage implements OnInit {
       
     }) 
     
+    // to get address count
     this.serviceClass.addAdrresscount().subscribe((res:any)=>{
       this.addresscount=res['addresscount']
       
