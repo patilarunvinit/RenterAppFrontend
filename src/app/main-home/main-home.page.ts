@@ -86,6 +86,7 @@ export class MainHomePage implements OnInit {
   logout(){
 
     this.serviceClass.logoutApi().subscribe((res:any)=>{
+      //to remove tokens
       localStorage.removeItem('ref_tokan');
       localStorage.removeItem('hotelUser');
       this.router.navigateByUrl('/home');
