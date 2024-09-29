@@ -71,6 +71,7 @@ export class MainHomePage implements OnInit {
   // menu button click
   token:any;
   menubuttons(menu:any){
+      // to menu 
       this.router.navigateByUrl('/' + menu);
       this.token= localStorage.getItem('hotelUser');
       this.error = '';  
