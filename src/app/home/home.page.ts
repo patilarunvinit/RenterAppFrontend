@@ -52,6 +52,10 @@ export class HomePage {
     // main input form 
     error:any;
     submitForm() {
+      
+      // to stop popup timer
+      this.stopPopup();
+
       if (this.formData.email && this.formData.password) {
         this.leaddispay = "block"
         this.serviceClass.login(this.formData).subscribe((res:any)=>{
@@ -77,6 +81,7 @@ export class HomePage {
         this.leaddispay = "none"
         this.error = error.error.detail ;
         if(this.error=='Invalid Email'){
+          this.bottompopup();
           this.formData = 
           {
             email: this.formData.email,
@@ -84,15 +89,26 @@ export class HomePage {
           };
           this.emaildisplay='red';
         }
-        else{
+        else if(this.error== "Invalid Password"){
+          this.bottompopup();
           this.formData = 
           {
             email:this.formData.email,
             password: ''
           };
         }
+
+        else{
+          this.error = 'Error Occurred'
+          this.bottompopup();
+          this.formData = 
+          {
+            email:'',
+            password: ''
+          };
+        }
         
-        this.bottompopup();
+        // this.bottompopup();
   
       })
       
@@ -116,6 +132,15 @@ export class HomePage {
       this.popupTimeout=setTimeout(() => {
       this.popupdisplay="none";
       },  8 * 1000); 
+    }
+
+    // stop from error popup
+    stopPopup() {
+      if (this.popupTimeout) {
+          clearTimeout(this.popupTimeout); 
+          this.popupTimeout = undefined;   
+      }
+      this.popupdisplay = "none";
     }
 
 
